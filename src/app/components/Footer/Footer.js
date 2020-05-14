@@ -36,27 +36,6 @@ export default function Footer(props) {
                 IEDPU
               </a>
             </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a href="#" className={classes.block}>
-                About us
-              </a>
-            </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a
-                href="#"
-                className={classes.block}
-              >
-                Blog
-              </a>
-            </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a
-                href="#"
-                className={classes.block}
-              >
-                Licenses
-              </a>
-            </ListItem>
           </List>
         </div>
         <div className={classes.right}>
@@ -66,7 +45,7 @@ export default function Footer(props) {
             href="https://sitasysng.com/"
             className={aClasses}
           >
-            Patriots
+            Sitasys
           </a>{" "}
           for a better Ilorin community.
         </div>
