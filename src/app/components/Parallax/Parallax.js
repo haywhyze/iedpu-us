@@ -13,7 +13,7 @@ const useStyles = makeStyles(styles);
 
 export default function Parallax(props) {
   let windowScrollTop;
-  if (window.innerWidth >= 768) {
+  if (process.browser && window.innerWidth >= 768) {
     windowScrollTop = window.pageYOffset / 3;
   } else {
     windowScrollTop = 0;
@@ -41,15 +41,15 @@ export default function Parallax(props) {
     [classes.parallax]: true,
     [classes.filter]: filter,
     [classes.small]: small,
-    [className]: className !== undefined
+    [className]: className !== undefined,
   });
   return (
     <div
       className={parallaxClasses}
       style={{
         ...style,
-        backgroundImage: "url(" + image + ")",
-        transform: transform
+        backgroundImage: `linear-gradient(to left top, rgba(16, 42, 110, 0.6), rgba(242, 48, 62, 0.6)), url("${image}")`,
+        transform: transform,
       }}
     >
       {children}
@@ -63,5 +63,5 @@ Parallax.propTypes = {
   children: PropTypes.node,
   style: PropTypes.string,
   image: PropTypes.string,
-  small: PropTypes.bool
+  small: PropTypes.bool,
 };

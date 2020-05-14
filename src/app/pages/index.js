@@ -9,8 +9,9 @@ import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
+import Link from "next/link";
 
-import styles from "assets/jss/material-kit-react/views/landingPage.js";
+import styles from "assets/jss/material-kit-react/views/components.js";
 
 // Sections for this page
 import ProductSection from "../Sections/ProductSection";
@@ -27,43 +28,34 @@ export default function Index(props) {
       <Header
         color="transparent"
         routes={dashboardRoutes}
-        brand="Material Kit React"
+        brand="IEDPU"
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
-          height: 400,
+          height: 300,
           color: "white",
         }}
         {...rest}
       />
-      <Parallax filter image="img/landing-bg.jpg">
+
+      <Parallax image="img/central-mosque-1.jpg">
         <div className={classes.container}>
           <GridContainer>
-            <GridItem xs={12} sm={12} md={6}>
-              <h1 className={classes.title}>Your Story Starts With Us.</h1>
-              <h4>
-                Ilorin Emirate Descendants Progressive Union (IEDPU) is the
-                mother of all Unions and Associations in the Ilorin Emirate. It
-                is also the umbrella Union of all indigenes of Ilorin Emirate
-                both at home and abroad. The union has her members and executive
-                members spread all over the five Local Government Areas in the
-                Emirate (Asa, Ilorin East, Ilorin South, Ilorin West and Moro
-                Local Government) Areas and has branches all over the world. The
-                union was formed in 1941 by a group of people before Ilorin
-                Division was dissolved into five differenct Local Government
-                Areas.
-              </h4>
-              <br />
-              <Button
-                color="danger"
-                size="lg"
-                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fas fa-play" />
-                Watch video
-              </Button>
+            <GridItem>
+              <div className={classes.brand}>
+                <h1 className={classes.title}>Welcome to IEDPU</h1>
+                <h3 className={classes.subtitle}>
+                  Ilorin Emirate Descendants Progressive Union (IEDPU) is the
+                  mother of all Unions and Associations in the Ilorin Emirate.
+                  It is also the umbrella Union of all indigenes of Ilorin
+                  Emirate both at home and abroad.
+                </h3>
+                <Link href="/">
+                  <Button color="primary" round>
+                    Join Us
+                  </Button>
+                </Link>
+              </div>
             </GridItem>
           </GridContainer>
         </div>
