@@ -1,7 +1,5 @@
 /*eslint-disable*/
 import React from "react";
-import DeleteIcon from "@material-ui/icons/Delete";
-import IconButton from "@material-ui/core/IconButton";
 // react components for routing our app without refresh
 import Link from "next/link";
 
@@ -11,11 +9,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Tooltip from "@material-ui/core/Tooltip";
 
-// @material-ui/icons
-import { Apps, CloudDownload } from "@material-ui/icons";
-
 // core components
-import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
 
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
@@ -27,32 +21,51 @@ export default function HeaderLinks(props) {
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
-      <Button
-          href="#"
-          color="transparent"
-          target="_blank"
-          className={classes.navLink}
-        >
-          Events
-        </Button>
+        <Link href="/">
+          <Button color="transparent" className={classes.navLink}>
+            Home
+          </Button>
+        </Link>
       </ListItem>
       <ListItem className={classes.listItem}>
-        <Button
-          href="#"
-          color="transparent"
-          target="_blank"
-          className={classes.navLink}
-        >
-          Gallery
-        </Button>
-        <Button
-          href="#"
-          color="transparent"
-          target="_blank"
-          className={classes.navLink}
-        >
-          Historical Facts
-        </Button>
+        <Link href="/events">
+          <Button color="transparent" className={classes.navLink}>
+            Events
+          </Button>
+        </Link>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <Link href="/news">
+          <Button color="transparent" className={classes.navLink}>
+            News
+          </Button>
+        </Link>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <Link href="/gallery">
+          <Button color="transparent" className={classes.navLink}>
+            Gallery
+          </Button>
+        </Link>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <Link href="/executives">
+          <Button color="transparent" className={classes.navLink}>
+            Executives
+          </Button>
+        </Link>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <Link href="/history">
+          <Button color="transparent" className={classes.navLink}>
+            Historical Facts
+          </Button>
+        </Link>
+        <Link href="/login">
+          <Button color="transparent" className={classes.navLink}>
+            Join Us
+          </Button>
+        </Link>
       </ListItem>
       <ListItem className={classes.listItem}>
         <Tooltip
