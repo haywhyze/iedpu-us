@@ -14,7 +14,7 @@ import Link from "next/link";
 import styles from "assets/jss/material-kit-react/views/components.js";
 
 // Sections for this page
-import ProductSection from "../Sections/ProductSection";
+import HomeSection from "../Sections/HomeSection";
 
 const dashboardRoutes = [];
 
@@ -62,7 +62,7 @@ export default function Index(props) {
       </Parallax>
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
-          <ProductSection />
+          <HomeSection />
         </div>
       </div>
       <Footer />
