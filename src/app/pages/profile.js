@@ -1,16 +1,20 @@
-import React, { useContext } from "react";
-import { useRouter } from "next/router";
+import React, { useContext, useEffect } from "react";
+import Router from "next/router";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
 import Header from "components/Header/Header.js";
+import dynamic from "next/dynamic";
+const LoginPage = dynamic(() => import("./login"));
 import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
+import { css } from "@emotion/core";
+import ClipLoader from "react-spinners/ClipLoader";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { AuthContext } from "./_app";
@@ -19,7 +23,6 @@ const useStyles = makeStyles(styles);
 
 function ProfilePage(props) {
   const classes = useStyles();
-  const router = useRouter();
   const { ...rest } = props;
   const imageClasses = classNames(
     classes.imgRaised,
@@ -27,11 +30,25 @@ function ProfilePage(props) {
     classes.imgFluid
   );
 
+  const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: purple;
+  `;
+
   const { user, isAuthenticated } = useContext(AuthContext);
 
+  React.useEffect(() => {
+    if (isAuthenticated) return; // do nothing if the user is logged in
+    Router.replace("/profile", "/login", { shallow: true });
+  }, [isAuthenticated]);
+
   if (!isAuthenticated) {
-      router.push("/login")
+    return <LoginPage />;
   }
+
+  if (!user)
+    return <ClipLoader css={override} size={150} color={"#123abc"} loading />;
 
   return (
     <div>
@@ -55,7 +72,7 @@ function ProfilePage(props) {
                 <div className={classes.profile}>
                   <div>
                     <img
-                      src={user && user.photoURL}
+                      src={(user && user.photoURL) || "img/profile.png"}
                       alt="..."
                       className={imageClasses}
                     />
