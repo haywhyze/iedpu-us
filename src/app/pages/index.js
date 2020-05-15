@@ -50,7 +50,7 @@ export default function Index(props) {
                   It is also the umbrella Union of all indigenes of Ilorin
                   Emirate both at home and abroad.
                 </h3>
-                <Link href="/">
+                <Link href="/login">
                   <Button color="primary" round>
                     Join Us
                   </Button>
