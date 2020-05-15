@@ -44,6 +44,7 @@ function MyApp(props) {
     signInWithFacebook,
     signInWithGoogle,
     loading,
+    error
   } = props;
 
   React.useEffect(() => {
@@ -72,6 +73,7 @@ function MyApp(props) {
             signInWithGoogle,
             loading,
             isAuthenticated,
+            error
           }}
         >
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
