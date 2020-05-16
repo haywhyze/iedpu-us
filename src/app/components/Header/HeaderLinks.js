@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import React from "react";
+import React, { useContext } from "react";
 // react components for routing our app without refresh
 import Link from "next/link";
 
@@ -13,11 +13,13 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Button from "components/CustomButtons/Button.js";
 
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
+import { AuthContext } from "../../pages/_app";
 
 const useStyles = makeStyles(styles);
 
-export default function HeaderLinks(props) {
+function HeaderLinks(props) {
   const classes = useStyles();
+  const { user, signOut, loading } = useContext(AuthContext);
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
@@ -62,9 +64,15 @@ export default function HeaderLinks(props) {
           </Button>
         </Link>
         <Link href="/login">
-          <Button color="transparent" className={classes.navLink}>
-            Join Us
-          </Button>
+          {user ? (
+            <Button color="danger" round onClick={signOut}>
+              Sign out
+            </Button>
+          ) : (
+            <Button color="primary" round>
+              Join Us
+            </Button>
+          )}
         </Link>
       </ListItem>
       <ListItem className={classes.listItem}>
@@ -127,3 +135,5 @@ export default function HeaderLinks(props) {
     </List>
   );
 }
+
+export default HeaderLinks;
