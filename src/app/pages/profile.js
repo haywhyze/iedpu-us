@@ -1,20 +1,22 @@
 import React, { useContext, useEffect } from "react";
 import Router from "next/router";
+import dynamic from "next/dynamic";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
+import { css } from "@emotion/core";
+import ClipLoader from "react-spinners/ClipLoader";
+
 import Header from "components/Header/Header.js";
-import dynamic from "next/dynamic";
 const LoginPage = dynamic(() => import("./login"));
 import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
-import { css } from "@emotion/core";
-import ClipLoader from "react-spinners/ClipLoader";
+import SectionTabs from "../Sections/SectionTabs";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { AuthContext } from "./_app";
@@ -85,6 +87,7 @@ function ProfilePage(props) {
                 </div>
               </GridItem>
             </GridContainer>
+            <SectionTabs />
           </div>
         </div>
       </div>
