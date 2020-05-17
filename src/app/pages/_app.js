@@ -9,12 +9,15 @@ import firebaseConfig from "../firebaseConfig";
 import withFirebaseAuth from "react-with-firebase-auth";
 import * as firebase from "firebase/app";
 import "firebase/auth";
+import "firebase/firestore";
 
 const firebaseApp = !firebase.apps.length
   ? firebase.initializeApp(firebaseConfig)
   : firebase.app();
 
 const firebaseAppAuth = firebaseApp.auth();
+
+export const db = firebase.firestore()
 
 let isAuthenticated = false;
 
