@@ -3,7 +3,7 @@ import {
   successCardHeader,
   dangerCardHeader,
   infoCardHeader,
-  primaryCardHeader
+  primaryCardHeader,
 } from "assets/jss/material-kit-react.js";
 const cardHeaderStyle = {
   cardHeader: {
@@ -13,17 +13,20 @@ const cardHeaderStyle = {
     marginRight: "15px",
     marginTop: "-30px",
     border: "0",
-    marginBottom: "0"
+    marginBottom: "0",
+    "@media (max-width: 768px)": {
+      padding: ".5rem 8px",
+    },
   },
   cardHeaderPlain: {
     marginLeft: "0px",
-    marginRight: "0px"
+    marginRight: "0px",
   },
   warningCardHeader,
   successCardHeader,
   dangerCardHeader,
   infoCardHeader,
-  primaryCardHeader
+  primaryCardHeader,
 };
 
 export default cardHeaderStyle;

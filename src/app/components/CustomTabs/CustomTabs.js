@@ -41,6 +41,8 @@ export default function CustomTabs(props) {
             root: classes.tabsRoot,
             indicator: classes.displayNone
           }}
+          variant="scrollable"
+          scrollButtons="auto"
         >
           {tabs.map((prop, key) => {
             var icon = {};
