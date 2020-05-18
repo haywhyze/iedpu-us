@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import Router from "next/router";
 import dynamic from "next/dynamic";
 // nodejs library that concatenates classes
@@ -17,6 +17,7 @@ import GridItem from "components/Grid/GridItem.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
 import SectionTabs from "../Sections/SectionTabs";
+import { db } from "./_app";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { AuthContext } from "./_app";
@@ -31,6 +32,10 @@ function ProfilePage(props) {
     classes.imgRoundedCircle,
     classes.imgFluid
   );
+  const { user, isAuthenticated } = useContext(AuthContext);
+  const [displayName, setDisplayName] = useState(
+    (user && user.displayName) || ""
+  );
 
   const override = css`
     display: block;
@@ -38,7 +43,14 @@ function ProfilePage(props) {
     border-color: purple;
   `;
 
-  const { user, isAuthenticated } = useContext(AuthContext);
+  user &&
+    db
+      .collection("Users")
+      .doc(user.uid)
+      .onSnapshot(function (doc) {
+        console.log("Current data: ", doc.data());
+        setDisplayName(doc.data().displayName);
+      });
 
   React.useEffect(() => {
     if (isAuthenticated) return; // do nothing if the user is logged in
@@ -80,9 +92,7 @@ function ProfilePage(props) {
                     />
                   </div>
                   <div className={classes.name}>
-                    <h3 className={classes.title}>
-                      {user && user.displayName}
-                    </h3>
+                    <h3 className={classes.title}>{displayName}</h3>
                   </div>
                 </div>
               </GridItem>
