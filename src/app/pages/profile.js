@@ -48,18 +48,18 @@ function ProfilePage(props) {
       .collection("Users")
       .doc(user.uid)
       .onSnapshot(function (doc) {
-        console.log("Current data: ", doc.data());
-        setDisplayName(doc.data().displayName);
+        if (doc.exists) setDisplayName(doc.data().displayName);
       });
 
   React.useEffect(() => {
-    if (isAuthenticated) return; // do nothing if the user is logged in
-    Router.replace("/profile", "/login", { shallow: true });
+    if (!isAuthenticated) {
+      Router.push("/login");
+    }
   }, [isAuthenticated]);
 
-  if (!isAuthenticated) {
-    return <LoginPage />;
-  }
+  React.useEffect(() => {
+    Router.prefetch("/login");
+  }, []);
 
   if (!user)
     return <ClipLoader css={override} size={150} color={"#123abc"} loading />;

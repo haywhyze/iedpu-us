@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
+import Router from "next/router";
 import Link from "next/link";
 import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -25,15 +26,21 @@ function LoginPage(props) {
     setCardAnimation("");
   }, 700);
   const classes = useStyles();
-  const {
-    signInWithFacebook,
-    signInWithGoogle,
-    isAuthenticated,
-    user,
-    signOut,
-  } = useContext(AuthContext);
+  const { signInWithFacebook, signInWithGoogle, isAuthenticated } = useContext(
+    AuthContext
+  );
 
   const { ...rest } = props;
+
+  React.useEffect(() => {
+    if (isAuthenticated) {
+      Router.push("/profile");
+    }
+  }, [isAuthenticated]);
+
+  React.useEffect(() => {
+    Router.prefetch("/profile");
+  }, []);
 
   return (
     <div>
@@ -57,59 +64,23 @@ function LoginPage(props) {
             <GridItem xs={12} sm={12} md={4}>
               <Card className={classes[cardAnimaton]}>
                 <form className={classes.form}>
-                  {!isAuthenticated ? (
-                    <>
-                      {" "}
-                      <CardHeader
-                        color="primary"
-                        className={classes.cardHeader}
-                      >
-                        <h4>Sign in with</h4>
-                        <div className={classes.socialLine}>
-                          <Button
-                            color="transparent"
-                            onClick={signInWithFacebook}
-                          >
-                            <i className={"fab fa-facebook"} />
-                          </Button>
-                          <Button
-                            color="transparent"
-                            onClick={signInWithGoogle}
-                          >
-                            <i className={"fab fa-google"} />
-                          </Button>
-                        </div>
-                      </CardHeader>
-                      <p className={classes.divider}>
-                        Join other members of the community
-                      </p>
-                      <CardBody>
-                        <p className={classes.divider}>OR</p>
-                      </CardBody>
-                    </>
-                  ) : (
-                    <>
-                      <CardHeader
-                        color="primary"
-                        className={classes.cardHeader}
-                      >
-                        <h3> Welcome, {user && user.displayName} </h3>{" "}
-                        <Link href="/profile">
-                          <Button simple color="white" size="lg">
-                            Go to your profile
-                          </Button>
-                        </Link>
-                        
-                        <Button
-                          onClick={signOut}
-                          round
-                          color="danger"
-                          size="sm"
-                        >
-                          Sign Out
-                        </Button>
-                      </CardHeader>
-                    </>
+                  <CardHeader color="primary" className={classes.cardHeader}>
+                    <h4>Sign in with</h4>
+                    <div className={classes.socialLine}>
+                      <Button color="transparent" onClick={signInWithFacebook}>
+                        <i className={"fab fa-facebook"} />
+                      </Button>
+                      <Button color="transparent" onClick={signInWithGoogle}>
+                        <i className={"fab fa-google"} />
+                      </Button>
+                    </div>
+                  </CardHeader>
+                  <p className={classes.divider}>
+                    Join other members of the community
+                  </p>
+                  <CardBody>
+                    <p className={classes.divider}>OR</p>
+                  </CardBody>
                   )}
                   <CardFooter className={classes.cardFooter}>
                     <Link href="/">
