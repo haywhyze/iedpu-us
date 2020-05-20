@@ -19,7 +19,7 @@ const firebaseAppAuth = firebaseApp.auth();
 
 export const db = firebase.firestore()
 
-let isAuthenticated = false;
+let isAuthenticated = true;
 
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
