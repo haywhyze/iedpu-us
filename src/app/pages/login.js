@@ -38,10 +38,6 @@ function LoginPage(props) {
     }
   }, [isAuthenticated]);
 
-  React.useEffect(() => {
-    Router.prefetch("/profile");
-  }, []);
-
   return (
     <div>
       <Header
@@ -74,18 +70,14 @@ function LoginPage(props) {
                         <i className={"fab fa-google"} />
                       </Button>
                     </div>
+                    <p className={classes.divider}>
+                      to join other members of the community
+                    </p>
                   </CardHeader>
-                  <p className={classes.divider}>
-                    Join other members of the community
-                  </p>
-                  <CardBody>
-                    <p className={classes.divider}>OR</p>
-                  </CardBody>
-                  )}
                   <CardFooter className={classes.cardFooter}>
                     <Link href="/">
                       <Button simple color="primary" size="lg">
-                        Go back to the homepage
+                        Return to homepage
                       </Button>
                     </Link>
                   </CardFooter>
