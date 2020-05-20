@@ -19,6 +19,7 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import styles from "assets/jss/material-kit-react/views/componentsSections/profileStyle.js";
 import { AuthContext } from "../pages/_app";
 import { db } from "../pages/_app";
+import Notifications from "./Notification";
 
 const useStyles = makeStyles(styles);
 
@@ -33,6 +34,10 @@ export default function ProfileUpdate() {
     location: "",
     occupation: "",
   });
+
+  const [successNotification, setSuccessNotification] = useState(false);
+  const [failureNotification, setFailureNotification] = useState(false);
+  // const [notifications, setNotifications] = useState(false)
 
   const docRef = user && db.collection("Users").doc(user.uid);
 
@@ -79,11 +84,17 @@ export default function ProfileUpdate() {
   const updateProfile = () => {
     db.collection("Users")
       .doc(user.uid)
-      .set(values)
+      .update(values)
       .then(function () {
         console.log("Document successfully written!");
+        // <Notifications type="success" message="Profile Successfully Updated" />;
+        setSuccessNotification(true);
+        setTimeout(() => {
+          setSuccessNotification(false);
+        }, 3000);
       })
       .catch(function (error) {
+        setFailureNotification(true);
         console.error("Error writing document: ", error);
       });
   };
@@ -91,6 +102,18 @@ export default function ProfileUpdate() {
   return (
     <div className={classes.section}>
       <div className={classes.container}>
+        {successNotification && (
+          <Notifications
+            type="success"
+            message="Profile Updated Successfully"
+          />
+        )}
+        {failureNotification && (
+          <Notifications
+            type="danger"
+            message="Error Updating Profile. PLease check your connection and try again"
+          />
+        )}
         <GridContainer justify="center">
           <GridItem
             style={{ paddingLeft: 0, paddingRight: 0 }}
@@ -145,7 +168,7 @@ export default function ProfileUpdate() {
                 inputProps={{
                   type: "text",
                   name: "phone",
-                  value: values.phone,
+                  value: values.phone || "",
                   onChange: _handleChange,
                   endAdornment: (
                     <InputAdornment position="end">
@@ -163,7 +186,7 @@ export default function ProfileUpdate() {
                 inputProps={{
                   name: "bio",
                   type: "text",
-                  value: values.bio,
+                  value: values.bio || "",
                   onChange: _handleChange,
                   endAdornment: (
                     <InputAdornment position="end">
@@ -181,7 +204,7 @@ export default function ProfileUpdate() {
                 inputProps={{
                   name: "location",
                   type: "text",
-                  value: values.location,
+                  value: values.location || "",
                   onChange: _handleChange,
                   endAdornment: (
                     <InputAdornment position="end">
@@ -199,7 +222,7 @@ export default function ProfileUpdate() {
                 inputProps={{
                   name: "occupation",
                   type: "text",
-                  value: values.occupation,
+                  value: values.occupation || "",
                   onChange: _handleChange,
                   endAdornment: (
                     <InputAdornment position="end">
