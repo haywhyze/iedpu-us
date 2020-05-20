@@ -8,12 +8,12 @@ admin.initializeApp();
 const db = admin.firestore();
 
 const createProfile = (userRecord, context) => {
-  const { email, uid, displayName } = userRecord;
+  const { email, uid, displayName, photoURL } = userRecord;
 
   return db
     .collection("Users")
     .doc(uid)
-    .set({ email, displayName })
+    .set({ email, displayName, photoURL })
     .catch(console.error);
 };
 
