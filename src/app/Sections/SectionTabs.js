@@ -15,6 +15,7 @@ import CustomTabs from "components/CustomTabs/CustomTabs.js";
 import ProfileUpdate from "./ProfileUpdate";
 
 import styles from "assets/jss/material-kit-react/views/componentsSections/tabsStyle.js";
+import MembersList from "./MembersList";
 
 const useStyles = makeStyles(styles);
 
@@ -53,7 +54,8 @@ export default function SectionTabs() {
                     tabIcon: People,
                     tabContent: (
                       <>
-                        <h3>Settle Membership Fees</h3>
+                        <h3>Get to know other Members</h3>
+                        <MembersList />
                       </>
                     ),
                   },
