@@ -2,12 +2,12 @@
 import React, { useContext } from "react";
 // react components for routing our app without refresh
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import Tooltip from "@material-ui/core/Tooltip";
 
 // core components
 import Button from "components/CustomButtons/Button.js";
@@ -19,7 +19,8 @@ const useStyles = makeStyles(styles);
 
 function HeaderLinks(props) {
   const classes = useStyles();
-  const { user, signOut, loading } = useContext(AuthContext);
+  const router = useRouter();
+  const { user, signOut, isAuthenticated } = useContext(AuthContext);
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
@@ -63,10 +64,20 @@ function HeaderLinks(props) {
             Historical Facts
           </Button>
         </Link>
-        <Link href="/login">
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <Link
+          href={
+            user
+              ? router.pathname !== "/profile"
+                ? "/profile"
+                : "/login"
+              : "/login"
+          }
+        >
           {user ? (
-            <Button color="danger" round onClick={signOut}>
-              Sign out
+            <Button color="transparent" round>
+              {user.displayName}
             </Button>
           ) : (
             <Button color="primary" round>
@@ -75,63 +86,13 @@ function HeaderLinks(props) {
           )}
         </Link>
       </ListItem>
-      <ListItem className={classes.listItem}>
-        <Tooltip
-          id="instagram-twitter"
-          title="Follow us on twitter"
-          placement={
-            process.browser && window.innerWidth > 959 ? "top" : "left"
-          }
-          classes={{ tooltip: classes.tooltip }}
-        >
-          <Button
-            href="https://twitter.com/haywhyze"
-            target="_blank"
-            color="transparent"
-            className={classes.navLink}
-          >
-            <i className={classes.socialIcons + " fab fa-twitter"} />
+      {isAuthenticated && (
+        <ListItem className={classes.listItem}>
+          <Button color="danger" round onClick={signOut}>
+            Sign out
           </Button>
-        </Tooltip>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <Tooltip
-          id="instagram-facebook"
-          title="Follow us on facebook"
-          placement={
-            process.browser && window.innerWidth > 959 ? "top" : "left"
-          }
-          classes={{ tooltip: classes.tooltip }}
-        >
-          <Button
-            color="transparent"
-            href="https://www.facebook.com/haywhyze"
-            target="_blank"
-            className={classes.navLink}
-          >
-            <i className={classes.socialIcons + " fab fa-facebook"} />
-          </Button>
-        </Tooltip>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <Tooltip
-          id="instagram-tooltip"
-          title="Follow us on instagram"
-          placement={
-            process.browser && window.innerWidth > 959 ? "top" : "left"
-          }
-          classes={{ tooltip: classes.tooltip }}
-        >
-          <Button
-            color="transparent"
-            href="https://www.instagram.com/haywhyze"
-            target="_blank"
-            className={classes.navLink}
-          >
-            <i className={classes.socialIcons + " fab fa-instagram"} />
-          </Button>
-        </Tooltip>
-      </ListItem>
+        </ListItem>
+      )}
     </List>
   );
 }
