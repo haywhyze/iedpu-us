@@ -18,8 +18,8 @@ import routes from "../routes";
 
 import styles from "assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
-const bgImage = "assets/img/sidebar-2.jpg";
-const logo = "img/reactlogo.png";
+const bgImage = "../img/sidebar-2.jpg";
+const logo = "../img/reactlogo.png";
 
 const switchRoutes = (
   <Switch>

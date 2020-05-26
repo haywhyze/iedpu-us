@@ -22,8 +22,12 @@ export default function Header(props) {
   function makeBrand() {
     var name;
     props.routes.map((prop) => {
-      if (process.browser && window.location.href.indexOf(prop.layout + prop.path) !== -1) {
+      if (
+        process.browser &&
+        window.location.href.indexOf(prop.layout + prop.path) !== -1
+      ) {
         name = props.rtlActive ? prop.rtlName : prop.name;
+        console.log(prop.name);
       }
       return null;
     });

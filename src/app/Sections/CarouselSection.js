@@ -29,7 +29,7 @@ export default function SectionCarousel() {
       <div className={classes.container}>
         <GridContainer>
           <GridItem xs={12} sm={12} md={8} className={classes.marginAuto}>
-            <Card carousel>
+            <Card>
               <Carousel {...settings}>
                 <div>
                   <img
