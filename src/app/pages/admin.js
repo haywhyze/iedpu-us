@@ -4,6 +4,7 @@ import {
   Route,
   Redirect,
   BrowserRouter as Router,
+  StaticRouter,
 } from "react-router-dom";
 // import Router from "next/router";
 // @material-ui/core components
@@ -17,27 +18,25 @@ import routes from "../routes";
 
 import styles from "assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
-import bgImage from "assets/img/sidebar-2.jpg";
-import logo from "assets/img/reactlogo.png";
+const bgImage = "assets/img/sidebar-2.jpg";
+const logo = "img/reactlogo.png";
 
 const switchRoutes = (
-  <Router>
-    <Switch>
-      {routes.map((prop, key) => {
-        if (prop.layout === "/admin") {
-          return (
-            <Route
-              path={prop.layout + prop.path}
-              component={prop.component}
-              key={key}
-            />
-          );
-        }
-        return null;
-      })}
-      <Redirect from="/admin" to="/admin/dashboard" />
-    </Switch>
-  </Router>
+  <Switch>
+    {routes.map((prop, key) => {
+      if (prop.layout === "/admin") {
+        return (
+          <Route
+            path={prop.layout + prop.path}
+            component={prop.component}
+            key={key}
+          />
+        );
+      }
+      return null;
+    })}
+    <Redirect from="/admin" to="/admin/dashboard" />
+  </Switch>
 );
 
 const useStyles = makeStyles(styles);
@@ -54,30 +53,63 @@ export default function Admin({ ...rest }) {
     setMobileOpen(!mobileOpen);
   };
 
+  if (!process.browser) {
+    return (
+      <StaticRouter>
+        <div className={classes.wrapper}>
+          <Sidebar
+            routes={routes}
+            logoText={"Creative Tim"}
+            logo={logo}
+            image={bgImage}
+            handleDrawerToggle={handleDrawerToggle}
+            open={mobileOpen}
+            color={"purple"}
+            {...rest}
+          />
+          <div className={classes.mainPanel} ref={mainPanel}>
+            <Navbar
+              routes={routes}
+              handleDrawerToggle={handleDrawerToggle}
+              {...rest}
+            />
+            {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
+            <div className={classes.content}>
+              <div className={classes.container}>{switchRoutes}</div>
+            </div>
+            <Footer />
+          </div>
+        </div>
+      </StaticRouter>
+    );
+  }
+
   return (
-    <div className={classes.wrapper}>
-      <Sidebar
-        routes={routes}
-        logoText={"Creative Tim"}
-        logo={logo}
-        image={bgImage}
-        handleDrawerToggle={handleDrawerToggle}
-        open={mobileOpen}
-        color={"purple"}
-        {...rest}
-      />
-      <div className={classes.mainPanel} ref={mainPanel}>
-        <Navbar
+    <Router>
+      <div className={classes.wrapper}>
+        <Sidebar
           routes={routes}
+          logoText={"Creative Tim"}
+          logo={logo}
+          image={bgImage}
           handleDrawerToggle={handleDrawerToggle}
+          open={mobileOpen}
+          color={"purple"}
           {...rest}
         />
-        {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
-        <div className={classes.content}>
-          <div className={classes.container}>{switchRoutes}</div>
+        <div className={classes.mainPanel} ref={mainPanel}>
+          <Navbar
+            routes={routes}
+            handleDrawerToggle={handleDrawerToggle}
+            {...rest}
+          />
+          {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
+          <div className={classes.content}>
+            <div className={classes.container}>{switchRoutes}</div>
+          </div>
+          <Footer />
         </div>
-        <Footer />
       </div>
-    </div>
+    </Router>
   );
 }
