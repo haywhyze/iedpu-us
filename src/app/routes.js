@@ -1,17 +1,16 @@
 import Dashboard from "@material-ui/icons/Dashboard";
-import Person from "@material-ui/icons/Person";
+import People from "@material-ui/icons/People";
 import LibraryBooks from "@material-ui/icons/LibraryBooks";
-import BubbleChart from "@material-ui/icons/BubbleChart";
-import Notifications from "@material-ui/icons/Notifications";
-import Unarchive from "@material-ui/icons/Unarchive";
+import LocalAtm from "@material-ui/icons/LocalAtm";
+import Event from "@material-ui/icons/Event";
+import PhotoLibrary from "@material-ui/icons/PhotoLibrary";
 // core components/views for Admin layout
 import DashboardPage from "views/Dashboard/Dashboard.js";
-import UserProfile from "views/UserProfile/UserProfile.js";
-import TableList from "views/TableList/TableList.js";
-import Typography from "views/Typography/Typography.js";
-import Icons from "views/Icons/Icons.js";
-import NotificationsPage from "views/Notifications/Notifications.js";
-import UpgradeToPro from "views/UpgradeToPro/UpgradeToPro.js";
+import Members from "views/Members/Members.js";
+import Payments from "views/Payments/Payments.js";
+import EventsMeetings from "views/EventsMeetings/EventsMeetings.js";
+import NewsArticles from "views/NewsArticles/NewsArticles.js";
+import GalleryPage from "views/Gallery/Gallery.js";
 // core components/views for RTL layout
 
 const dashboardRoutes = [
@@ -23,45 +22,38 @@ const dashboardRoutes = [
     layout: "/admin",
   },
   {
-    path: "/user",
-    name: "User Profile",
-    icon: Person,
-    component: UserProfile,
+    path: "/members",
+    name: "Members",
+    icon: People,
+    component: Members,
     layout: "/admin",
   },
   {
-    path: "/table",
-    name: "Table List",
-    icon: "content_paste",
-    component: TableList,
+    path: "/payments",
+    name: "Payments",
+    icon: LocalAtm,
+    component: Payments,
     layout: "/admin",
   },
   {
-    path: "/typography",
-    name: "Typography",
+    path: "/events-meetings",
+    name: "Events and Meetings",
+    icon: Event,
+    component: EventsMeetings,
+    layout: "/admin",
+  },
+  {
+    path: "/news-articles",
+    name: "News and Articles",
     icon: LibraryBooks,
-    component: Typography,
+    component: NewsArticles,
     layout: "/admin",
   },
   {
-    path: "/icons",
-    name: "Icons",
-    icon: BubbleChart,
-    component: Icons,
-    layout: "/admin",
-  },
-  {
-    path: "/notifications",
-    name: "Notifications",
-    icon: Notifications,
-    component: NotificationsPage,
-    layout: "/admin",
-  },
-  {
-    path: "/upgrade-to-pro",
-    name: "Upgrade To PRO",
-    icon: Unarchive,
-    component: UpgradeToPro,
+    path: "/gallery",
+    name: "Gallery",
+    icon: PhotoLibrary,
+    component: GalleryPage,
     layout: "/admin",
   },
 ];
