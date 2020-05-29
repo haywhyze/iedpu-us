@@ -185,7 +185,8 @@ export default function ProfileUpdate() {
                 }}
                 inputProps={{
                   name: "bio",
-                  type: "text",
+                  multiline:true,
+                  rows: 3,
                   value: values.bio || "",
                   onChange: _handleChange,
                   endAdornment: (
@@ -231,7 +232,7 @@ export default function ProfileUpdate() {
                   ),
                 }}
               />
-              <Button onClick={updateProfile} simple color="primary" size="lg">
+              <Button onClick={updateProfile} round color="primary" >
                 Update Profile
               </Button>
             </form>

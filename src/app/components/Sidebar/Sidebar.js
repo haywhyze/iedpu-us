@@ -50,8 +50,6 @@ export default function Sidebar(props) {
           <Link
             href="/admin/[section]"
             as={`/admin${prop.path}`}
-            className={activePro + classes.item}
-            activeClassName="active"
             key={key}
           >
             <ListItem button className={classes.itemLink + listItemClasses}>
@@ -153,14 +151,3 @@ export default function Sidebar(props) {
     </div>
   );
 }
-
-Sidebar.propTypes = {
-  rtlActive: PropTypes.bool,
-  handleDrawerToggle: PropTypes.func,
-  bgColor: PropTypes.oneOf(["purple", "blue", "green", "orange", "red"]),
-  logo: PropTypes.string,
-  image: PropTypes.string,
-  logoText: PropTypes.string,
-  routes: PropTypes.arrayOf(PropTypes.object),
-  open: PropTypes.bool,
-};
