@@ -1,10 +1,14 @@
 import React, { useContext } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import Icon from "@material-ui/core/Icon";
 
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Router from "next/router";
+import Email from "@material-ui/icons/Email";
+import People from "@material-ui/icons/People";
 import Link from "next/link";
 import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -13,6 +17,7 @@ import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
+import CustomInput from "components/CustomInput/CustomInput.js";
 import CardFooter from "components/Card/CardFooter.js";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
@@ -34,19 +39,13 @@ function LoginPage(props) {
 
   React.useEffect(() => {
     if (isAuthenticated) {
-      Router.push("/profile");
+      // Router.push("/admin/dashboard");
+      console.log("object");
     }
   }, [isAuthenticated]);
 
   return (
     <div>
-      <Header
-        absolute
-        color="transparent"
-        brand="IEDPU"
-        rightLinks={<HeaderLinks />}
-        {...rest}
-      />
       <div
         className={classes.pageHeader}
         style={{
@@ -61,23 +60,47 @@ function LoginPage(props) {
               <Card className={classes[cardAnimaton]}>
                 <form className={classes.form}>
                   <CardHeader color="primary" className={classes.cardHeader}>
-                    <h4>Sign in with</h4>
-                    <div className={classes.socialLine}>
-                      <Button color="transparent" onClick={signInWithFacebook}>
-                        <i className={"fab fa-facebook"} />
-                      </Button>
-                      <Button color="transparent" onClick={signInWithGoogle}>
-                        <i className={"fab fa-google"} />
-                      </Button>
-                    </div>
-                    <p className={classes.divider}>
-                      to join other members of the community
-                    </p>
+                    <h3>Login as Admin</h3>
                   </CardHeader>
+                  <CardBody>
+                    <CustomInput
+                      labelText="Email..."
+                      id="email"
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        type: "email",
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <Email className={classes.inputIconsColor} />
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                    <CustomInput
+                      labelText="Password"
+                      id="pass"
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        type: "password",
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <Icon className={classes.inputIconsColor}>
+                              lock_outline
+                            </Icon>
+                          </InputAdornment>
+                        ),
+                        autoComplete: "off",
+                      }}
+                    />
+                  </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Link href="/">
+                    <Link href="/admin">
                       <Button simple color="primary" size="lg">
-                        Return to homepage
+                        LOG IN
                       </Button>
                     </Link>
                   </CardFooter>
