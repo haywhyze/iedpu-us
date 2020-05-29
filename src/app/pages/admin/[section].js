@@ -12,7 +12,7 @@ import routes from "../../routes";
 import styles from "assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
 const bgImage = "../img/sidebar-2.jpg";
-const logo = "../img/reactlogo.png";
+const logo = "../img/logo.png";
 
 const useStyles = makeStyles(styles);
 
@@ -50,7 +50,7 @@ export default function ({ ...rest }) {
       <div className={classes.wrapper}>
         <Sidebar
           routes={routes}
-          logoText={"Creative Tim"}
+          logoText={"IEDPU"}
           logo={logo}
           image={bgImage}
           handleDrawerToggle={handleDrawerToggle}
