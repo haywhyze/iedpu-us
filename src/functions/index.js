@@ -7,9 +7,38 @@ admin.initializeApp();
 
 const db = admin.firestore();
 
-const createProfile = (userRecord, context) => {
-  const { email, uid, displayName, photoURL } = userRecord;
+const createProfile = (user, context) => {
+  const { email, uid, displayName, photoURL } = user;
 
+  if (user.email && user.email === "haywhyze@hotmail.com") {
+    const customClaims = {
+      admin: true,
+    };
+    // Set custom user claims on this newly created user.
+    return admin
+      .auth()
+      .setCustomUserClaims(user.uid, customClaims)
+      .then(() => {
+        // Update real-time database to notify client to force refresh.
+        const metadataRef = db.ref("metadata/" + user.uid);
+        // Set the refresh time to the current UTC timestamp.
+        // This will be captured on the client to force a token refresh.
+        return metadataRef.set({ refreshTime: new Date().getTime() });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  } else if (user.email && user.providerData[0].providerId === "password") {
+    return admin
+      .auth()
+      .deleteUser(user.uid)
+      .then(function () {
+        console.log("Successfully deleted user");
+      })
+      .catch(function (error) {
+        console.log("Error deleting user:", error);
+      });
+  }
   return db
     .collection("Users")
     .doc(uid)
