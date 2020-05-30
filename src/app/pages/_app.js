@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Head from "next/head";
 import { ThemeProvider } from "@material-ui/core/styles";
@@ -19,18 +19,6 @@ const firebaseAppAuth = firebaseApp.auth();
 
 export const db = firebase.firestore();
 
-let isAuthenticated = true;
-
-firebase.auth().onAuthStateChanged(function (user) {
-  if (user) {
-    // User is signed in.
-    isAuthenticated = true;
-  } else {
-    // No user is signed in.
-    isAuthenticated = false;
-  }
-});
-
 const providers = {
   facebookProvider: new firebase.auth.FacebookAuthProvider(),
   googleProvider: new firebase.auth.GoogleAuthProvider(),
@@ -40,6 +28,21 @@ import "assets/scss/material-kit-react.scss?v=1.8.0";
 
 export const AuthContext = React.createContext();
 function MyApp(props) {
+  const [isAdmin, setIsAdmin] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  firebase.auth().onAuthStateChanged(async function (user) {
+    if (user) {
+      // User is signed in.
+      setIsAuthenticated(true);
+      const idToken = await user.getIdTokenResult();
+      if (idToken && idToken.claims && idToken.claims.admin) {
+        setIsAdmin(true);
+      } else setIsAdmin(false);
+    } else {
+      // No user is signed in.
+      setIsAuthenticated(false);
+    }
+  });
   const { Component, pageProps } = props;
   const {
     user,
@@ -50,7 +53,7 @@ function MyApp(props) {
     createUserWithEmailAndPassword,
     loading,
     error,
-    setError
+    setError,
   } = props;
 
   React.useEffect(() => {
@@ -82,7 +85,8 @@ function MyApp(props) {
             loading,
             isAuthenticated,
             error,
-            setError
+            setError,
+            isAdmin,
           }}
         >
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}

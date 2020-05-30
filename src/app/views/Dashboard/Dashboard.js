@@ -42,7 +42,7 @@ export default function Dashboard() {
               </CardIcon>
               <p className={classes.cardCategory}>Registered Users</p>
               <h3 className={classes.cardTitle}>
-                340 <small>Members</small>
+                340
               </h3>
             </CardHeader>
             <CardFooter stats>
@@ -70,8 +70,6 @@ export default function Dashboard() {
             </CardFooter>
           </Card>
         </GridItem>
-      </GridContainer>
-      <GridContainer>
         <GridItem xs={12} sm={6} md={4} lg={3}>
           <Card>
             <CardHeader color="success" stats icon>

@@ -20,7 +20,7 @@ const useStyles = makeStyles(styles);
 export default function ({ ...rest }) {
   const router = useRouter();
   const { section } = router.query;
-  const { user, isAuthenticated } = useContext(AuthContext);
+  const { user, isAdmin, isAuthenticated } = useContext(AuthContext);
 
   const classes = useStyles();
   // ref to help us initialize PerfectScrollbar on windows devices
@@ -56,11 +56,17 @@ export default function ({ ...rest }) {
     Router.prefetch("/admin-login");
   }, []);
 
+  if (!isAdmin) {
+    Router.push("/login");
+    return null;
+  }
+
   if (!process.browser) return null;
   if (!isAuthenticated) return null;
   return (
     <BrowserRouter>
-      <div className={classes.wrapper}>
+    {console.log(isAdmin, isAuthenticated)}
+      {isAuthenticated && isAdmin && <div className={classes.wrapper}>
         <Sidebar
           routes={routes}
           logoText={"IEDPU"}
@@ -84,7 +90,7 @@ export default function ({ ...rest }) {
           </div>
           <Footer />
         </div>
-      </div>
+      </div>}
     </BrowserRouter>
   );
 }

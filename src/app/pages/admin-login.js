@@ -31,6 +31,7 @@ function LoginPage(props) {
     error,
     isAuthenticated,
     signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
     setError,
     loading,
   } = useContext(AuthContext);
@@ -126,7 +127,7 @@ function LoginPage(props) {
                     )}
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    {isAuthenticated && Router.push("/admin/dashboard")}
+                    
                     {!isAuthenticated && (
                       <Button
                         onClick={() =>
