@@ -17,7 +17,7 @@ const firebaseApp = !firebase.apps.length
 
 const firebaseAppAuth = firebaseApp.auth();
 
-export const db = firebase.firestore()
+export const db = firebase.firestore();
 
 let isAuthenticated = true;
 
@@ -46,8 +46,11 @@ function MyApp(props) {
     signOut,
     signInWithFacebook,
     signInWithGoogle,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
     loading,
-    error
+    error,
+    setError
   } = props;
 
   React.useEffect(() => {
@@ -74,9 +77,12 @@ function MyApp(props) {
             signOut,
             signInWithFacebook,
             signInWithGoogle,
+            signInWithEmailAndPassword,
+            createUserWithEmailAndPassword,
             loading,
             isAuthenticated,
-            error
+            error,
+            setError
           }}
         >
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 // @material-ui/core components
@@ -10,7 +10,7 @@ import Hidden from "@material-ui/core/Hidden";
 // @material-ui/icons
 import Menu from "@material-ui/icons/Menu";
 // core components
-import AdminNavbarLinks from "./AdminNavbarLinks.js";
+import { AuthContext } from "../../pages/_app";
 import Button from "components/CustomButtons/Button.js";
 
 import styles from "assets/jss/material-dashboard-react/components/headerStyle.js";
@@ -19,6 +19,7 @@ const useStyles = makeStyles(styles);
 
 export default function Header(props) {
   const classes = useStyles();
+  const { signOut } = useContext(AuthContext);
 
   const { color, route } = props;
   const appBarClasses = classNames({
@@ -34,7 +35,9 @@ export default function Header(props) {
           </Button>
         </div>
         <Hidden smDown implementation="css">
-          <AdminNavbarLinks />
+          <Button onClick={signOut} color="danger">
+            Sign Out
+          </Button>
         </Hidden>
         <Hidden mdUp implementation="css">
           <IconButton

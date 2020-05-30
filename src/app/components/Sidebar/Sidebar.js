@@ -47,11 +47,7 @@ export default function Sidebar(props) {
           [" " + classes.whiteFont]: activeRoute(prop.layout + prop.path),
         });
         return (
-          <Link
-            href="/admin/[section]"
-            as={`/admin${prop.path}`}
-            key={key}
-          >
+          <Link href="/admin/[section]" as={`/admin${prop.path}`} key={key}>
             <ListItem button className={classes.itemLink + listItemClasses}>
               {typeof prop.icon === "string" ? (
                 <Icon
@@ -116,7 +112,7 @@ export default function Sidebar(props) {
         >
           {brand}
           <div className={classes.sidebarWrapper}>
-            {props.rtlActive ? <RTLNavbarLinks /> : <AdminNavbarLinks />}
+            {<AdminNavbarLinks />}
             {links}
           </div>
           {image !== undefined ? (
