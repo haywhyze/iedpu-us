@@ -76,9 +76,11 @@ function LoginPage(props) {
                   </CardHeader>
                   <CardFooter className={classes.cardFooter}>
                     <Link href="/">
-                      <Button simple color="primary" size="lg">
-                        Return to homepage
-                      </Button>
+                      <span>
+                        <Button simple color="primary" size="lg">
+                          Return to homepage
+                        </Button>
+                      </span>
                     </Link>
                   </CardFooter>
                 </form>

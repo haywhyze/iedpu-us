@@ -54,9 +54,11 @@ export default function Index(props) {
                   Emirate both at home and abroad.
                 </h3>
                 <Link href="/login">
-                  <Button color="primary" round>
-                    Join Us
-                  </Button>
+                  <span>
+                    <Button color="primary" round>
+                      Join Us
+                    </Button>
+                  </span>
                 </Link>
               </div>
             </GridItem>
@@ -89,33 +91,35 @@ export default function Index(props) {
                 process.browser && window.innerWidth > 959 ? "top" : "left"
               }
             >
-              <Button
-                href="https://twitter.com/haywhyze"
-                target="_blank"
-                style={{
-                  color: "inherit",
-                  position: "relative",
-                  padding: "0.9375rem",
-                  fontWeight: "400",
-                  fontSize: "12px",
-                  textTransform: "uppercase",
-                  borderRadius: "3px",
-                  lineHeight: "20px",
-                  textDecoration: "none",
-                  margin: "0px",
-                  display: "inline-flex",
-                  "&:hover,&:focus": {
+              <span>
+                <Button
+                  href="https://twitter.com/haywhyze"
+                  target="_blank"
+                  style={{
                     color: "inherit",
-                    background: "rgba(200, 200, 200, 0.2)",
-                  },
-                }}
-                color="transparent"
-              >
-                <i
-                  style={{ position: "relative" }}
-                  className={"fab fa-twitter"}
-                />
-              </Button>
+                    position: "relative",
+                    padding: "0.9375rem",
+                    fontWeight: "400",
+                    fontSize: "12px",
+                    textTransform: "uppercase",
+                    borderRadius: "3px",
+                    lineHeight: "20px",
+                    textDecoration: "none",
+                    margin: "0px",
+                    display: "inline-flex",
+                    "&:hover,&:focus": {
+                      color: "inherit",
+                      background: "rgba(200, 200, 200, 0.2)",
+                    },
+                  }}
+                  color="transparent"
+                >
+                  <i
+                    style={{ position: "relative" }}
+                    className={"fab fa-twitter"}
+                  />
+                </Button>
+              </span>
             </Tooltip>
           </li>
           <li>
@@ -126,33 +130,35 @@ export default function Index(props) {
                 process.browser && window.innerWidth > 959 ? "top" : "left"
               }
             >
-              <Button
-                color="transparent"
-                href="https://www.facebook.com/haywhyze"
-                target="_blank"
-                style={{
-                  color: "inherit",
-                  position: "relative",
-                  padding: "0.9375rem",
-                  fontWeight: "400",
-                  fontSize: "12px",
-                  textTransform: "uppercase",
-                  borderRadius: "3px",
-                  lineHeight: "20px",
-                  textDecoration: "none",
-                  margin: "0px",
-                  display: "inline-flex",
-                  "&:hover,&:focus": {
+              <span>
+                <Button
+                  color="transparent"
+                  href="https://www.facebook.com/haywhyze"
+                  target="_blank"
+                  style={{
                     color: "inherit",
-                    background: "rgba(200, 200, 200, 0.2)",
-                  },
-                }}
-              >
-                <i
-                  style={{ fontSize: "20px !important" }}
-                  className={"fab fa-facebook"}
-                />
-              </Button>
+                    position: "relative",
+                    padding: "0.9375rem",
+                    fontWeight: "400",
+                    fontSize: "12px",
+                    textTransform: "uppercase",
+                    borderRadius: "3px",
+                    lineHeight: "20px",
+                    textDecoration: "none",
+                    margin: "0px",
+                    display: "inline-flex",
+                    "&:hover,&:focus": {
+                      color: "inherit",
+                      background: "rgba(200, 200, 200, 0.2)",
+                    },
+                  }}
+                >
+                  <i
+                    style={{ fontSize: "20px !important" }}
+                    className={"fab fa-facebook"}
+                  />
+                </Button>
+              </span>
             </Tooltip>
           </li>
           <li>
@@ -163,33 +169,35 @@ export default function Index(props) {
                 process.browser && window.innerWidth > 959 ? "top" : "left"
               }
             >
-              <Button
-                color="transparent"
-                href="https://www.instagram.com/haywhyze"
-                target="_blank"
-                style={{
-                  color: "inherit",
-                  position: "relative",
-                  padding: "0.9375rem",
-                  fontWeight: "400",
-                  fontSize: "12px",
-                  textTransform: "uppercase",
-                  borderRadius: "3px",
-                  lineHeight: "20px",
-                  textDecoration: "none",
-                  margin: "0px",
-                  display: "inline-flex",
-                  "&:hover,&:focus": {
+              <span>
+                <Button
+                  color="transparent"
+                  href="https://www.instagram.com/haywhyze"
+                  target="_blank"
+                  style={{
                     color: "inherit",
-                    background: "rgba(200, 200, 200, 0.2)",
-                  },
-                }}
-              >
-                <i
-                  style={{ marginRight: "4px" }}
-                  className={"fab fa-instagram"}
-                />
-              </Button>
+                    position: "relative",
+                    padding: "0.9375rem",
+                    fontWeight: "400",
+                    fontSize: "12px",
+                    textTransform: "uppercase",
+                    borderRadius: "3px",
+                    lineHeight: "20px",
+                    textDecoration: "none",
+                    margin: "0px",
+                    display: "inline-flex",
+                    "&:hover,&:focus": {
+                      color: "inherit",
+                      background: "rgba(200, 200, 200, 0.2)",
+                    },
+                  }}
+                >
+                  <i
+                    style={{ marginRight: "4px" }}
+                    className={"fab fa-instagram"}
+                  />
+                </Button>
+              </span>
             </Tooltip>
           </li>
         </List>

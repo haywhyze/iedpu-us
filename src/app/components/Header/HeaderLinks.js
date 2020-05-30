@@ -25,44 +25,56 @@ function HeaderLinks(props) {
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
         <Link href="/">
-          <Button color="transparent" className={classes.navLink}>
-            Home
-          </Button>
+          <span>
+            <Button color="transparent" className={classes.navLink}>
+              Home
+            </Button>
+          </span>
         </Link>
       </ListItem>
       <ListItem className={classes.listItem}>
         <Link href="/events">
-          <Button color="transparent" className={classes.navLink}>
-            Events
-          </Button>
+          <span>
+            <Button color="transparent" className={classes.navLink}>
+              Events
+            </Button>
+          </span>
         </Link>
       </ListItem>
       <ListItem className={classes.listItem}>
         <Link href="/news">
-          <Button color="transparent" className={classes.navLink}>
-            News
-          </Button>
+          <span>
+            <Button color="transparent" className={classes.navLink}>
+              News
+            </Button>
+          </span>
         </Link>
       </ListItem>
       <ListItem className={classes.listItem}>
         <Link href="/gallery">
-          <Button color="transparent" className={classes.navLink}>
-            Gallery
-          </Button>
+          <span>
+            <Button color="transparent" className={classes.navLink}>
+              Gallery
+            </Button>
+          </span>
         </Link>
       </ListItem>
       <ListItem className={classes.listItem}>
         <Link href="/executives">
-          <Button color="transparent" className={classes.navLink}>
-            Executives
-          </Button>
+          <span>
+            <Button color="transparent" className={classes.navLink}>
+              Executives
+            </Button>
+          </span>
         </Link>
       </ListItem>
       <ListItem className={classes.listItem}>
         <Link href="/history">
-          <Button color="transparent" className={classes.navLink}>
-            Historical Facts
-          </Button>
+          <span>
+            <Button color="transparent" className={classes.navLink}>
+              Historical Facts
+            </Button>
+          </span>
         </Link>
       </ListItem>
       <ListItem className={classes.listItem}>
@@ -76,13 +88,17 @@ function HeaderLinks(props) {
           }
         >
           {user ? (
-            <Button color="transparent" round>
-              {user.displayName}
-            </Button>
+            <span>
+              <Button color="transparent" round>
+                {user.displayName}
+              </Button>
+            </span>
           ) : (
-            <Button color="primary" round>
-              Join Us
-            </Button>
+            <span>
+              <Button color="primary" round>
+                Join Us
+              </Button>
+            </span>
           )}
         </Link>
       </ListItem>
