@@ -65,7 +65,6 @@ export default function ({ ...rest }) {
   if (!isAuthenticated) return null;
   return (
     <BrowserRouter>
-    {console.log(isAdmin, isAuthenticated)}
       {isAuthenticated && isAdmin && <div className={classes.wrapper}>
         <Sidebar
           routes={routes}
