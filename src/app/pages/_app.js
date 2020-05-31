@@ -25,6 +25,7 @@ const providers = {
 };
 
 import "assets/scss/material-kit-react.scss?v=1.8.0";
+import "assets/scss/style.scss";
 
 export const AuthContext = React.createContext();
 function MyApp(props) {

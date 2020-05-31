@@ -21,6 +21,7 @@ import { db } from "./_app";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { AuthContext } from "./_app";
+import UnderReview from "../Sections/UnderReview";
 
 const useStyles = makeStyles(styles);
 
@@ -32,11 +33,12 @@ function ProfilePage(props) {
     classes.imgRoundedCircle,
     classes.imgFluid
   );
-  const { user, isAuthenticated } = useContext(AuthContext);
+  const { user, isAuthenticated, isAdmin } = useContext(AuthContext);
   const [displayName, setDisplayName] = useState(
     (user && user.displayName) || ""
   );
   const [photoURL, setPhotoURL] = useState((user && user.photoURL) || "");
+  const [verified, setVerified] = useState(false);
 
   const override = css`
     display: block;
@@ -50,6 +52,10 @@ function ProfilePage(props) {
       .doc(user.uid)
       .onSnapshot(function (doc) {
         if (doc.exists) {
+          if (!doc.data().verified) {
+            setVerified(false);
+            return;
+          } else setVerified(true);
           setDisplayName(doc.data().displayName);
           setPhotoURL(doc.data().photoURL);
         }
@@ -120,6 +126,11 @@ function ProfilePage(props) {
 
   if (!user)
     return <ClipLoader css={override} size={150} color={"#123abc"} loading />;
+
+  console.log(!isAdmin, !verified);
+  if (!isAdmin && !verified) {
+    return <UnderReview />;
+  }
 
   return (
     <div>
