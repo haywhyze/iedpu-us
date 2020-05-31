@@ -34,15 +34,16 @@ function LoginPage(props) {
     createUserWithEmailAndPassword,
     setError,
     loading,
+    user,
   } = useContext(AuthContext);
 
   const { ...rest } = props;
 
   React.useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated && user) {
       Router.push("/admin/dashboard");
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, user]);
 
   const [values, setValues] = useState({
     email: "",
@@ -127,7 +128,6 @@ function LoginPage(props) {
                     )}
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    
                     {!isAuthenticated && (
                       <Button
                         onClick={() =>

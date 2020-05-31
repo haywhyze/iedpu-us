@@ -46,7 +46,8 @@ function ProfilePage(props) {
     border-color: purple;
   `;
 
-  user &&
+  !isAdmin &&
+    user &&
     db
       .collection("Users")
       .doc(user.uid)
