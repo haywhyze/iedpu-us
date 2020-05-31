@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
 import Check from "@material-ui/icons/Check";
 import Warning from "@material-ui/icons/Warning";
+import Info from "@material-ui/icons/InfoOutlined";
 // core components
 import SnackbarContent from "components/Snackbar/SnackbarContent.js";
 import Clearfix from "components/Clearfix/Clearfix.js";
@@ -21,11 +22,13 @@ export default function Notifications({ type, message }) {
         // close
         color={type}
         icon={
-          type !== "info" || type !== "danger"
-            ? type !== "warning"
-              ? Check
+          type !== "info"
+            ? type !== "warning" 
+            ? type !== "danger"
+            ? Check 
+              : Info
               : Warning
-            : "info_outline"
+              : Info
         }
       />
       <Clearfix />
