@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // react plugin for creating charts
 import ChartistGraph from "react-chartist";
 // @material-ui/core
@@ -7,30 +7,45 @@ import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
 import Store from "@material-ui/icons/Store";
 import Update from "@material-ui/icons/Update";
-import AccessTime from "@material-ui/icons/AccessTime";
 import HourGlassEmpty from "@material-ui/icons/HourGlassEmpty";
 import VerifiedUser from "@material-ui/icons/VerifiedUser";
-import Cloud from "@material-ui/icons/Cloud";
 // core components
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import ConfirmCell from "../../Sections/ConfirmCell";
 import DeleteCell from "../../Sections/DeleteCell";
 import Table from "components/Table/Table.js";
-import Tasks from "components/Tasks/Tasks.js";
 import CustomTabs from "components/CustomTabs/CustomTabs.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardIcon from "components/Card/CardIcon.js";
 import CardBody from "components/Card/CardBody.js";
+import Notifications from "../../Sections/Notification";
 import CardFooter from "components/Card/CardFooter.js";
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
 const useStyles = makeStyles(styles);
 
-export default function Dashboard() {
+export default function Dashboard({ members }) {
   const classes = useStyles();
+  const [successNotification, setSuccessNotification] = useState(false);
+  const [failureNotification, setFailureNotification] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const unconfirmedMembers = members.reduce((filtered, member) => {
+    if (!member.verified) {
+      filtered.push(member);
+    }
+    return filtered;
+  }, []);
+  const confirmedMembers = members.reduce((filtered, member) => {
+    if (member.verified) {
+      filtered.push(member);
+    }
+    return filtered;
+  }, []);
+
   return (
     <div>
       <GridContainer>
@@ -41,9 +56,7 @@ export default function Dashboard() {
                 <Icon>people</Icon>
               </CardIcon>
               <p className={classes.cardCategory}>Registered Users</p>
-              <h3 className={classes.cardTitle}>
-                340
-              </h3>
+              <h3 className={classes.cardTitle}>{members.length}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -107,6 +120,12 @@ export default function Dashboard() {
       </GridContainer>
       <GridContainer>
         <GridItem xs={12} sm={12} md={8}>
+          {successNotification && (
+            <Notifications type="success" message={successMessage} />
+          )}
+          {failureNotification && (
+            <Notifications type="danger" message={errorMessage} />
+          )}
           <CustomTabs
             title="Recent Members:"
             headerColor="primary"
@@ -117,30 +136,31 @@ export default function Dashboard() {
                 tabContent: (
                   <Table
                     tableHeaderColor="primary"
-                    tableHead={["Name", "City", "Email Adddress", "", ""]}
-                    tableData={[
-                      [
-                        "Dakota Rice",
-                        "Oud-Turnhout",
-                        "dakota.rice@example.com",
-                        <ConfirmCell />,
-                        <DeleteCell />,
-                      ],
-                      [
-                        "Minerva Hooper",
-                        "Sinaai-Waas",
-                        "yusuf.ayo@example.com",
-                        <ConfirmCell />,
-                        <DeleteCell />,
-                      ],
-                      [
-                        "Sage Rodriguez",
-                        "Baileux",
-                        "new.member@example.com",
-                        <ConfirmCell />,
-                        <DeleteCell />,
-                      ],
-                    ]}
+                    tableHead={["Name", "Email Adddress", "Verify", "Remove"]}
+                    tableData={unconfirmedMembers.map((member) => {
+                      const newValue = [];
+                      newValue.push(member.displayName);
+                      newValue.push(member.email);
+                      newValue.push(
+                        <ConfirmCell
+                          user={member}
+                          setErrorMessage={setErrorMessage}
+                          setSuccessMessage={setSuccessMessage}
+                          setSuccessNotification={setSuccessNotification}
+                          setFailureNotification={setFailureNotification}
+                        />
+                      );
+                      newValue.push(
+                        <DeleteCell
+                          user={member}
+                          setSuccessMessage={setSuccessMessage}
+                          setErrorMessage={setErrorMessage}
+                          setSuccessNotification={setSuccessNotification}
+                          setFailureNotification={setFailureNotification}
+                        />
+                      );
+                      return newValue;
+                    })}
                   />
                 ),
               },
@@ -150,27 +170,13 @@ export default function Dashboard() {
                 tabContent: (
                   <Table
                     tableHeaderColor="primary"
-                    tableHead={["Name", "City", "Email Adddress", ""]}
-                    tableData={[
-                      [
-                        "Dakota Rice",
-                        "Oud-Turnhout",
-                        "dakota.rice@example.com",
-                        <DeleteCell />,
-                      ],
-                      [
-                        "Minerva Hooper",
-                        "Sinaai-Waas",
-                        "yusuf.ayo@example.com",
-                        <DeleteCell />,
-                      ],
-                      [
-                        "Sage Rodriguez",
-                        "Baileux",
-                        "new.member@example.com",
-                        <DeleteCell />,
-                      ],
-                    ]}
+                    tableHead={["Name", "Email Address"]}
+                    tableData={confirmedMembers.map((member) => {
+                      const newValue = [];
+                      newValue.push(member.displayName);
+                      newValue.push(member.email);
+                      return newValue;
+                    })}
                   />
                 ),
               },
