@@ -33,7 +33,7 @@ function ProfilePage(props) {
     classes.imgRoundedCircle,
     classes.imgFluid
   );
-  const { user, isAuthenticated, isAdmin } = useContext(AuthContext);
+  const { user, isAuthenticated, isAdmin, authLoading } = useContext(AuthContext);
   const [displayName, setDisplayName] = useState(
     (user && user.displayName) || ""
   );
@@ -125,10 +125,9 @@ function ProfilePage(props) {
     );
   };
 
-  if (!user)
+  if (authLoading)
     return <ClipLoader css={override} size={150} color={"#123abc"} loading />;
 
-  console.log(!isAdmin, !verified);
   if (!isAdmin && !verified) {
     return <UnderReview />;
   }

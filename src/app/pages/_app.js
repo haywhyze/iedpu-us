@@ -31,6 +31,7 @@ export const AuthContext = React.createContext();
 function MyApp(props) {
   const [isAdmin, setIsAdmin] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [authLoading, setAuthLoading] = useState(true);
   firebase.auth().onAuthStateChanged(async function (user) {
     if (user) {
       // User is signed in.
@@ -38,10 +39,15 @@ function MyApp(props) {
       const idToken = await user.getIdTokenResult();
       if (idToken && idToken.claims && idToken.claims.admin) {
         setIsAdmin(true);
-      } else setIsAdmin(false);
+        setAuthLoading(false);
+      } else {
+        setIsAdmin(false);
+        setAuthLoading(false);
+      }
     } else {
       // No user is signed in.
       setIsAuthenticated(false);
+      setAuthLoading(false);
     }
   });
   const { Component, pageProps } = props;
@@ -88,6 +94,7 @@ function MyApp(props) {
             error,
             setError,
             isAdmin,
+            authLoading,
           }}
         >
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}

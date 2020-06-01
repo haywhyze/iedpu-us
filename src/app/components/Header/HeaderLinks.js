@@ -87,7 +87,7 @@ function HeaderLinks(props) {
               : "/login"
           }
         >
-          {user ? (
+          {user && isAuthenticated ? (
             <span>
               <Button color="transparent" round>
                 {user.displayName}
