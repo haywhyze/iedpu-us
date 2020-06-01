@@ -14,7 +14,7 @@ import Button from "components/CustomButtons/Button.js";
 export default function MembersList() {
   const { user } = useContext(AuthContext);
 
-  const docRef = user && db.collection("Users").orderBy("displayName");
+  const docRef = user && db.collection("Users").where("verified", "==", true).orderBy("displayName");
 
   const [classicModal, setClassicModal] = React.useState(false);
 
