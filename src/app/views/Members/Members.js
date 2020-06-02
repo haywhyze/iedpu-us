@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 // core components
 import GridItem from "components/Grid/GridItem.js";
+import ProfileModal from "../../Sections/ProfileModal";
 import GridContainer from "components/Grid/GridContainer.js";
 import Table from "components/Table/Table.js";
 import Card from "components/Card/Card.js";
@@ -10,6 +11,7 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import ConfirmCell from "../../Sections/ConfirmCell";
 import Button from "components/CustomButtons/Button.js";
+import Notifications from "../../Sections/Notification";
 import LaunchRoundedIcon from "@material-ui/icons/LaunchRounded";
 import DeleteCell from "../../Sections/DeleteCell";
 const styles = {
@@ -50,6 +52,14 @@ export default function Members({ members }) {
   const [failureNotification, setFailureNotification] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+
+  const [classicModal, setClassicModal] = React.useState(false);
+  const [selectedMember, setSelectedMember] = useState(null);
+  const viewMember = (member) => {
+    setSelectedMember(member);
+    setClassicModal(true);
+  };
+
   const unconfirmedMembers = members.reduce((filtered, member) => {
     if (!member.verified) {
       filtered.push(member);
@@ -64,6 +74,11 @@ export default function Members({ members }) {
   }, []);
   return (
     <GridContainer>
+      <ProfileModal
+        classicModal={classicModal}
+        setClassicModal={setClassicModal}
+        member={selectedMember}
+      />
       <GridItem xs={12} sm={12} md={12}>
         <Card>
           <CardHeader color="primary">
@@ -150,7 +165,19 @@ export default function Members({ members }) {
                     day: "numeric",
                   }).format(date)
                 );
-                newValue.push(<p>Hello Dear</p>)
+                newValue.push(
+                  <Button
+                    onClick={() => viewMember(member)}
+                    color="transparent"
+                    style={{
+                      padding: "0.2rem 0.9375rem",
+                      fontWeight: "400",
+                      fontSize: "12px",
+                    }}
+                  >
+                    <LaunchRoundedIcon fontSize="small" />
+                  </Button>
+                );
                 return newValue;
               })}
             />
