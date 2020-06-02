@@ -2,12 +2,12 @@
 import React, { useContext } from "react";
 // react components for routing our app without refresh
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import Tooltip from "@material-ui/core/Tooltip";
 
 // core components
 import Button from "components/CustomButtons/Button.js";
@@ -19,119 +19,96 @@ const useStyles = makeStyles(styles);
 
 function HeaderLinks(props) {
   const classes = useStyles();
-  const { user, signOut, loading } = useContext(AuthContext);
+  const router = useRouter();
+  const { user, signOut, isAuthenticated } = useContext(AuthContext);
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
         <Link href="/">
-          <Button color="transparent" className={classes.navLink}>
-            Home
-          </Button>
+          <span>
+            <Button color="transparent" className={classes.navLink}>
+              Home
+            </Button>
+          </span>
         </Link>
       </ListItem>
       <ListItem className={classes.listItem}>
         <Link href="/events">
-          <Button color="transparent" className={classes.navLink}>
-            Events
-          </Button>
+          <span>
+            <Button color="transparent" className={classes.navLink}>
+              Events
+            </Button>
+          </span>
         </Link>
       </ListItem>
       <ListItem className={classes.listItem}>
         <Link href="/news">
-          <Button color="transparent" className={classes.navLink}>
-            News
-          </Button>
+          <span>
+            <Button color="transparent" className={classes.navLink}>
+              News
+            </Button>
+          </span>
         </Link>
       </ListItem>
       <ListItem className={classes.listItem}>
         <Link href="/gallery">
-          <Button color="transparent" className={classes.navLink}>
-            Gallery
-          </Button>
+          <span>
+            <Button color="transparent" className={classes.navLink}>
+              Gallery
+            </Button>
+          </span>
         </Link>
       </ListItem>
       <ListItem className={classes.listItem}>
         <Link href="/executives">
-          <Button color="transparent" className={classes.navLink}>
-            Executives
-          </Button>
+          <span>
+            <Button color="transparent" className={classes.navLink}>
+              Executives
+            </Button>
+          </span>
         </Link>
       </ListItem>
       <ListItem className={classes.listItem}>
         <Link href="/history">
-          <Button color="transparent" className={classes.navLink}>
-            Historical Facts
-          </Button>
+          <span>
+            <Button color="transparent" className={classes.navLink}>
+              Historical Facts
+            </Button>
+          </span>
         </Link>
-        <Link href="/login">
-          {user ? (
-            <Button color="danger" round onClick={signOut}>
-              Sign out
-            </Button>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <Link
+          href={
+            user
+              ? router.pathname !== "/profile"
+                ? "/profile"
+                : "/login"
+              : "/login"
+          }
+        >
+          {user && isAuthenticated ? (
+            <span>
+              <Button color="transparent" round>
+                {user.displayName}
+              </Button>
+            </span>
           ) : (
-            <Button color="primary" round>
-              Join Us
-            </Button>
+            <span>
+              <Button color="primary" round>
+                Join Us
+              </Button>
+            </span>
           )}
         </Link>
       </ListItem>
-      <ListItem className={classes.listItem}>
-        <Tooltip
-          id="instagram-twitter"
-          title="Follow us on twitter"
-          placement={
-            process.browser && window.innerWidth > 959 ? "top" : "left"
-          }
-          classes={{ tooltip: classes.tooltip }}
-        >
-          <Button
-            href="https://twitter.com/haywhyze"
-            target="_blank"
-            color="transparent"
-            className={classes.navLink}
-          >
-            <i className={classes.socialIcons + " fab fa-twitter"} />
+      {isAuthenticated && (
+        <ListItem className={classes.listItem}>
+          <Button color="danger" round onClick={signOut}>
+            Sign out
           </Button>
-        </Tooltip>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <Tooltip
-          id="instagram-facebook"
-          title="Follow us on facebook"
-          placement={
-            process.browser && window.innerWidth > 959 ? "top" : "left"
-          }
-          classes={{ tooltip: classes.tooltip }}
-        >
-          <Button
-            color="transparent"
-            href="https://www.facebook.com/haywhyze"
-            target="_blank"
-            className={classes.navLink}
-          >
-            <i className={classes.socialIcons + " fab fa-facebook"} />
-          </Button>
-        </Tooltip>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <Tooltip
-          id="instagram-tooltip"
-          title="Follow us on instagram"
-          placement={
-            process.browser && window.innerWidth > 959 ? "top" : "left"
-          }
-          classes={{ tooltip: classes.tooltip }}
-        >
-          <Button
-            color="transparent"
-            href="https://www.instagram.com/haywhyze"
-            target="_blank"
-            className={classes.navLink}
-          >
-            <i className={classes.socialIcons + " fab fa-instagram"} />
-          </Button>
-        </Tooltip>
-      </ListItem>
+        </ListItem>
+      )}
     </List>
   );
 }

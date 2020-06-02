@@ -41,10 +41,7 @@ export default function Footer(props) {
         <div className={classes.right}>
           &copy; {1900 + new Date().getYear()} , made with{" "}
           <Favorite className={classes.icon} /> by{" "}
-          <a
-            href="https://sitasysng.com/"
-            className={aClasses}
-          >
+          <a href="https://sitasysng.com/" className={aClasses}>
             Sitasys
           </a>{" "}
           for a better Ilorin community.

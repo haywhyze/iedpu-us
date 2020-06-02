@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -76,9 +76,11 @@ function LoginPage(props) {
                   </CardHeader>
                   <CardFooter className={classes.cardFooter}>
                     <Link href="/">
-                      <Button simple color="primary" size="lg">
-                        Return to homepage
-                      </Button>
+                      <span>
+                        <Button simple color="primary" size="lg">
+                          Return to homepage
+                        </Button>
+                      </span>
                     </Link>
                   </CardFooter>
                 </form>

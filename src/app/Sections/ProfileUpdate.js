@@ -37,6 +37,7 @@ export default function ProfileUpdate() {
 
   const [successNotification, setSuccessNotification] = useState(false);
   const [failureNotification, setFailureNotification] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("")
   // const [notifications, setNotifications] = useState(false)
 
   const docRef = user && db.collection("Users").doc(user.uid);
@@ -95,6 +96,7 @@ export default function ProfileUpdate() {
       })
       .catch(function (error) {
         setFailureNotification(true);
+        setErrorMessage(error.message)
         console.error("Error writing document: ", error);
       });
   };
@@ -111,7 +113,7 @@ export default function ProfileUpdate() {
         {failureNotification && (
           <Notifications
             type="danger"
-            message="Error Updating Profile. PLease check your connection and try again"
+            message={errorMessage}
           />
         )}
         <GridContainer justify="center">
@@ -185,7 +187,8 @@ export default function ProfileUpdate() {
                 }}
                 inputProps={{
                   name: "bio",
-                  type: "text",
+                  multiline:true,
+                  rows: 3,
                   value: values.bio || "",
                   onChange: _handleChange,
                   endAdornment: (
@@ -231,7 +234,7 @@ export default function ProfileUpdate() {
                   ),
                 }}
               />
-              <Button onClick={updateProfile} simple color="primary" size="lg">
+              <Button onClick={updateProfile} round color="primary" >
                 Update Profile
               </Button>
             </form>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Head from "next/head";
 import { ThemeProvider } from "@material-ui/core/styles";
@@ -17,19 +17,7 @@ const firebaseApp = !firebase.apps.length
 
 const firebaseAppAuth = firebaseApp.auth();
 
-export const db = firebase.firestore()
-
-let isAuthenticated = true;
-
-firebase.auth().onAuthStateChanged(function (user) {
-  if (user) {
-    // User is signed in.
-    isAuthenticated = true;
-  } else {
-    // No user is signed in.
-    isAuthenticated = false;
-  }
-});
+export const db = firebase.firestore();
 
 const providers = {
   facebookProvider: new firebase.auth.FacebookAuthProvider(),
@@ -37,17 +25,42 @@ const providers = {
 };
 
 import "assets/scss/material-kit-react.scss?v=1.8.0";
+import "assets/scss/style.scss";
 
 export const AuthContext = React.createContext();
 function MyApp(props) {
+  const [isAdmin, setIsAdmin] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [authLoading, setAuthLoading] = useState(true);
+  firebase.auth().onAuthStateChanged(async function (user) {
+    if (user) {
+      // User is signed in.
+      setIsAuthenticated(true);
+      const idToken = await user.getIdTokenResult();
+      if (idToken && idToken.claims && idToken.claims.admin) {
+        setIsAdmin(true);
+        setAuthLoading(false);
+      } else {
+        setIsAdmin(false);
+        setAuthLoading(false);
+      }
+    } else {
+      // No user is signed in.
+      setIsAuthenticated(false);
+      setAuthLoading(false);
+    }
+  });
   const { Component, pageProps } = props;
   const {
     user,
     signOut,
     signInWithFacebook,
     signInWithGoogle,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
     loading,
-    error
+    error,
+    setError,
   } = props;
 
   React.useEffect(() => {
@@ -74,9 +87,14 @@ function MyApp(props) {
             signOut,
             signInWithFacebook,
             signInWithGoogle,
+            signInWithEmailAndPassword,
+            createUserWithEmailAndPassword,
             loading,
             isAuthenticated,
-            error
+            error,
+            setError,
+            isAdmin,
+            authLoading,
           }}
         >
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}

@@ -29,14 +29,14 @@ export default function SectionCarousel() {
       <div className={classes.container}>
         <GridContainer>
           <GridItem xs={12} sm={12} md={8} className={classes.marginAuto}>
-            <Card carousel>
+            <Card>
               <Carousel {...settings}>
                 <div>
                   <img
                     src="img/bg.jpg"
                     alt="First slide"
                     className="slick-image"
-                    style={{ height: "25rem", objectFit: "contain" }}
+                    style={{ height: "25rem", objectFit: "cover" }}
                   />
                 </div>
                 <div>
@@ -44,7 +44,7 @@ export default function SectionCarousel() {
                     src="img/bg2.jpg"
                     alt="Second slide"
                     className="slick-image"
-                    style={{ height: "25rem", objectFit: "contain" }}
+                    style={{ height: "25rem", objectFit: "cover" }}
                   />
                 </div>
                 <div>
@@ -52,7 +52,7 @@ export default function SectionCarousel() {
                     src="img/bg3.jpg"
                     alt="Third slide"
                     className="slick-image"
-                    style={{ height: "25rem", objectFit: "contain" }}
+                    style={{ height: "25rem", objectFit: "cover" }}
                   />
                 </div>
                 <div>
@@ -60,15 +60,15 @@ export default function SectionCarousel() {
                     src="img/bg4.jpg"
                     alt="Third slide"
                     className="slick-image"
-                    style={{ height: "25rem", objectFit: "contain" }}
+                    style={{ height: "25rem", objectFit: "cover" }}
                   />
                 </div>
                 <div>
                   <img
-                    src="img/bg7.jpg"
+                    src="img/bg7.png"
                     alt="Third slide"
                     className="slick-image"
-                    style={{ height: "25rem", objectFit: "contain" }}
+                    style={{ height: "25rem", objectFit: "cover" }}
                   />
                 </div>
               </Carousel>

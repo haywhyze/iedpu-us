@@ -6,7 +6,6 @@ import classNames from "classnames";
 import { makeStyles } from "@material-ui/core/styles";
 // core components
 import { css } from "@emotion/core";
-import ClipLoader from "react-spinners/ClipLoader";
 
 import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
@@ -17,10 +16,12 @@ import Parallax from "components/Parallax/Parallax.js";
 import SectionTabs from "../Sections/SectionTabs";
 import AddAPhoto from "@material-ui/icons/AddAPhoto";
 import Button from "components/CustomButtons/Button.js";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { db } from "./_app";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { AuthContext } from "./_app";
+import UnderReview from "../Sections/UnderReview";
 
 const useStyles = makeStyles(styles);
 
@@ -32,11 +33,15 @@ function ProfilePage(props) {
     classes.imgRoundedCircle,
     classes.imgFluid
   );
-  const { user, isAuthenticated } = useContext(AuthContext);
+  const { user, isAuthenticated, isAdmin, authLoading } = useContext(
+    AuthContext
+  );
   const [displayName, setDisplayName] = useState(
     (user && user.displayName) || ""
   );
   const [photoURL, setPhotoURL] = useState((user && user.photoURL) || "");
+  const [verified, setVerified] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const override = css`
     display: block;
@@ -44,15 +49,21 @@ function ProfilePage(props) {
     border-color: purple;
   `;
 
-  user &&
+  !isAdmin &&
+    user &&
     db
       .collection("Users")
       .doc(user.uid)
       .onSnapshot(function (doc) {
         if (doc.exists) {
+          setLoading(false);
+          if (!doc.data().verified) {
+            setVerified(false);
+            return;
+          } else setVerified(true);
           setDisplayName(doc.data().displayName);
           setPhotoURL(doc.data().photoURL);
-        }
+        } else setLoading(false);
       });
 
   React.useEffect(() => {
@@ -118,8 +129,23 @@ function ProfilePage(props) {
     );
   };
 
-  if (!user)
-    return <ClipLoader css={override} size={150} color={"#123abc"} loading />;
+  if (authLoading || loading)
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "100vh",
+        }}
+      >
+        <CircularProgress />
+      </div>
+    );
+
+  if (!isAdmin && !verified) {
+    return <UnderReview />;
+  }
 
   return (
     <div>
