@@ -19,7 +19,6 @@ import CustomTabs from "components/CustomTabs/CustomTabs.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardIcon from "components/Card/CardIcon.js";
-import CardBody from "components/Card/CardBody.js";
 import Notifications from "../../Sections/Notification";
 import CardFooter from "components/Card/CardFooter.js";
 
@@ -133,7 +132,7 @@ export default function Dashboard({ members }) {
               {
                 tabName: "Unconfirmed",
                 tabIcon: HourGlassEmpty,
-                tabContent: (
+                tabContent: unconfirmedMembers.length ? (
                   <Table
                     tableHeaderColor="primary"
                     tableHead={["Name", "Email Adddress", "Verify", "Remove"]}
@@ -162,6 +161,10 @@ export default function Dashboard({ members }) {
                       return newValue;
                     })}
                   />
+                ) : (
+                  <h3 style={{ textAlign: "center" }}>
+                    No new member request at this time
+                  </h3>
                 ),
               },
               {

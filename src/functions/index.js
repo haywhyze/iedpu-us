@@ -9,6 +9,7 @@ const db = admin.firestore();
 
 const createProfile = (user, context) => {
   const { email, uid, displayName, photoURL } = user;
+  const created = user.metadata.creationTime;
 
   if (user.email && user.email === "haywhyze@hotmail.com") {
     const customClaims = {
@@ -42,9 +43,15 @@ const createProfile = (user, context) => {
   return db
     .collection("Users")
     .doc(uid)
-    .set({ email, displayName, photoURL })
+    .set({ email, displayName, photoURL, created })
     .catch(console.error);
 };
+
+const deleteProfile = (user, context) => {
+  return db.collection("Users").doc(user.uid).delete().catch(console.error);
+};
+
+exports.authOnDelete = functions.auth.user().onDelete(deleteProfile);
 
 exports.authOnCreate = functions.auth.user().onCreate(createProfile);
 

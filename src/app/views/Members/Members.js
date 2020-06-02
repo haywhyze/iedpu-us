@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
@@ -44,8 +44,24 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-export default function Members() {
+export default function Members({ members }) {
   const classes = useStyles();
+  const [successNotification, setSuccessNotification] = useState(false);
+  const [failureNotification, setFailureNotification] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const unconfirmedMembers = members.reduce((filtered, member) => {
+    if (!member.verified) {
+      filtered.push(member);
+    }
+    return filtered;
+  }, []);
+  const confirmedMembers = members.reduce((filtered, member) => {
+    if (member.verified) {
+      filtered.push(member);
+    }
+    return filtered;
+  }, []);
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} md={12}>
@@ -57,47 +73,55 @@ export default function Members() {
             </p>
           </CardHeader>
           <CardBody>
-            <Table
-              tableHeaderColor="primary"
-              tableHead={["Name", "Email", "Created", "", ""]}
-              tableData={[
-                [
-                  "Dakota Rice",
-                  "yusufayo19@yahoo.com",
-                  "May 19, 2020",
-                  <ConfirmCell />,
-                  <DeleteCell />,
-                ],
-                [
-                  "Yusuf  Ayo",
-                  "haywhyze@gmail.com",
-                  "May 19, 2020",
-                  <ConfirmCell />,
-                  <DeleteCell />,
-                ],
-                [
-                  "Dakota Rice",
-                  "yusufayo19@yahoo.com",
-                  "May 19, 2020",
-                  <ConfirmCell />,
-                  <DeleteCell />,
-                ],
-                [
-                  "Ayo Yusuf",
-                  "haywhyze@gmail.com",
-                  "May 19, 2020",
-                  <ConfirmCell />,
-                  <DeleteCell />,
-                ],
-                [
-                  "Dakota Rice",
-                  "yusufayo19@yahoo.com",
-                  "May 19, 2020",
-                  <ConfirmCell />,
-                  <DeleteCell />,
-                ],
-              ]}
-            />
+            {successNotification && (
+              <Notifications type="success" message={successMessage} />
+            )}
+            {failureNotification && (
+              <Notifications type="danger" message={errorMessage} />
+            )}
+            {unconfirmedMembers.length ? (
+              <Table
+                tableHeaderColor="primary"
+                tableHead={["Name", "Email", "Created", "Verify", "Discard"]}
+                tableData={unconfirmedMembers.map((member) => {
+                  const newValue = [];
+                  const date = new Date(member.created);
+                  newValue.push(member.displayName);
+                  newValue.push(member.email);
+                  newValue.push(
+                    new Intl.DateTimeFormat("en-US", {
+                      weekday: "long",
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    }).format(date)
+                  );
+                  newValue.push(
+                    <ConfirmCell
+                      user={member}
+                      setErrorMessage={setErrorMessage}
+                      setSuccessMessage={setSuccessMessage}
+                      setSuccessNotification={setSuccessNotification}
+                      setFailureNotification={setFailureNotification}
+                    />
+                  );
+                  newValue.push(
+                    <DeleteCell
+                      user={member}
+                      setSuccessMessage={setSuccessMessage}
+                      setErrorMessage={setErrorMessage}
+                      setSuccessNotification={setSuccessNotification}
+                      setFailureNotification={setFailureNotification}
+                    />
+                  );
+                  return newValue;
+                })}
+              />
+            ) : (
+              <h3 style={{ textAlign: "center" }}>
+                No new member request at this time
+              </h3>
+            )}
           </CardBody>
         </Card>
       </GridItem>
@@ -112,95 +136,23 @@ export default function Members() {
           <CardBody>
             <Table
               tableHeaderColor="primary"
-              tableHead={["Name", "Email", "Created", "", ""]}
-              tableData={[
-                [
-                  "Dakota Rice",
-                  "yusufayo19@yahoo.com",
-                  "May 19, 2020",
-
-                  <Button
-                    onClick={() => viewMember(member)}
-                    color="transparent"
-                    style={{
-                      padding: "0.2rem 0.9375rem",
-                      fontWeight: "400",
-                      fontSize: "12px",
-                    }}
-                  >
-                    <LaunchRoundedIcon fontSize="small" />
-                  </Button>,
-                  <DeleteCell />,
-                ],
-                [
-                  "Yusuf  Ayo",
-                  "haywhyze@gmail.com",
-                  "May 19, 2020",
-                  <Button
-                    onClick={() => viewMember(member)}
-                    color="transparent"
-                    style={{
-                      padding: "0.2rem 0.9375rem",
-                      fontWeight: "400",
-                      fontSize: "12px",
-                    }}
-                  >
-                    <LaunchRoundedIcon fontSize="small" />
-                  </Button>,
-                  <DeleteCell />,
-                ],
-                [
-                  "Dakota Rice",
-                  "yusufayo19@yahoo.com",
-                  "May 19, 2020",
-                  <Button
-                    onClick={() => viewMember(member)}
-                    color="transparent"
-                    style={{
-                      padding: "0.2rem 0.9375rem",
-                      fontWeight: "400",
-                      fontSize: "12px",
-                    }}
-                  >
-                    <LaunchRoundedIcon fontSize="small" />
-                  </Button>,
-                  <DeleteCell />,
-                ],
-                [
-                  "Ayo Yusuf",
-                  "haywhyze@gmail.com",
-                  "May 19, 2020",
-                  <Button
-                    onClick={() => viewMember(member)}
-                    color="transparent"
-                    style={{
-                      padding: "0.2rem 0.9375rem",
-                      fontWeight: "400",
-                      fontSize: "12px",
-                    }}
-                  >
-                    <LaunchRoundedIcon fontSize="small" />
-                  </Button>,
-                  <DeleteCell />,
-                ],
-                [
-                  "Dakota Rice",
-                  "yusufayo19@yahoo.com",
-                  "May 19, 2020",
-                  <Button
-                    onClick={() => viewMember(member)}
-                    color="transparent"
-                    style={{
-                      padding: "0.2rem 0.9375rem",
-                      fontWeight: "400",
-                      fontSize: "12px",
-                    }}
-                  >
-                    <LaunchRoundedIcon fontSize="small" />
-                  </Button>,
-                  <DeleteCell />,
-                ],
-              ]}
+              tableHead={["Name", "Email", "Created", "View Details"]}
+              tableData={confirmedMembers.map((member) => {
+                const newValue = [];
+                const date = new Date(member.created);
+                newValue.push(member.displayName);
+                newValue.push(member.email);
+                newValue.push(
+                  new Intl.DateTimeFormat("en-US", {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  }).format(date)
+                );
+                newValue.push(<p>Hello Dear</p>)
+                return newValue;
+              })}
             />
           </CardBody>
         </Card>
