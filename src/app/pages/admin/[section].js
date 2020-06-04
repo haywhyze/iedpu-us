@@ -1,19 +1,19 @@
-import React, { useEffect, useState, useContext } from "react";
-import Router, { useRouter } from "next/router";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useEffect, useState, useContext } from 'react';
+import Router, { useRouter } from 'next/router';
+import { makeStyles } from '@material-ui/core/styles';
 // core components
-import Navbar from "components/Navbars/Navbar.js";
-import Footer from "components/Footer/Footer.js";
-import Sidebar from "components/Sidebar/Sidebar.js";
-import { BrowserRouter } from "react-router-dom";
-import { AuthContext, db } from "../_app";
+import Navbar from 'components/Navbars/Navbar.js';
+import Footer from 'components/Footer/Footer.js';
+import Sidebar from 'components/Sidebar/Sidebar.js';
+import { BrowserRouter } from 'react-router-dom';
+import styles from 'assets/jss/material-dashboard-react/layouts/adminStyle.js';
+import { AuthContext, db } from '../_app';
 
-import routes from "../../routes";
+import routes from '../../routes';
 
-import styles from "assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
-const bgImage = "../img/sidebar-2.jpg";
-const logo = "../img/logo.png";
+const bgImage = '../img/sidebar-2.jpg';
+const logo = '../img/logo.png';
 
 const useStyles = makeStyles(styles);
 
@@ -21,7 +21,8 @@ export default function ({ ...rest }) {
   const router = useRouter();
   const { section } = router.query;
   const { user, isAdmin, isAuthenticated } = useContext(AuthContext);
-  const docRef = user && db.collection("Users").orderBy("displayName");
+  const docRef = user && db.collection('Users').orderBy('displayName');
+  const eventsRef = user && db.collection('events');
   const classes = useStyles();
   // ref to help us initialize PerfectScrollbar on windows devices
   const mainPanel = React.createRef();
@@ -34,43 +35,59 @@ export default function ({ ...rest }) {
   const [currentSection, setCurrentSection] = useState(null);
   const [switchRoutes, setSwitchRoutes] = useState(null);
   const [members, setMembers] = useState([]);
+  const [events, setEvents] = useState([]);
   useEffect(() => {
     setSwitchRoutes(
       <>
         {routes.map((prop, key) => {
-          if (prop.layout === "/admin" && prop.path === "/" + section) {
+          if (prop.layout === '/admin' && prop.path === `/${section}`) {
             setCurrentSection(prop);
-            return <prop.component members={members} key={key + prop.path} />;
+            return (
+              <prop.component
+                events={events}
+                members={members}
+                key={key + prop.path}
+              />
+            );
           }
         })}
-      </>
+      </>,
     );
   }, [router.query, currentSection, members]);
 
   useEffect(() => {
-    if (user)
+    if (user) {
       docRef.onSnapshot((querySnapshot) => {
         const data = [];
-        querySnapshot.forEach(function (doc) {
+        querySnapshot.forEach((doc) => {
           // doc.data() is never undefined for query doc snapshots
           data.push({ ...doc.data(), id: doc.id });
         });
         setMembers(data);
       });
+      eventsRef.onSnapshot((querySnapshot) => {
+        const data = [];
+        querySnapshot.forEach((doc) => {
+          // doc.data() is never undefined for query doc snapshots
+          data.push({ ...doc.data(), id: doc.id });
+        });
+        setEvents(data);
+      });
+    }
   }, [isAuthenticated, user]);
 
   React.useEffect(() => {
     if (!isAuthenticated) {
-      Router.push("/admin-login");
+      Router.push('/admin-login');
     }
   }, [isAuthenticated]);
 
   React.useEffect(() => {
-    Router.prefetch("/admin-login");
+    Router.prefetch('/admin-login');
   }, []);
 
   if (!isAdmin) {
-    Router.push("/login");
+    Router.push('/login');
     return null;
   }
 
@@ -82,12 +99,12 @@ export default function ({ ...rest }) {
         <div className={classes.wrapper}>
           <Sidebar
             routes={routes}
-            logoText={"IEDPU"}
+            logoText="IEDPU"
             logo={logo}
             image={bgImage}
             handleDrawerToggle={handleDrawerToggle}
             open={mobileOpen}
-            color={"purple"}
+            color="purple"
             {...rest}
           />
           <div className={classes.mainPanel} ref={mainPanel}>
