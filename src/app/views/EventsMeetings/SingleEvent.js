@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable react/prop-types */
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import GridItem from 'components/Grid/GridItem.js';
 import Button from 'components/CustomButtons/Button.js';
@@ -9,6 +10,8 @@ import CardFooter from 'components/Card/CardFooter.js';
 import Create from '@material-ui/icons/Create';
 import LocationCity from '@material-ui/icons/LocationCity';
 import ConfirmDelete from './ConfirmDelete';
+import ViewEventModal from './ViewEventModal';
+import EditEventModal from './EditEventModal';
 
 const styles = {
   image: {
@@ -38,8 +41,36 @@ export default function SingleEvent({
 }) {
   const classes = useStyles();
 
+  const [classicModal, setClassicModal] = useState(false);
+  const [editModal, setEditModal] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+
+  const viewEvent = (event) => {
+    setSelectedEvent(event);
+    setClassicModal(true);
+  };
+
+  const editEvent = (event) => {
+    setSelectedEvent(event);
+    setEditModal(true);
+  };
+
   return (
     <GridItem xs={12} sm={6} md={4} lg={3}>
+      <ViewEventModal
+        classicModal={classicModal}
+        setClassicModal={setClassicModal}
+        event={selectedEvent}
+      />
+      <EditEventModal
+        classicModal={editModal}
+        setClassicModal={setEditModal}
+        event={selectedEvent}
+        setSuccessMessage={setSuccessMessage}
+        setErrorMessage={setErrorMessage}
+        setSuccessNotification={setSuccessNotification}
+        setFailureNotification={setFailureNotification}
+      />
       <Card>
         <CardHeader>
           <img className={classes.image} src={image} alt="..." />
@@ -50,7 +81,14 @@ export default function SingleEvent({
             {description.substring(0, 150)}
             {' '}
             <span>
-              <Button simple size="sm" color="transparent">
+              <Button
+                onClick={() => viewEvent({
+                  title, description, venue, time, image, id,
+                })}
+                simple
+                size="sm"
+                color="info"
+              >
                 View Details
               </Button>
             </span>
@@ -72,7 +110,14 @@ export default function SingleEvent({
           </h6>
         </CardBody>
         <CardFooter style={{ borderTop: '1px solid rgba(40,40,40, .05)' }}>
-          <Button className={classes.footerButton} color="transparent" round>
+          <Button
+            onClick={() => editEvent({
+              title, description, venue, time, image, id,
+            })}
+            className={classes.footerButton}
+            color="transparent"
+            round
+          >
             <Create />
           </Button>
           <ConfirmDelete
