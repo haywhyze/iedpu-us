@@ -1,17 +1,18 @@
-import React from "react";
-import Tooltip from "@material-ui/core/Tooltip";
-import Delete from "@material-ui/icons/Delete";
-import IconButton from "@material-ui/core/IconButton";
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import { makeStyles } from "@material-ui/core/styles";
-import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
+import React from 'react';
+import Tooltip from '@material-ui/core/Tooltip';
+import Delete from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import { makeStyles } from '@material-ui/core/styles';
+import styles from 'assets/jss/material-dashboard-react/views/dashboardStyle.js';
+import { db } from '../pages/_app';
+
 const useStyles = makeStyles(styles);
-import { db } from "../pages/_app";
 
 export default function DeleteCell({
   user,
@@ -34,21 +35,22 @@ export default function DeleteCell({
 
   const deleteUser = (uid) => {
     // console.log(uid);
-    db.collection("Users")
+    db.collection('Users')
       .doc(uid)
       .delete()
-      .then(function () {
-        console.log("Document successfully removed!");
-        setSuccessMessage("User successfully deleted!");
+      .then(() => {
+        setSuccessMessage('User successfully deleted!');
         setSuccessNotification(true);
         setTimeout(() => {
           setSuccessNotification(false);
         }, 3000);
       })
-      .catch(function (error) {
+      .catch((error) => {
         setFailureNotification(true);
+        setTimeout(() => {
+          setFailureNotification(false);
+        }, 3000);
         setErrorMessage(error.message);
-        console.error("Error removing document: ", error);
       });
     setOpen(false);
   };
@@ -67,7 +69,7 @@ export default function DeleteCell({
           className={classes.tableActionButton}
         >
           <Delete
-            className={classes.tableActionButtonIcon + " " + classes.edit}
+            className={`${classes.tableActionButtonIcon} ${classes.edit}`}
           />
         </IconButton>
       </Tooltip>
@@ -77,7 +79,7 @@ export default function DeleteCell({
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Verify User"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">Verify User</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             Are you sure you want to remove this user as a member of IEDPU - US
