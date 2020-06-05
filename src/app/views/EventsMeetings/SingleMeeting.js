@@ -70,7 +70,7 @@ export default function SingleMeeting({
       />
       <Card>
         <CardBody style={{
-          height: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+          height: '350px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
         }}
         >
           <h4>
@@ -85,7 +85,9 @@ export default function SingleMeeting({
           </h4>
           <p style={{ whiteSpace: 'pre-wrap' }}>
             {meetingNotes.substring(0, 200)}
+            {meetingNotes.length > 200 && (
             <span>
+              ...
               <Button
                 onClick={() => viewMeeting({
                   time, meetingNotes, venue, id,
@@ -97,6 +99,7 @@ export default function SingleMeeting({
                 View Details
               </Button>
             </span>
+            )}
           </p>
           <h5>
             <LocationCity fontSize="small" />

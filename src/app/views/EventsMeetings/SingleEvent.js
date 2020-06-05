@@ -75,15 +75,19 @@ export default function SingleEvent({
         <CardHeader>
           <img className={classes.image} src={image} alt="..." />
         </CardHeader>
-        <CardBody style={{ height: '250px' }}>
+        <CardBody style={{
+          height: '350px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+        }}
+        >
           <h3>{title}</h3>
-          <p>
-            {description.substring(0, 150)}
-            {' '}
+          <p style={{ whiteSpace: 'pre-wrap' }}>
+            {description.substring(0, 200)}
+            {description.length > 200 && (
             <span>
+              ...
               <Button
                 onClick={() => viewEvent({
-                  title, description, venue, time, image, id,
+                  time, description, venue, id,
                 })}
                 simple
                 size="sm"
@@ -92,6 +96,7 @@ export default function SingleEvent({
                 View Details
               </Button>
             </span>
+            )}
           </p>
           <h5>
             <LocationCity fontSize="small" />
