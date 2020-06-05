@@ -10,9 +10,9 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Notifications from '../../Sections/Notification';
 import { AuthContext, db } from '../../pages/_app';
 import NewEventModal from './NewEventModal';
+import NewMeetingModal from './NewMeetingModal';
 import SingleEvent from './SingleEvent';
-
-const avatar = '/img/sidebar-2.jpg';
+import SingleMeeting from './SingleMeeting';
 
 const styles = {
   cardCategoryWhite: {
@@ -38,25 +38,38 @@ const useStyles = makeStyles(styles);
 export default function EventsMeetings() {
   const classes = useStyles();
   const [events, setEvents] = useState([]);
+  const [meetings, setMeetings] = useState([]);
   const [classicModal, setClassicModal] = React.useState(false);
+  const [meetingsModal, setMeetingsModal] = React.useState(false);
   const { user, isAuthenticated } = useContext(AuthContext);
   const eventsRef = user && db.collection('events');
+  const meetingsRef = user && db.collection('meetings');
   const [loading, setLoading] = useState(true);
   const [successNotification, setSuccessNotification] = useState(false);
   const [failureNotification, setFailureNotification] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   useEffect(() => {
-    user
-      && eventsRef.onSnapshot((querySnapshot) => {
+    if (user) {
+      eventsRef.onSnapshot((querySnapshot) => {
         const data = [];
         querySnapshot.forEach((doc) => {
-          // doc.data() is never undefined for query doc snapshots
+        // doc.data() is never undefined for query doc snapshots
           data.push({ ...doc.data(), id: doc.id });
         });
         setLoading(false);
         setEvents(data);
       });
+      meetingsRef.onSnapshot((querySnapshot) => {
+        const data = [];
+        querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+          data.push({ ...doc.data(), id: doc.id });
+        });
+        setLoading(false);
+        setMeetings(data);
+      });
+    }
   }, [isAuthenticated, user]);
   if (loading) {
     return (
@@ -83,6 +96,14 @@ export default function EventsMeetings() {
           setSuccessNotification={setSuccessNotification}
           setFailureNotification={setFailureNotification}
         />
+        <NewMeetingModal
+          classicModal={meetingsModal}
+          setClassicModal={setMeetingsModal}
+          setSuccessMessage={setSuccessMessage}
+          setErrorMessage={setErrorMessage}
+          setSuccessNotification={setSuccessNotification}
+          setFailureNotification={setFailureNotification}
+        />
         <GridItem>
           <Button
             onClick={() => setClassicModal(true)}
@@ -93,7 +114,11 @@ export default function EventsMeetings() {
           </Button>
         </GridItem>
         <GridItem>
-          <Button color="info" size="lg">
+          <Button
+            color="info"
+            size="lg"
+            onClick={() => setMeetingsModal(true)}
+          >
             Create New meeting
           </Button>
         </GridItem>
@@ -107,7 +132,7 @@ export default function EventsMeetings() {
             </p>
           </CardHeader>
           <CardBody>
-            <GridContainer>
+            <GridContainer space={8}>
               {successNotification && (
                 <Notifications type="success" message={successMessage} />
               )}
@@ -141,78 +166,25 @@ export default function EventsMeetings() {
           </CardHeader>
           <CardBody>
             <GridContainer>
-              <SingleEvent
-                image={avatar}
-                title="Lorem Ipsum"
-                description="Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the industry's
-                      standard dummy text ever since the 1500s, when an unknown
-                      printer took a galley of type and scrambled it to make a
-                      type specimen book."
-                venue="Houston, TX 77001 United
-                  States"
-                time="Fri, May 1, 2020, 12:00 AM"
-              />
-              <SingleEvent
-                image={avatar}
-                title="Lorem Ipsum"
-                description="Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the industry's
-                      standard dummy text ever since the 1500s, when an unknown
-                      printer took a galley of type and scrambled it to make a
-                      type specimen book."
-                venue="Houston, TX 77001 United
-                  States"
-                time="Fri, May 1, 2020, 12:00 AM"
-              />
-              <SingleEvent
-                image={avatar}
-                title="Lorem Ipsum"
-                description="Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the industry's
-                      standard dummy text ever since the 1500s, when an unknown
-                      printer took a galley of type and scrambled it to make a
-                      type specimen book."
-                venue="Houston, TX 77001 United
-                  States"
-                time="Fri, May 1, 2020, 12:00 AM"
-              />
-              <SingleEvent
-                image={avatar}
-                title="Lorem Ipsum"
-                description="Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the industry's
-                      standard dummy text ever since the 1500s, when an unknown
-                      printer took a galley of type and scrambled it to make a
-                      type specimen book."
-                venue="Houston, TX 77001 United
-                  States"
-                time="Fri, May 1, 2020, 12:00 AM"
-              />
-              <SingleEvent
-                image={avatar}
-                title="Lorem Ipsum"
-                description="Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the industry's
-                      standard dummy text ever since the 1500s, when an unknown
-                      printer took a galley of type and scrambled it to make a
-                      type specimen book."
-                venue="Houston, TX 77001 United
-                  States"
-                time="Fri, May 1, 2020, 12:00 AM"
-              />
-              <SingleEvent
-                image={avatar}
-                title="Lorem Ipsum"
-                description="Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the industry's
-                      standard dummy text ever since the 1500s, when an unknown
-                      printer took a galley of type and scrambled it to make a
-                      type specimen book."
-                venue="Houston, TX 77001 United
-                  States"
-                time="Fri, May 1, 2020, 12:00 AM"
-              />
+              {successNotification && (
+              <Notifications type="success" message={successMessage} />
+              )}
+              {failureNotification && (
+                <Notifications type="danger" message={errorMessage} />
+              )}
+              {meetings.map((event) => (
+                <SingleMeeting
+                  meetingNotes={event.meetingNotes}
+                  venue={event.venue}
+                  time={event.time}
+                  key={event.id}
+                  id={event.id}
+                  setSuccessMessage={setSuccessMessage}
+                  setErrorMessage={setErrorMessage}
+                  setSuccessNotification={setSuccessNotification}
+                  setFailureNotification={setFailureNotification}
+                />
+              ))}
             </GridContainer>
           </CardBody>
         </Card>
