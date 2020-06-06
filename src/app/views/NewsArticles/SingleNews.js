@@ -1,36 +1,35 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody";
-import CardHeader from "components/Card/CardHeader";
-import CardFooter from "components/Card/CardFooter.js";
-import Create from "@material-ui/icons/Create";
-import Delete from "@material-ui/icons/Delete";
-import LocationCity from "@material-ui/icons/LocationCity";
-import Launch from "@material-ui/icons/Launch";
+import React, { useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import GridItem from 'components/Grid/GridItem.js';
+import Button from 'components/CustomButtons/Button.js';
+import Card from 'components/Card/Card.js';
+import CardBody from 'components/Card/CardBody';
+import CardHeader from 'components/Card/CardHeader';
+import CardFooter from 'components/Card/CardFooter.js';
+import Create from '@material-ui/icons/Create';
+import Delete from '@material-ui/icons/Delete';
+import Launch from '@material-ui/icons/Launch';
 
 const styles = {
   image: {
-    width: "100%",
-    height: "10rem",
-    objectFit: "cover",
+    width: '100%',
+    height: '10rem',
+    objectFit: 'cover',
   },
   footerButton: {
-    padding: "10px",
+    padding: '10px',
   },
 };
 
 const useStyles = makeStyles(styles);
 
-export default function SingleEvent({
+export default function SingleNews({
   image,
   title,
-  description,
+  details,
   author,
   time,
+  caption,
 }) {
   const classes = useStyles();
   return (
@@ -38,14 +37,26 @@ export default function SingleEvent({
       <Card>
         <CardHeader>
           <img className={classes.image} src={image} alt="..." />
+          <p style={{ marginBottom: '0', marginTop: '10px' }}>{caption}</p>
         </CardHeader>
         <CardBody>
-          <h3>{title}</h3>
-          <p>{description}</p>
+          <h3 style={{ marginTop: '0' }}>{title}</h3>
+          <p style={{ whiteSpace: 'pre-wrap' }}>{details}</p>
           <h5>
-            By {author}
+            By
+            {' '}
+            {author}
           </h5>
-          <h6>{time}</h6>
+          <h6>
+            {new Intl.DateTimeFormat('en-US', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+              hour: 'numeric',
+              minute: 'numeric',
+            }).format(new Date(time))}
+          </h6>
         </CardBody>
         <CardFooter>
           <Button className={classes.footerButton} color="transparent" round>
