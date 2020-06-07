@@ -196,7 +196,6 @@ export default function EditEventModal({
                   <GridItem xs={12}>
                     <CustomInput
                       labelText="Title"
-                      id="title"
                       formControlProps={{
                         fullWidth: true,
                       }}
@@ -210,7 +209,6 @@ export default function EditEventModal({
                   <GridItem xs={12}>
                     <CustomInput
                       labelText="Venue"
-                      id="venue"
                       formControlProps={{
                         fullWidth: true,
                       }}
@@ -224,7 +222,6 @@ export default function EditEventModal({
                   <GridItem xs={12} sm={12} md={6}>
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                       <CustomDateTimePicker
-                        id="date-time"
                         formControlProps={{
                           fullWidth: true,
                         }}
