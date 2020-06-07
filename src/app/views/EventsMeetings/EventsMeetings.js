@@ -139,7 +139,7 @@ export default function EventsMeetings() {
               {failureNotification && (
                 <Notifications type="danger" message={errorMessage} />
               )}
-              {events.map((event) => (
+              {events.sort((a, b) => Date.parse(b.time) - Date.parse(a.time)).map((event) => (
                 <SingleEvent
                   image={event.imageUrl}
                   title={event.title}
@@ -172,7 +172,7 @@ export default function EventsMeetings() {
               {failureNotification && (
                 <Notifications type="danger" message={errorMessage} />
               )}
-              {meetings.map((event) => (
+              {meetings.sort((a, b) => Date.parse(b.time) - Date.parse(a.time)).map((event) => (
                 <SingleMeeting
                   meetingNotes={event.meetingNotes}
                   venue={event.venue}
