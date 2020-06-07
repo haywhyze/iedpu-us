@@ -1,35 +1,19 @@
-import React from "react";
+import React from 'react';
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
-
-// @material-ui/icons
-import Chat from "@material-ui/icons/Chat";
-import VerifiedUser from "@material-ui/icons/VerifiedUser";
-import Fingerprint from "@material-ui/icons/Fingerprint";
-
-import Slider from "react-slick";
+import { makeStyles } from '@material-ui/core/styles';
 
 // core components
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
-import InfoArea from "components/InfoArea/InfoArea.js";
-import CarouselSection from "./CarouselSection";
+import GridContainer from 'components/Grid/GridContainer.js';
+import GridItem from 'components/Grid/GridItem.js';
+import styles from 'assets/jss/material-kit-react/views/landingPageSections/productStyle.js';
+import CarouselSection from './CarouselSection';
 
-import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
 
 const useStyles = makeStyles(styles);
 
 export default function HomeSection() {
   const classes = useStyles();
-  const settings = {
-    className: "center",
-    centerMode: true,
-    infinite: true,
-    centerPadding: "60px",
-    slidesToShow: 3,
-    speed: 500,
-    autoPlay: true,
-  };
+
   return (
     <div className={classes.section}>
       <GridContainer justify="center">
