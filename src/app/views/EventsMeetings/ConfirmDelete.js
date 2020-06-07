@@ -10,16 +10,14 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { makeStyles } from '@material-ui/core/styles';
 import styles from 'assets/jss/material-dashboard-react/views/dashboardStyle.js';
-import { db } from '../pages/_app';
+import { db } from '../../pages/_app.js';
 
 const useStyles = makeStyles(styles);
 
 export default function DeleteCell({
-  user,
-  setSuccessNotification,
+  id,
   setFailureNotification,
   setErrorMessage,
-  setSuccessMessage,
 }) {
   const classes = useStyles();
 
@@ -33,16 +31,17 @@ export default function DeleteCell({
     setOpen(false);
   };
 
-  const deleteUser = (uid) => {
+  const deleteEvent = (uid) => {
     // console.log(uid);
-    db.collection('Users')
+    db.collection('events')
       .doc(uid)
       .delete()
       .then(() => {
-        setSuccessMessage('User successfully deleted!');
-        setSuccessNotification(true);
+        console.log('Document successfully removed!');
+        setErrorMessage('Event successfully deleted!');
+        setFailureNotification(true);
         setTimeout(() => {
-          setSuccessNotification(false);
+          setFailureNotification(false);
         }, 3000);
       })
       .catch((error) => {
@@ -51,6 +50,7 @@ export default function DeleteCell({
           setFailureNotification(false);
         }, 3000);
         setErrorMessage(error.message);
+        console.error('Error removing event: ', error);
       });
     setOpen(false);
   };
@@ -79,15 +79,14 @@ export default function DeleteCell({
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">Verify User</DialogTitle>
+        <DialogTitle id="alert-dialog-title">Delete Event</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure you want to remove this user as a member of IEDPU - US
-            branch?
+            Are you sure you want to delete this event?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => deleteUser(user.id)} color="primary">
+          <Button onClick={() => deleteEvent(id)} color="primary">
             Yes, please
           </Button>
           <Button onClick={handleClose} color="primary" autoFocus>

@@ -1,15 +1,18 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import Head from "next/head";
-import { ThemeProvider } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import theme from "../components/theme";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import Head from 'next/head';
+import { ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import withFirebaseAuth from 'react-with-firebase-auth';
+import * as firebase from 'firebase/app';
+import theme from '../components/theme';
 
-import firebaseConfig from "../firebaseConfig";
-import withFirebaseAuth from "react-with-firebase-auth";
-import * as firebase from "firebase/app";
-import "firebase/auth";
-import "firebase/firestore";
+import firebaseConfig from '../firebaseConfig';
+import 'firebase/auth';
+import 'firebase/firestore';
+
+import 'assets/scss/material-kit-react.scss?v=1.8.0';
+import 'assets/scss/style.scss';
 
 const firebaseApp = !firebase.apps.length
   ? firebase.initializeApp(firebaseConfig)
@@ -24,15 +27,12 @@ const providers = {
   googleProvider: new firebase.auth.GoogleAuthProvider(),
 };
 
-import "assets/scss/material-kit-react.scss?v=1.8.0";
-import "assets/scss/style.scss";
-
 export const AuthContext = React.createContext();
 function MyApp(props) {
   const [isAdmin, setIsAdmin] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [authLoading, setAuthLoading] = useState(true);
-  firebase.auth().onAuthStateChanged(async function (user) {
+  firebase.auth().onAuthStateChanged(async (user) => {
     if (user) {
       // User is signed in.
       setIsAuthenticated(true);
@@ -65,14 +65,14 @@ function MyApp(props) {
 
   React.useEffect(() => {
     // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector("#jss-server-side");
+    const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
   }, []);
 
   return (
-    <React.Fragment>
+    <>
       <Head>
         <title>IEDPU - US</title>
         <meta
@@ -102,7 +102,7 @@ function MyApp(props) {
           <Component {...pageProps} />
         </AuthContext.Provider>
       </ThemeProvider>
-    </React.Fragment>
+    </>
   );
 }
 

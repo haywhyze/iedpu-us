@@ -2,7 +2,7 @@ import React from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
 import Delete from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
+import Button from 'components/CustomButtons/Button.js';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -10,16 +10,14 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { makeStyles } from '@material-ui/core/styles';
 import styles from 'assets/jss/material-dashboard-react/views/dashboardStyle.js';
-import { db } from '../pages/_app';
+import { db } from '../../pages/_app.js';
 
 const useStyles = makeStyles(styles);
 
 export default function DeleteCell({
-  user,
-  setSuccessNotification,
+  id,
   setFailureNotification,
   setErrorMessage,
-  setSuccessMessage,
 }) {
   const classes = useStyles();
 
@@ -33,16 +31,17 @@ export default function DeleteCell({
     setOpen(false);
   };
 
-  const deleteUser = (uid) => {
+  const deleteMeeting = (uid) => {
     // console.log(uid);
-    db.collection('Users')
+    db.collection('meetings')
       .doc(uid)
       .delete()
       .then(() => {
-        setSuccessMessage('User successfully deleted!');
-        setSuccessNotification(true);
+        console.log('Document successfully removed!');
+        setErrorMessage('Event successfully deleted!');
+        setFailureNotification(true);
         setTimeout(() => {
-          setSuccessNotification(false);
+          setFailureNotification(false);
         }, 3000);
       })
       .catch((error) => {
@@ -51,6 +50,7 @@ export default function DeleteCell({
           setFailureNotification(false);
         }, 3000);
         setErrorMessage(error.message);
+        console.error('Error removing event: ', error);
       });
     setOpen(false);
   };
@@ -59,7 +59,7 @@ export default function DeleteCell({
     <>
       <Tooltip
         id="tooltip-top"
-        title="Delete Member"
+        title="Delete Meeting"
         placement="top"
         classes={{ tooltip: classes.tooltip }}
       >
@@ -79,18 +79,17 @@ export default function DeleteCell({
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">Verify User</DialogTitle>
+        <DialogTitle id="alert-dialog-title">Delete Meeting</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure you want to remove this user as a member of IEDPU - US
-            branch?
+            Are you sure you want to delete this meeting?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => deleteUser(user.id)} color="primary">
+          <Button onClick={() => deleteMeeting(id)} color="danger">
             Yes, please
           </Button>
-          <Button onClick={handleClose} color="primary" autoFocus>
+          <Button onClick={handleClose} color="transparent" autoFocus>
             No, cancel
           </Button>
         </DialogActions>
