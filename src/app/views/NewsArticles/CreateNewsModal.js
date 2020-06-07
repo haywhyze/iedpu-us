@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 // @material-ui/core components
-import InputLabel from '@material-ui/core/InputLabel';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import Slide from '@material-ui/core/Slide';
@@ -8,12 +7,9 @@ import IconButton from '@material-ui/core/IconButton';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
-import DateFnsUtils from '@date-io/date-fns'; // choose your lib
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DialogActions from '@material-ui/core/DialogActions';
 // @material-ui/icons
 import CustomInput from 'components/CustomInput/CustomInput.js';
-import CustomDateTimePicker from 'components/CustomInput/CustomDatePicker';
 import Close from '@material-ui/icons/Close';
 // core components
 import GridContainer from 'components/Grid/GridContainer.js';
