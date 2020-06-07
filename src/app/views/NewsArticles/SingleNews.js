@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import GridItem from 'components/Grid/GridItem.js';
 import Button from 'components/CustomButtons/Button.js';
@@ -7,8 +7,9 @@ import CardBody from 'components/Card/CardBody';
 import CardHeader from 'components/Card/CardHeader';
 import CardFooter from 'components/Card/CardFooter.js';
 import Create from '@material-ui/icons/Create';
-import Delete from '@material-ui/icons/Delete';
-import Launch from '@material-ui/icons/Launch';
+import ConfirmDelete from './ConfirmDelete';
+import EditNewsModal from './EditNewsModal';
+import ViewNewsModal from './ViewNewsModal';
 
 const styles = {
   image: {
@@ -30,18 +31,69 @@ export default function SingleNews({
   author,
   time,
   caption,
+  id,
+  setSuccessMessage,
+  setErrorMessage,
+  setSuccessNotification,
+  setFailureNotification,
 }) {
   const classes = useStyles();
+
+  const descriptionEl = useRef(null);
+
+  const [classicModal, setClassicModal] = useState(false);
+  const [selectedNews, setSelectedNews] = useState(null);
+  const [editModal, setEditModal] = useState(false);
+
+  const editNews = (news) => {
+    setSelectedNews(news);
+    setEditModal(true);
+  };
+
+  const viewNews = (news) => {
+    setSelectedNews(news);
+    setClassicModal(true);
+  };
+
   return (
     <GridItem xs={12} sm={6} md={4} lg={3}>
+      <ViewNewsModal
+        classicModal={classicModal}
+        setClassicModal={setClassicModal}
+        news={selectedNews}
+      />
+      <EditNewsModal
+        classicModal={editModal}
+        setClassicModal={setEditModal}
+        news={selectedNews}
+        setSuccessMessage={setSuccessMessage}
+        setErrorMessage={setErrorMessage}
+        setSuccessNotification={setSuccessNotification}
+        setFailureNotification={setFailureNotification}
+      />
       <Card>
         <CardHeader>
           <img className={classes.image} src={image} alt="..." />
           <p style={{ marginBottom: '0', marginTop: '10px' }}>{caption}</p>
         </CardHeader>
-        <CardBody>
+        <CardBody style={{
+          height: '350px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+        }}
+        >
           <h3 style={{ marginTop: '0' }}>{title}</h3>
-          <p style={{ whiteSpace: 'pre-wrap' }}>{details}</p>
+          <p ref={descriptionEl} style={{ whiteSpace: 'pre-wrap', overflow: 'hidden' }}>{details}</p>
+          <span>
+            <Button
+              onClick={() => viewNews({
+                id, image, title, details, author, time, caption,
+              })}
+              simple
+              size="sm"
+              color="info"
+            >
+              View Details
+            </Button>
+          </span>
           <h5>
             By
             {' '}
@@ -59,15 +111,23 @@ export default function SingleNews({
           </h6>
         </CardBody>
         <CardFooter>
-          <Button className={classes.footerButton} color="transparent" round>
+          <Button
+            onClick={() => editNews({
+              id, image, title, details, author, time, caption,
+            })}
+            className={classes.footerButton}
+            color="transparent"
+            round
+          >
             <Create />
           </Button>
-          <Button className={classes.footerButton} color="transparent" round>
-            <Launch />
-          </Button>
-          <Button className={classes.footerButton} color="transparent" round>
-            <Delete />
-          </Button>
+          <ConfirmDelete
+            id={id}
+            setSuccessMessage={setSuccessMessage}
+            setErrorMessage={setErrorMessage}
+            setSuccessNotification={setSuccessNotification}
+            setFailureNotification={setFailureNotification}
+          />
         </CardFooter>
       </Card>
     </GridItem>
