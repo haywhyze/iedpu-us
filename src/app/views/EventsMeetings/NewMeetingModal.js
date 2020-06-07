@@ -124,7 +124,6 @@ export default function NewMeetingModal({
                   <GridItem xs={12}>
                     <CustomInput
                       labelText="Venue"
-                      id="venue"
                       formControlProps={{
                         fullWidth: true,
                       }}
@@ -138,7 +137,6 @@ export default function NewMeetingModal({
                   <GridItem xs={12} sm={12}>
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                       <CustomDateTimePicker
-                        id="date-time"
                         formControlProps={{
                           fullWidth: true,
                         }}
@@ -152,7 +150,6 @@ export default function NewMeetingModal({
                   <GridItem xs={12} sm={12} md={12}>
                     <CustomInput
                       labelText="Minutes of Meeting (Meeting Notes)"
-                      id="about-me"
                       formControlProps={{
                         fullWidth: true,
                       }}
