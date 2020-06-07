@@ -12,8 +12,6 @@ import { AuthContext, db } from '../../pages/_app';
 import SingleNews from './SingleNews';
 import CreateNewsModal from './CreateNewsModal';
 
-const avatar = '/img/sidebar-2.jpg';
-
 const styles = {
   cardCategoryWhite: {
     color: 'rgba(255,255,255,.62)',
@@ -111,7 +109,7 @@ export default function EventsMeetings() {
               {failureNotification && (
                 <Notifications type="danger" message={errorMessage} />
               )}
-              {news.map((post) => (
+              {news.sort((a, b) => Date.parse(b.time) - Date.parse(a.time)).map((post) => (
                 <SingleNews
                   image={post.imageUrl}
                   caption={post.caption}
