@@ -9,6 +9,7 @@ import CardBody from 'components/Card/CardBody';
 import CardHeader from 'components/Card/CardHeader';
 import CardFooter from 'components/Card/CardFooter.js';
 import Create from '@material-ui/icons/Create';
+import LocationOn from '@material-ui/icons/LocationOn';
 import LocationCity from '@material-ui/icons/LocationCity';
 import ConfirmDelete from './ConfirmDelete';
 import ViewEventModal from './ViewEventModal';
@@ -102,7 +103,7 @@ export default function SingleEvent({
           </span>
 
           <h5>
-            <LocationCity fontSize="small" />
+            <LocationOn fontSize="small" />
             {' '}
             {venue}
           </h5>

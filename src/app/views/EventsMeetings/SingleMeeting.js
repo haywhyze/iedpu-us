@@ -7,7 +7,7 @@ import Card from 'components/Card/Card.js';
 import CardBody from 'components/Card/CardBody';
 import CardFooter from 'components/Card/CardFooter.js';
 import Create from '@material-ui/icons/Create';
-import LocationCity from '@material-ui/icons/LocationCity';
+import LocationOn from '@material-ui/icons/LocationOn';
 import ConfirmMeetingDelete from './ConfirmMeetingDelete';
 import EditMeetingModal from './EditMeetingModal';
 import ViewMeetingModal from './ViewMeetingModal';
@@ -101,7 +101,7 @@ export default function SingleMeeting({
             </Button>
           </span>
           <h5>
-            <LocationCity fontSize="small" />
+            <LocationOn fontSize="small" />
             {venue}
           </h5>
         </CardBody>
