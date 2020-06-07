@@ -70,7 +70,7 @@ export default function SingleMeeting({
       />
       <Card>
         <CardBody style={{
-          height: '350px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+          height: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
         }}
         >
           <h4>
@@ -83,24 +83,23 @@ export default function SingleMeeting({
               minute: 'numeric',
             }).format(new Date(time))}
           </h4>
-          <p style={{ whiteSpace: 'pre-wrap' }}>
-            {meetingNotes.substring(0, 200)}
-            {meetingNotes.length > 200 && (
-            <span>
-              ...
-              <Button
-                onClick={() => viewMeeting({
-                  time, meetingNotes, venue, id,
-                })}
-                simple
-                size="sm"
-                color="info"
-              >
-                View Details
-              </Button>
-            </span>
-            )}
+          <p style={{ whiteSpace: 'pre-wrap', overflow: 'hidden' }}>
+            {meetingNotes}
+
+
           </p>
+          <span>
+            <Button
+              onClick={() => viewMeeting({
+                time, meetingNotes, venue, id,
+              })}
+              simple
+              size="sm"
+              color="info"
+            >
+              View Details
+            </Button>
+          </span>
           <h5>
             <LocationCity fontSize="small" />
             {venue}

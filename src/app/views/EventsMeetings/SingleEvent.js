@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import GridItem from 'components/Grid/GridItem.js';
 import Button from 'components/CustomButtons/Button.js';
@@ -13,6 +13,7 @@ import LocationCity from '@material-ui/icons/LocationCity';
 import ConfirmDelete from './ConfirmDelete';
 import ViewEventModal from './ViewEventModal';
 import EditEventModal from './EditEventModal';
+const avatar = "/img/sidebar-2.jpg";
 
 const styles = {
   image: {
@@ -41,6 +42,8 @@ export default function SingleEvent({
   setFailureNotification,
 }) {
   const classes = useStyles();
+
+  const descriptionEl = useRef(null);
 
   const [classicModal, setClassicModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
@@ -74,31 +77,30 @@ export default function SingleEvent({
       />
       <Card>
         <CardHeader>
-          <img className={classes.image} src={image} alt="..." />
+          <img className={classes.image} src={image || avatar} alt="..." />
         </CardHeader>
         <CardBody style={{
-          height: '350px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+          height: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
         }}
         >
           <h3>{title}</h3>
-          <p style={{ whiteSpace: 'pre-wrap' }}>
-            {description.substring(0, 200)}
-            {description.length > 200 && (
-            <span>
-              ...
-              <Button
-                onClick={() => viewEvent({
-                  time, description, venue, id,
-                })}
-                simple
-                size="sm"
-                color="info"
-              >
-                View Details
-              </Button>
-            </span>
-            )}
+          <p ref={descriptionEl} style={{ whiteSpace: 'pre-wrap', overflow: 'hidden' }}>
+            {description}
+
           </p>
+          <span>
+            <Button
+              onClick={() => viewEvent({
+                time, description, venue, id, image: image || avatar,
+              })}
+              simple
+              size="sm"
+              color="info"
+            >
+              View Details
+            </Button>
+          </span>
+
           <h5>
             <LocationCity fontSize="small" />
             {' '}
