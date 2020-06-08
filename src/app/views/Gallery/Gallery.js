@@ -16,11 +16,11 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import { AuthContext, db } from "../../pages/_app.js";
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 const avatar = "/img/sidebar-2.jpg";
 
 const styles = {
@@ -90,12 +90,11 @@ export default function Gallery() {
 
   const [photos, setPhotos] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
-  
 
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = (image) => {
-    setSelectedImage(image)
+    setSelectedImage(image);
     setOpen(true);
   };
 
@@ -117,7 +116,6 @@ export default function Gallery() {
       });
     setOpen(false);
   };
-
 
   useEffect(() => {
     setLoading(true);
@@ -240,46 +238,7 @@ export default function Gallery() {
 
   return (
     <>
-      <GridContainer>
-        <GridItem style={{ display: "flex" }}>
-          {!imageUrl && (
-            <Button onClick={uploadPhoto} color="primary" size="lg">
-              Upload New Image
-            </Button>
-          )}
-          {imageUrl && (
-            <img
-              src={imageUrl}
-              alt="..."
-              width={100}
-              height={100}
-              style={{ objectFit: "cover", margin: "20px" }}
-            />
-          )}
-          {newImageOn && imageUrl && (
-            <div>
-              <CustomInput
-                labelText="Image Caption"
-                id="caption-modal"
-                formControlProps={{
-                  fullWidth: true,
-                }}
-                inputProps={{
-                  name: "caption",
-                  value: newCaption,
-                  onChange: (e) => setNewCaption(e.target.value),
-                }}
-              />
-              <Button onClick={saveNewImage} color="info" size="sm">
-                Save
-              </Button>
-              <Button onClick={() => setImageUrl("")} color="transparent" size="sm">
-                Cancel
-              </Button>
-            </div>
-          )}
-        </GridItem>
-      </GridContainer>
+      <GridContainer></GridContainer>
       <GridContainer>
         <Card>
           <CardHeader color="primary">
@@ -288,6 +247,48 @@ export default function Gallery() {
             </p>
           </CardHeader>
           <CardBody>
+            <GridItem style={{ display: "flex" }}>
+              {!imageUrl && (
+                <Button onClick={uploadPhoto} color="primary" size="lg">
+                  Upload New Image
+                </Button>
+              )}
+              {imageUrl && (
+                <img
+                  src={imageUrl}
+                  alt="..."
+                  width={100}
+                  height={100}
+                  style={{ objectFit: "cover", margin: "20px" }}
+                />
+              )}
+              {newImageOn && imageUrl && (
+                <div>
+                  <CustomInput
+                    labelText="Image Caption"
+                    id="caption-modal"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      name: "caption",
+                      value: newCaption,
+                      onChange: (e) => setNewCaption(e.target.value),
+                    }}
+                  />
+                  <Button onClick={saveNewImage} color="info" size="sm">
+                    Save
+                  </Button>
+                  <Button
+                    onClick={() => setImageUrl("")}
+                    color="transparent"
+                    size="sm"
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              )}
+            </GridItem>
             <GridContainer>
               {photos
                 .sort((a, b) => Date.parse(b.created) - Date.parse(a.created))
@@ -345,7 +346,11 @@ export default function Gallery() {
                         </Button>
                       </GridItem>
                       <GridItem>
-                        <Button onClick={() => handleClickOpen(photo)} color="danger" size="sm">
+                        <Button
+                          onClick={() => handleClickOpen(photo)}
+                          color="danger"
+                          size="sm"
+                        >
                           Delete
                         </Button>
                       </GridItem>
@@ -373,7 +378,7 @@ export default function Gallery() {
             Delete
           </Button>
           <Button onClick={handleClose} color="transparent" autoFocus>
-          Cancel
+            Cancel
           </Button>
         </DialogActions>
       </Dialog>

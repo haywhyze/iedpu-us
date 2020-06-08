@@ -87,21 +87,20 @@ export default function EventsMeetings() {
           setSuccessNotification={setSuccessNotification}
           setFailureNotification={setFailureNotification}
         />
-        <GridItem>
-          <Button color="primary" size="lg" onClick={() => setClassicModal(true)}>
-            Create New Post
-          </Button>
-        </GridItem>
       </GridContainer>
       <GridContainer>
         <Card plain>
           <CardHeader color="primary" plain>
-            <h4 className={classes.cardTitleWhite}>News and Articles</h4>
             <p className={classes.cardCategoryWhite}>
               Manage all news and feature articles
             </p>
           </CardHeader>
           <CardBody>
+            <GridItem>
+              <Button color="primary" size="lg" onClick={() => setClassicModal(true)}>
+                Create New Post
+              </Button>
+            </GridItem>
             <GridContainer>
               {successNotification && (
               <Notifications type="success" message={successMessage} />

@@ -104,24 +104,6 @@ export default function EventsMeetings() {
           setSuccessNotification={setSuccessNotification}
           setFailureNotification={setFailureNotification}
         />
-        <GridItem>
-          <Button
-            onClick={() => setClassicModal(true)}
-            color="primary"
-            size="lg"
-          >
-            Create New event
-          </Button>
-        </GridItem>
-        <GridItem>
-          <Button
-            color="info"
-            size="lg"
-            onClick={() => setMeetingsModal(true)}
-          >
-            Create New meeting
-          </Button>
-        </GridItem>
       </GridContainer>
       <GridContainer>
         <Card plain>
@@ -132,6 +114,15 @@ export default function EventsMeetings() {
             </p>
           </CardHeader>
           <CardBody>
+            <GridItem>
+              <Button
+                onClick={() => setClassicModal(true)}
+                color="primary"
+                size="lg"
+              >
+                Create New event
+              </Button>
+            </GridItem>
             <GridContainer space={8}>
               {successNotification && (
                 <Notifications type="success" message={successMessage} />
@@ -165,13 +156,16 @@ export default function EventsMeetings() {
             </p>
           </CardHeader>
           <CardBody>
+            <GridItem>
+              <Button
+                color="info"
+                size="lg"
+                onClick={() => setMeetingsModal(true)}
+              >
+                Create New meeting
+              </Button>
+            </GridItem>
             <GridContainer>
-              {successNotification && (
-              <Notifications type="success" message={successMessage} />
-              )}
-              {failureNotification && (
-                <Notifications type="danger" message={errorMessage} />
-              )}
               {meetings.sort((a, b) => Date.parse(b.time) - Date.parse(a.time)).map((event) => (
                 <SingleMeeting
                   meetingNotes={event.meetingNotes}

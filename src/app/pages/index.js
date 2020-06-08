@@ -41,10 +41,10 @@ export default function Index(props) {
       />
 
       <Parallax image="img/central-mosque-1.jpg">
-        <div style={{ textAlign: 'center', display: 'flex', justifyContent: 'center' }} className={classes.container}>
+        <div style={{ display: 'flex', justifyContent: 'center' }} className={classes.container}>
           <GridContainer>
             <GridItem>
-              <div style={{ textAlign: 'center' }} className={classes.brand}>
+              <div className={classes.brand}>
                 <h1 className={classes.title}>Welcome to IEDPU</h1>
                 <h3 className={classes.subtitle}>
                   Ilorin Emirate Descendants Progressive Union (IEDPU) is the
