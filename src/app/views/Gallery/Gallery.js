@@ -238,7 +238,6 @@ export default function Gallery() {
 
   return (
     <>
-      <GridContainer></GridContainer>
       <GridContainer>
         <Card>
           <CardHeader color="primary">
@@ -293,7 +292,7 @@ export default function Gallery() {
               {photos
                 .sort((a, b) => Date.parse(b.created) - Date.parse(a.created))
                 .map((photo) => (
-                  <GridItem key={photo.id} xs={12} sm={6} md={4} lg={3}>
+                  <GridItem style={{ margin: '1rem' }} key={photo.id} xs={12} sm={6} md={4} lg={3}>
                     <img
                       src={photo.imageUrl}
                       alt="..."

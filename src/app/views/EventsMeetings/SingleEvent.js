@@ -92,7 +92,7 @@ export default function SingleEvent({
           <span>
             <Button
               onClick={() => viewEvent({
-                time, description, venue, id, image: image || avatar,
+                time, title, description, venue, id, image: image || avatar,
               })}
               simple
               size="sm"

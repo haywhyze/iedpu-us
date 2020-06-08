@@ -74,7 +74,6 @@ export default function SingleNews({
       <Card>
         <CardHeader>
           <img className={classes.image} src={image} alt="..." />
-          <p style={{ marginBottom: '0', marginTop: '10px' }}>{caption}</p>
         </CardHeader>
         <CardBody style={{
           height: '350px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',

@@ -119,7 +119,7 @@ export default function NewMeetingModal({
               <CardBody>
                 <GridContainer>
                   <GridItem xs={12}>
-                    <h2>Create New Meeting</h2>
+                    <h3>Create New Meeting</h3>
                   </GridItem>
                   <GridItem xs={12}>
                     <CustomInput

@@ -175,7 +175,7 @@ export default function NewEventModal({
               <CardBody>
                 <GridContainer>
                   <GridItem xs={12}>
-                    <h2>Create New Event</h2>
+                    <h3>Create New Event</h3>
                   </GridItem>
                   <GridItem xs={12}>
                     <CustomInput

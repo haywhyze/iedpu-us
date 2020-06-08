@@ -68,8 +68,8 @@ export default function ProfileModal({ classicModal, setClassicModal, event }) {
               className={classes.modalBody}
             >
               <div className={profileClasses.container}>
-                <h3 style={{ textAlign: 'center' }}>{event.title}</h3>
                 <GridContainer justify="center">
+                  <h3 style={{ textAlign: 'center' }}>{event.title}</h3>
                   <GridItem xs={12} sm={12} md={6}>
                     <img
                       style={{
@@ -84,7 +84,7 @@ export default function ProfileModal({ classicModal, setClassicModal, event }) {
                   </GridItem>
                   <GridItem xs={12} sm={12} md={6}>
                     <GridItem xs={12} sm={12}>
-                      <p>{event.description}</p>
+                      <p style={{ whiteSpace: 'pre-wrap' }}>{event.description}</p>
                     </GridItem>
                     <GridItem xs={12} sm={12}>
                       <h5>
