@@ -1,15 +1,18 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
 
-import Header from "components/Header/Header.js";
-import HeaderLinks from "components/Header/HeaderLinks.js";
-import Parallax from "components/Parallax/Parallax.js";
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
-import Small from "components/Typography/Small.js";
+import Header from 'components/Header/Header.js';
+import HeaderLinks from 'components/Header/HeaderLinks.js';
+import Parallax from 'components/Parallax/Parallax.js';
+import GridContainer from 'components/Grid/GridContainer.js';
+import GridItem from 'components/Grid/GridItem.js';
+import Small from 'components/Typography/Small.js';
+import Footer from 'components/Footer/Footer.js';
 
-import styles from "assets/jss/material-kit-react/views/profilePage.js";
-import typoStyles from "assets/jss/material-kit-react/views/componentsSections/typographyStyle.js";
+import styles from 'assets/jss/material-kit-react/views/profilePage.js';
+import typoStyles from 'assets/jss/material-kit-react/views/componentsSections/typographyStyle.js';
+import NewsContainer from '../Sections/NewsPage';
 
 const useStyles = makeStyles(styles);
 const useTypoStyles = makeStyles(typoStyles);
@@ -27,8 +30,8 @@ export default function News(props) {
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
-          height: 300,
-          color: "white",
+          height: 50,
+          color: 'white',
         }}
         {...rest}
       />
@@ -37,12 +40,12 @@ export default function News(props) {
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={6}>
               <div className={typoClasses.typo}>
-                <h1 className={classes.title} style={{ color: "#fff" }}>
+                <h1 className={classes.title} style={{ color: '#fff' }}>
                   News
                 </h1>
                 <h2>
                   <Small>
-                    <span style={{ color: "#fff" }}>
+                    <span style={{ color: '#fff' }}>
                       Get latest news updates about the union and the emirates in general
                     </span>
                   </Small>
@@ -52,6 +55,14 @@ export default function News(props) {
           </GridContainer>
         </div>
       </Parallax>
+      <div className={classNames(classes.main, classes.mainRaised)}>
+        <div>
+          <div className={classes.container}>
+            <NewsContainer />
+          </div>
+        </div>
+      </div>
+      <Footer />
     </div>
   );
 }
