@@ -74,7 +74,7 @@ export default function Index(props) {
           position: 'fixed',
           zIndex: '5',
           top: '40%',
-          // right: "0",
+          right: '10px',
           background: 'white',
           boxShadow:
             '0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)',
@@ -171,7 +171,7 @@ export default function Index(props) {
               <span>
                 <Button
                   color="transparent"
-                  href="https://www.instagram.com/haywhyze"
+                  href="https://www.instagram.com/ilorinemirate_us"
                   target="_blank"
                   style={{
                     color: 'inherit',
