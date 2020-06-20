@@ -12,7 +12,7 @@ import Footer from 'components/Footer/Footer.js';
 
 import styles from 'assets/jss/material-kit-react/views/profilePage.js';
 import typoStyles from 'assets/jss/material-kit-react/views/componentsSections/typographyStyle.js';
-import NewsContainer from '../Sections/NewsPage';
+import NewsContainer from '../Sections/News/NewsPage';
 
 const useStyles = makeStyles(styles);
 const useTypoStyles = makeStyles(typoStyles);
