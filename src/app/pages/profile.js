@@ -48,29 +48,33 @@ function ProfilePage(props) {
   const [verified, setVerified] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  // const override = css`
-  //   display: block;
-  //   margin: 0 auto;
-  //   border-color: purple;
-  // `;
 
-  if (!isAdmin
-    && user) {
-    db
-      .collection('Users')
-      .doc(user.uid)
-      .onSnapshot((doc) => {
-        if (doc.exists) {
+  React.useEffect(() => {
+    let unsubscribe;
+    if (!isAdmin && user) {
+      unsubscribe = db.collection('Users')
+        .doc(user.uid)
+        .onSnapshot((doc) => {
+          if (doc.exists) {
+            setLoading(false);
+            if (!doc.data().verified) {
+              setVerified(false);
+              return;
+            }
+            setVerified(true);
+            setDisplayName(doc.data().displayName);
+            setPhotoURL(doc.data().photoURL);
+          } else setLoading(false);
+        }, (error) => {
+          console.log(error.message);
+          setVerified(false);
           setLoading(false);
-          if (!doc.data().verified) {
-            setVerified(false);
-            return;
-          } setVerified(true);
-          setDisplayName(doc.data().displayName);
-          setPhotoURL(doc.data().photoURL);
-        } else setLoading(false);
-      });
-  }
+        });
+    }
+    return () => {
+      typeof unsubscribe === 'function' ? unsubscribe() : null
+    };
+  }, [isAdmin, user, verified]);
 
   React.useEffect(() => {
     if (!isAuthenticated) {
