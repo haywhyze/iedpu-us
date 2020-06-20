@@ -1,0 +1,12 @@
+TO DO:
+ 
+- Fix user access on sign up without verification. ✅
+- Populate events, meetings and executive pages 
+- Implement add to calendar on events and meetings
+- Implement email verification
+- Give admin access to send newsletters 
+- Implement feedback on user and admin end
+- Implement donation and member fees
+- Implement Input validation (image restrictions too).
+- Implement photo gallery on gallery page
+- Use react toast for notifications

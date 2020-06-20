@@ -32,7 +32,7 @@ function HeaderLinks(props) {
           </span>
         </Link>
       </ListItem>
-      <ListItem className={classes.listItem}>
+      {user && isAuthenticated && (<><ListItem className={classes.listItem}>
         <Link href="/events">
           <span>
             <Button color="transparent" className={classes.navLink}>
@@ -58,7 +58,7 @@ function HeaderLinks(props) {
             </Button>
           </span>
         </Link>
-      </ListItem>
+      </ListItem></>)}
       <ListItem className={classes.listItem}>
         <Link href="/executives">
           <span>
