@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import Router from 'next/router';
 import { makeStyles } from '@material-ui/core/styles';
 import GridContainer from 'components/Grid/GridContainer.js';
 import Card from 'components/Card/Card.js';
@@ -32,28 +33,33 @@ export default function NewsContainer() {
   const classes = useStyles();
 
   const [news, setNews] = useState([]);
-  const [classicModal, setClassicModal] = React.useState(false);
+
   const [loading, setLoading] = useState(true);
-//   const [successNotification, setSuccessNotification] = useState(false);
-//   const [failureNotification, setFailureNotification] = useState(false);
-//   const [errorMessage, setErrorMessage] = useState('');
-//   const [successMessage, setSuccessMessage] = useState('');
 
   const { user, isAuthenticated } = useContext(AuthContext);
 
   const newsRef = user && db.collection('news');
 
   useEffect(() => {
+    let unsubscribe;
     if (user) {
-      newsRef.onSnapshot((querySnapshot) => {
+      console.log('We dey here');
+      unsubscribe = newsRef.onSnapshot((querySnapshot) => {
         const data = [];
         querySnapshot.forEach((doc) => {
           data.push({ ...doc.data(), id: doc.id });
         });
         setLoading(false);
         setNews(data);
+      }, (error) => {
+        console.log("Not verified yet",error.message);
+        setLoading(false);
+        Router.push('/');
       });
     }
+    return () => {
+      if (typeof unsubscribe === 'function') unsubscribe();
+    };
   }, [isAuthenticated, user]);
 
   if (loading) {
@@ -82,7 +88,6 @@ export default function NewsContainer() {
           </CardHeader> */}
           <CardBody>
             <GridContainer>
-                {console.log(news)}
               {news.sort((a, b) => Date.parse(b.time) - Date.parse(a.time)).map((post) => (
                 <SingleNews
                   image={post.imageUrl}
