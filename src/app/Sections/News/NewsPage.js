@@ -5,7 +5,7 @@ import GridContainer from 'components/Grid/GridContainer.js';
 import Card from 'components/Card/Card.js';
 import CardBody from 'components/Card/CardBody';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { AuthContext, db } from '../pages/_app';
+import { AuthContext, db } from '../../pages/_app';
 import SingleNews from './SingleNews';
 
 const styles = {
@@ -43,19 +43,21 @@ export default function NewsContainer() {
   useEffect(() => {
     let unsubscribe;
     if (user) {
-      console.log('We dey here');
-      unsubscribe = newsRef.onSnapshot((querySnapshot) => {
-        const data = [];
-        querySnapshot.forEach((doc) => {
-          data.push({ ...doc.data(), id: doc.id });
-        });
-        setLoading(false);
-        setNews(data);
-      }, (error) => {
-        console.log("Not verified yet",error.message);
-        setLoading(false);
-        Router.push('/');
-      });
+      unsubscribe = newsRef.onSnapshot(
+        (querySnapshot) => {
+          const data = [];
+          querySnapshot.forEach((doc) => {
+            data.push({ ...doc.data(), id: doc.id });
+          });
+          setLoading(false);
+          setNews(data);
+        },
+        (error) => {
+          console.log('Not verified yet', error.message);
+          setLoading(false);
+          Router.push('/');
+        },
+      );
     }
     return () => {
       if (typeof unsubscribe === 'function') unsubscribe();
@@ -88,18 +90,20 @@ export default function NewsContainer() {
           </CardHeader> */}
           <CardBody>
             <GridContainer>
-              {news.sort((a, b) => Date.parse(b.time) - Date.parse(a.time)).map((post) => (
-                <SingleNews
-                  image={post.imageUrl}
-                  caption={post.caption}
-                  details={post.details}
-                  author={post.author}
-                  time={post.time}
-                  title={post.title}
-                  key={post.id}
-                  id={post.id}
-                />
-              ))}
+              {news
+                .sort((a, b) => Date.parse(b.time) - Date.parse(a.time))
+                .map((post) => (
+                  <SingleNews
+                    image={post.imageUrl}
+                    caption={post.caption}
+                    details={post.details}
+                    author={post.author}
+                    time={post.time}
+                    title={post.title}
+                    key={post.id}
+                    id={post.id}
+                  />
+                ))}
             </GridContainer>
           </CardBody>
         </Card>

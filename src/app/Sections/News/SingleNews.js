@@ -35,7 +35,6 @@ export default function SingleNews({
 
   const [classicModal, setClassicModal] = useState(false);
   const [selectedNews, setSelectedNews] = useState(null);
-  const [editModal, setEditModal] = useState(false);
 
   const viewNews = (news) => {
     setSelectedNews(news);
