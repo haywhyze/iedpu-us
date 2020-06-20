@@ -1,7 +1,7 @@
 TO DO:
  
 - Fix user access on sign up without verification. ✅
-- Populate events, meetings and executive pages 
+- Populate events, meetings and executive pages ✅
 - Implement add to calendar on events and meetings
 - Implement email verification
 - Give admin access to send newsletters 

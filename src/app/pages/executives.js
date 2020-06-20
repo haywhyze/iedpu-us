@@ -9,6 +9,7 @@ import GridContainer from 'components/Grid/GridContainer.js';
 import GridItem from 'components/Grid/GridItem.js';
 import Small from 'components/Typography/Small.js';
 import Button from 'components/CustomButtons/Button.js';
+import Footer from 'components/Footer/Footer.js';
 import Card from 'components/Card/Card.js';
 import CardBody from 'components/Card/CardBody.js';
 import CardFooter from 'components/Card/CardFooter.js';
@@ -46,7 +47,7 @@ export default function Executives(props) {
       socialmedia: {
         facebook: 'haywhyze',
         twitter: 'haywhyze',
-        instagram: 'haywhyze',
+        // instagram: 'haywhyze',
       },
     },
     {
@@ -57,7 +58,7 @@ export default function Executives(props) {
         'You can write here details about one of your team members. You can give more details about what they do. Feel free to add some links for people to be able to follow them outside the site.',
       socialmedia: {
         facebook: 'haywhyze',
-        twitter: 'haywhyze',
+        // twitter: 'haywhyze',
         instagram: 'haywhyze',
       },
     },
@@ -68,7 +69,7 @@ export default function Executives(props) {
       bio:
         'You can write here details about one of your team members. You can give more details about what they do. Feel free to add some links for people to be able to follow them outside the site.',
       socialmedia: {
-        facebook: 'haywhyze',
+        // facebook: 'haywhyze',
         twitter: 'haywhyze',
         instagram: 'haywhyze',
       },
@@ -146,8 +147,8 @@ export default function Executives(props) {
       </Parallax>
       <div className={classNames(classes2.main, classes2.mainRaised)}>
         <div className={classes2.container}>
-          <div className={classes2.section}>
-            <h2 className={teamClasses.title}>Here is our team</h2>
+          <div style={{ textAlign: 'center'}} className={classes2.section}>
+            <h2 className={teamClasses.title}>.</h2>
             <div>
               <GridContainer>
                 {executives.map((e) => (
@@ -158,10 +159,11 @@ export default function Executives(props) {
                         sm={12}
                         md={6}
                         className={teamClasses.itemGrid}
+                        style={{ margin: 'auto'}}
                       >
                         <img src={team1} alt="..." className={imageClasses} />
                       </GridItem>
-                      <h4 className={teamClasses.cardTitle}>
+                      <h4 className={teamClasses.cardTitle} style={{ textAlign: 'center'}}>
                         {e.name}
                         <br />
                         <small className={teamClasses.smallTitle}>
@@ -169,13 +171,14 @@ export default function Executives(props) {
                         </small>
                       </h4>
                       <CardBody>
-                        <p className={teamClasses.description}>{e.bio}</p>
+                        <p className={teamClasses.description} style={{ textAlign: 'center'}}>{e.bio}</p>
                       </CardBody>
                       <CardFooter className={teamClasses.justifyCenter}>
                         {e.socialmedia.twitter && (
                         <Button
                           href={`https://twitter.com/${e.socialmedia.twitter}`}
                           justIcon
+                          target='_blank'
                           color="transparent"
                           className={teamClasses.margin5}
                         >
@@ -184,9 +187,10 @@ export default function Executives(props) {
                           />
                         </Button>
                         )}
-                        {e.socialmedia.twitter && (
+                        {e.socialmedia.instagram && (
                         <Button
                           href={`https://instagram.com/${e.socialmedia.instagram}`}
+                          target='_blank'
                           justIcon
                           color="transparent"
                           className={teamClasses.margin5}
@@ -196,10 +200,11 @@ export default function Executives(props) {
                           />
                         </Button>
                         )}
-                        {e.socialmedia.twitter && (
+                        {e.socialmedia.facebook && (
                         <Button
                           href={`https://facebook.com/${e.socialmedia.facebook}`}
                           justIcon
+                          target='_blank'
                           color="transparent"
                           className={teamClasses.margin5}
                         >
@@ -217,6 +222,7 @@ export default function Executives(props) {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

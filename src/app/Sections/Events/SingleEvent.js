@@ -2,6 +2,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import AddToCalendar from 'react-add-to-calendar';
 import GridItem from 'components/Grid/GridItem.js';
 import Button from 'components/CustomButtons/Button.js';
 import Card from 'components/Card/Card.js';
@@ -35,6 +36,13 @@ export default function SingleEvent({
   id,
 }) {
   const classes = useStyles();
+  let ev = {
+    title: 'Sample Event',
+    description: 'This is the sample event provided as an example only',
+    location: 'Portland, OR',
+    startTime: '2016-09-16T20:15:00-04:00',
+    endTime: '2016-09-16T21:45:00-04:00'
+}
 
   const descriptionEl = useRef(null);
 
@@ -78,7 +86,7 @@ export default function SingleEvent({
               View Details
             </Button>
           </span>
-
+          <AddToCalendar event={ev} />
           <h5>
             <LocationOn fontSize="small" />
             {' '}
