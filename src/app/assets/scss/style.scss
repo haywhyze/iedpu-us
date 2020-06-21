@@ -1,3 +1,5 @@
+@import "~react-image-gallery/styles/scss/image-gallery.scss";
+
 .container-review,
 .overlay-review:before {
   background: url("../../public/img/central-mosque-1.jpg") no-repeat fixed 0 0 /
@@ -100,4 +102,14 @@
           }
       }
   }
+}
+
+.img-gallery img {
+  height: calc(80vh - 80px);
+  width: auto;
+  object-fit: contain !important;
+}
+
+.image-gallery {
+  width: 90vw;
 }
