@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import { AuthContext } from "../pages/_app";
-import { db } from "../pages/_app";
+import { AuthContext } from "../../pages/_app";
+import { db } from "../../pages/_app";
 import ProfileModal from "./ProfileModal";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";

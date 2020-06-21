@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Link from "next/link";
 import Button from "components/CustomButtons/Button.js";
-import { AuthContext } from "../pages/_app";
+import { AuthContext } from "../../pages/_app";
 
 export default function UnderReview() {
   const { signOut } = useContext(AuthContext);

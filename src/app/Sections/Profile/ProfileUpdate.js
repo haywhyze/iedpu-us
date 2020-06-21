@@ -17,9 +17,9 @@ import Button from 'components/CustomButtons/Button.js';
 import CustomInput from 'components/CustomInput/CustomInput.js';
 
 import styles from 'assets/jss/material-kit-react/views/componentsSections/profileStyle.js';
-import { AuthContext, db } from '../pages/_app';
+import { AuthContext, db } from '../../pages/_app';
 
-import Notifications from './Notification';
+import Notifications from '../utils/Notification';
 
 const useStyles = makeStyles(styles);
 
