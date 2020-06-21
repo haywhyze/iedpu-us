@@ -22,11 +22,9 @@ import Button from 'components/CustomButtons/Button.js';
 import CardBody from 'components/Card/CardBody.js';
 
 import styles from 'assets/jss/material-kit-react/views/componentsSections/javascriptStyles.js';
-import profileStyles from 'assets/jss/material-kit-react/views/profilePage.js';
 import { db } from '../../pages/_app.js';
 
 const useStyles = makeStyles(styles);
-const useProfileStyles = makeStyles(profileStyles);
 
 const Transition = React.forwardRef((props, ref) => <Slide direction="down" ref={ref} {...props} />);
 
@@ -41,63 +39,12 @@ export default function NewEventModal({
   setSuccessMessage,
 }) {
   const classes = useStyles();
-  const profileClasses = useProfileStyles();
-  const imageClasses = classNames(
-    profileClasses.imgRaised,
-    profileClasses.imgRoundedCircle,
-    // profileClasses.imgFluid
-  );
   const [values, setValues] = useState({
     title: '',
     description: '',
     venue: '',
   });
-  const [imageUrl, setImageUrl] = useState('');
   const [selectedDate, handleDateChange] = useState(new Date());
-
-  const uploadPhoto = () => {
-    window.cloudinary.openUploadWidget(
-      {
-        cloudName: 'haywhyze',
-        uploadPreset: 'ittv3vvm',
-        sources: ['local', 'camera', 'facebook', 'instagram'],
-        showAdvancedOptions: true,
-        cropping: true,
-        multiple: false,
-        defaultSource: 'local',
-        styles: {
-          palette: {
-            window: '#FFFFFF',
-            windowBorder: '#90A0B3',
-            tabIcon: '#0078FF',
-            menuIcons: '#5A616A',
-            textDark: '#000000',
-            textLight: '#FFFFFF',
-            link: '#0078FF',
-            action: '#FF620C',
-            inactiveTabIcon: '#0E2F5A',
-            error: '#F44235',
-            inProgress: '#0078FF',
-            complete: '#20B832',
-            sourceBg: '#E4EBF1',
-          },
-          fonts: {
-            default: {
-              active: true,
-            },
-          },
-        },
-      },
-      (err, info) => {
-        if (!err) {
-          if (info.event === 'success') {
-            // console.log(info.info.secure_url)
-            setImageUrl(info.info.secure_url);
-          }
-        }
-      },
-    );
-  };
 
   const handleChange = (e) => {
     setValues({
@@ -111,7 +58,7 @@ export default function NewEventModal({
       ...values,
       author: 'Admin',
       time: selectedDate.toISOString(),
-      imageUrl,
+      // imageUrl,
     };
 
     db.collection('events')
@@ -119,7 +66,7 @@ export default function NewEventModal({
       .then((docRef) => {
         console.log('Document written with ID: ', docRef.id);
         setValues({ title: '', description: '', venue: '' });
-        setImageUrl('');
+        handleDateChange(new Date());
         setClassicModal(false);
         setSuccessMessage('Event successfully created');
         setTimeout(() => {
@@ -215,24 +162,6 @@ export default function NewEventModal({
                       />
                       <InputLabel>Date and Time</InputLabel>
                     </MuiPickersUtilsProvider>
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={6}>
-                    <Button
-                      className="makeStyles-formControl-428"
-                      onClick={uploadPhoto}
-                      color="info"
-                    >
-                      <i className={`${classes.socials} fas fa-camera`} />
-                      Upload Image
-                    </Button>
-                    <img
-                      src={imageUrl || '../img/profile.png'}
-                      alt="..."
-                      width={50}
-                      height={50}
-                      style={{ objectFit: 'cover' }}
-                      className={`${imageClasses} makeStyles-formControl-428`}
-                    />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={12}>
                     <CustomInput

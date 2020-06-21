@@ -59,7 +59,7 @@ export default function DeleteCell({
     <>
       <Tooltip
         id="tooltip-top"
-        title="Delete Member"
+        title="Delete Event"
         placement="top"
         classes={{ tooltip: classes.tooltip }}
       >
