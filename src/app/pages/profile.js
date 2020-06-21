@@ -22,9 +22,9 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import styles from 'assets/jss/material-kit-react/views/profilePage.js';
 import { db, AuthContext } from './_app';
 
-import SectionTabs from '../Sections/SectionTabs';
+import SectionTabs from '../Sections/Profile/SectionTabs';
 
-import UnderReview from '../Sections/UnderReview';
+import UnderReview from '../Sections/Profile/UnderReview';
 
 const useStyles = makeStyles(styles);
 

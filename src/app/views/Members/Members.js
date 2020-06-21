@@ -3,17 +3,17 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 // core components
 import GridItem from "components/Grid/GridItem.js";
-import ProfileModal from "../../Sections/ProfileModal";
+import ProfileModal from "../../Sections/Profile/ProfileModal";
 import GridContainer from "components/Grid/GridContainer.js";
 import Table from "components/Table/Table.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
-import ConfirmCell from "../../Sections/ConfirmCell";
+import ConfirmCell from "../../Sections/utils/ConfirmCell";
 import Button from "components/CustomButtons/Button.js";
-import Notifications from "../../Sections/Notification";
+import Notifications from "../../Sections/utils/Notification";
 import LaunchRoundedIcon from "@material-ui/icons/LaunchRounded";
-import DeleteCell from "../../Sections/DeleteCell";
+import DeleteCell from "../../Sections/utils/DeleteCell";
 const styles = {
   cardCategoryWhite: {
     "&,& a,& a:hover,& a:focus": {

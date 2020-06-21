@@ -16,7 +16,7 @@ import Link from 'next/link';
 import styles from 'assets/jss/material-kit-react/views/components.js';
 
 // Sections for this page
-import HomeSection from '../Sections/HomeSection';
+import HomeSection from '../Sections/Homepage/HomeSection';
 
 const dashboardRoutes = [];
 

@@ -12,14 +12,14 @@ import VerifiedUser from "@material-ui/icons/VerifiedUser";
 // core components
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
-import ConfirmCell from "../../Sections/ConfirmCell";
-import DeleteCell from "../../Sections/DeleteCell";
+import ConfirmCell from "../../Sections/utils/ConfirmCell";
+import DeleteCell from "../../Sections/utils/DeleteCell";
 import Table from "components/Table/Table.js";
 import CustomTabs from "components/CustomTabs/CustomTabs.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardIcon from "components/Card/CardIcon.js";
-import Notifications from "../../Sections/Notification";
+import Notifications from "../../Sections/utils/Notification";
 import CardFooter from "components/Card/CardFooter.js";
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";

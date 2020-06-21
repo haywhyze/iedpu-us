@@ -7,7 +7,7 @@ import Card from 'components/Card/Card.js';
 import CardBody from 'components/Card/CardBody';
 import CardHeader from 'components/Card/CardHeader';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Notifications from '../../Sections/Notification';
+import Notifications from '../../Sections/utils/Notification';
 import { AuthContext, db } from '../../pages/_app';
 import NewEventModal from './NewEventModal';
 import SingleEvent from './SingleEvent';
