@@ -8,7 +8,6 @@ import { AuthContext, db } from '../../pages/_app';
 import SingleEvent from './SingleEvent';
 
 export default function EventsContainer() {
-
   const [events, setEvents] = useState([]);
 
   const [loading, setLoading] = useState(true);
@@ -35,6 +34,9 @@ export default function EventsContainer() {
           Router.push('/');
         },
       );
+    }
+    if (!isAuthenticated) {
+      Router.push('/login');
     }
     return () => {
       if (typeof unsubscribeEvents === 'function') {

@@ -59,6 +59,9 @@ export default function NewsContainer() {
         },
       );
     }
+    if (!isAuthenticated) {
+      Router.push('/login');
+    }
     return () => {
       if (typeof unsubscribe === 'function') unsubscribe();
     };

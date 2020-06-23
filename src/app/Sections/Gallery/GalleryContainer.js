@@ -36,6 +36,9 @@ export default function GalleryContainer() {
         },
       );
     }
+    if (!isAuthenticated) {
+      Router.push('/login');
+    }
     return () => {
       if (typeof unsubscribePhotos === 'function') {
         unsubscribePhotos();
