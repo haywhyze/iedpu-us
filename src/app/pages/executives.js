@@ -8,18 +8,17 @@ import Parallax from 'components/Parallax/Parallax.js';
 import GridContainer from 'components/Grid/GridContainer.js';
 import GridItem from 'components/Grid/GridItem.js';
 import Small from 'components/Typography/Small.js';
-import Button from 'components/CustomButtons/Button.js';
+import CustomTabs from 'components/CustomTabs/CustomTabs.js';
 import Footer from 'components/Footer/Footer.js';
-import Card from 'components/Card/Card.js';
-import CardBody from 'components/Card/CardBody.js';
-import CardFooter from 'components/Card/CardFooter.js';
 
 import styles from 'assets/jss/material-kit-react/views/profilePage.js';
 import styles2 from 'assets/jss/material-kit-react/views/landingPage.js';
 import typoStyles from 'assets/jss/material-kit-react/views/componentsSections/typographyStyle.js';
 import teamStyles from 'assets/jss/material-kit-react/views/landingPageSections/teamStyle.js';
 
-const team1 = '/img/faces/marc.jpg';
+import organizationChartData from '../Sections/OrganizationCharts/data';
+import Panel from '../Sections/OrganizationCharts/Panel';
+
 
 const useStyles = makeStyles(styles);
 const useStyles2 = makeStyles(styles2);
@@ -31,86 +30,8 @@ export default function Executives(props) {
   const classes2 = useStyles2();
   const typoClasses = useTypoStyles();
   const teamClasses = useTeamStyles();
-  const imageClasses = classNames(
-    classes.imgRaised,
-    classes.imgRoundedCircle,
-    classes.imgFluid,
-  );
   const { ...rest } = props;
-  const executives = [
-    {
-      name: 'Yusuf Ayo',
-      position: 'Chairman',
-      image: '/img/faces/marc',
-      bio:
-        'You can write here details about one of your team members. You can give more details about what they do. Feel free to add some links for people to be able to follow them outside the site.',
-      socialmedia: {
-        facebook: 'haywhyze',
-        twitter: 'haywhyze',
-        // instagram: 'haywhyze',
-      },
-    },
-    {
-      name: 'Yusuf Ayo',
-      position: 'Chairman',
-      image: '/img/faces/marc',
-      bio:
-        'You can write here details about one of your team members. You can give more details about what they do. Feel free to add some links for people to be able to follow them outside the site.',
-      socialmedia: {
-        facebook: 'haywhyze',
-        // twitter: 'haywhyze',
-        instagram: 'haywhyze',
-      },
-    },
-    {
-      name: 'Yusuf Ayo',
-      position: 'Chairman',
-      image: '/img/faces/marc',
-      bio:
-        'You can write here details about one of your team members. You can give more details about what they do. Feel free to add some links for people to be able to follow them outside the site.',
-      socialmedia: {
-        // facebook: 'haywhyze',
-        twitter: 'haywhyze',
-        instagram: 'haywhyze',
-      },
-    },
-    {
-      name: 'Yusuf Ayo',
-      position: 'Chairman',
-      image: '/img/faces/marc',
-      bio:
-        'You can write here details about one of your team members. You can give more details about what they do. Feel free to add some links for people to be able to follow them outside the site.',
-      socialmedia: {
-        facebook: 'haywhyze',
-        twitter: 'haywhyze',
-        instagram: 'haywhyze',
-      },
-    },
-    {
-      name: 'Yusuf Ayo',
-      position: 'Chairman',
-      image: '/img/faces/marc',
-      bio:
-        'You can write here details about one of your team members. You can give more details about what they do. Feel free to add some links for people to be able to follow them outside the site.',
-      socialmedia: {
-        facebook: 'haywhyze',
-        twitter: 'haywhyze',
-        instagram: 'haywhyze',
-      },
-    },
-    {
-      name: 'Yusuf Ayo',
-      position: 'Chairman',
-      image: '/img/faces/marc',
-      bio:
-        'You can write here details about one of your team members. You can give more details about what they do. Feel free to add some links for people to be able to follow them outside the site.',
-      socialmedia: {
-        facebook: 'haywhyze',
-        twitter: 'haywhyze',
-        instagram: 'haywhyze',
-      },
-    },
-  ];
+  const { executives } = organizationChartData;
   return (
     <div>
       <Header
@@ -123,6 +44,7 @@ export default function Executives(props) {
           height: 50,
           color: 'white',
         }}
+        // eslint-disable-next-line react/jsx-props-no-spreading
         {...rest}
       />
       <Parallax small image="img/central-mosque-1.jpg">
@@ -131,12 +53,12 @@ export default function Executives(props) {
             <GridItem xs={12} sm={12} md={6}>
               <div className={typoClasses.typo}>
                 <h1 className={classes.title} style={{ color: '#fff' }}>
-                  Executives
+                  Organization Charts
                 </h1>
                 <h2>
                   <Small>
                     <span style={{ color: '#fff' }}>
-                      Get to know the executive members of the union
+                      Get to know the executive and boad members of the union
                     </span>
                   </Small>
                 </h2>
@@ -147,77 +69,46 @@ export default function Executives(props) {
       </Parallax>
       <div className={classNames(classes2.main, classes2.mainRaised)}>
         <div className={classes2.container}>
-          <div style={{ textAlign: 'center'}} className={classes2.section}>
+          <div style={{ textAlign: 'center' }} className={classes2.section}>
             <h2 className={teamClasses.title}>.</h2>
             <div>
-              <GridContainer>
-                {executives.map((e) => (
-                  <GridItem xs={12} sm={12} md={4}>
-                    <Card plain>
-                      <GridItem
-                        xs={12}
-                        sm={12}
-                        md={6}
-                        className={teamClasses.itemGrid}
-                        style={{ margin: 'auto'}}
-                      >
-                        <img src={team1} alt="..." className={imageClasses} />
-                      </GridItem>
-                      <h4 className={teamClasses.cardTitle} style={{ textAlign: 'center'}}>
-                        {e.name}
-                        <br />
-                        <small className={teamClasses.smallTitle}>
-                          {e.position}
-                        </small>
-                      </h4>
-                      <CardBody>
-                        <p className={teamClasses.description} style={{ textAlign: 'center'}}>{e.bio}</p>
-                      </CardBody>
-                      <CardFooter className={teamClasses.justifyCenter}>
-                        {e.socialmedia.twitter && (
-                        <Button
-                          href={`https://twitter.com/${e.socialmedia.twitter}`}
-                          justIcon
-                          target='_blank'
-                          color="transparent"
-                          className={teamClasses.margin5}
-                        >
-                          <i
-                            className={`${teamClasses.socials} fab fa-twitter`}
-                          />
-                        </Button>
-                        )}
-                        {e.socialmedia.instagram && (
-                        <Button
-                          href={`https://instagram.com/${e.socialmedia.instagram}`}
-                          target='_blank'
-                          justIcon
-                          color="transparent"
-                          className={teamClasses.margin5}
-                        >
-                          <i
-                            className={`${teamClasses.socials} fab fa-instagram`}
-                          />
-                        </Button>
-                        )}
-                        {e.socialmedia.facebook && (
-                        <Button
-                          href={`https://facebook.com/${e.socialmedia.facebook}`}
-                          justIcon
-                          target='_blank'
-                          color="transparent"
-                          className={teamClasses.margin5}
-                        >
-                          <i
-                            className={`${teamClasses.socials} fab fa-facebook`}
-                          />
-                        </Button>
-                        )}
-                      </CardFooter>
-                    </Card>
-                  </GridItem>
-                ))}
-              </GridContainer>
+              <div className={classes.container}>
+                <div id="nav-tabs">
+                  <GridContainer>
+                    <GridItem xs={12} sm={12} md={12}>
+                      <CustomTabs
+                        headerColor="primary"
+                        tabs={[
+                          {
+                            tabName: 'Executives',
+                            tabContent: (
+                              <>
+                                <Panel data={executives} />
+                              </>
+                            ),
+                          },
+                          {
+                            tabName: 'Board of Trustees',
+                            tabContent: (
+                              <>
+                                <Panel data={executives} />
+                              </>
+                            ),
+                          },
+                          {
+                            tabName: 'Advisory Council',
+                            tabContent: (
+                              <>
+                                <Panel data={executives} />
+                              </>
+                            ),
+                          },
+                        ]}
+                      />
+                    </GridItem>
+                  </GridContainer>
+                </div>
+              </div>
             </div>
           </div>
         </div>
