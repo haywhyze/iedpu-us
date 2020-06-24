@@ -38,6 +38,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-add-to-calendar": "^0.1.5",
+    "react-async-script-loader": "^0.3.0",
     "react-chartist": "^0.14.3",
     "react-dom": "^16.13.1",
     "react-image-gallery": "^1.0.7",
