@@ -3,13 +3,12 @@ import ReactDOM from "react-dom";
 import scriptLoader from "react-async-script-loader";
 
 const CLIENT = {
-  sandbox:"sb-ag03c2399851@business.example.com",
-  production:"AQk8e-TUA5L92PRYv7BU_SE87PTNfhZGm1YS6dXQ57np5lP7GpQMlow4HgeuNeZscVlF39SUmMfqEefc"
+  sandbox: process.env.NEXT_PUBLIC_PAYPAL_SANDBOX,
+  production:""
 };
 
-const CLIENT_ID = "AQk8e-TUA5L92PRYv7BU_SE87PTNfhZGm1YS6dXQ57np5lP7GpQMlow4HgeuNeZscVlF39SUmMfqEefc"
-
-//   process.env.NODE_ENV === "production" ? CLIENT.production : CLIENT.sandbox;
+const CLIENT_ID =
+  process.env.NODE_ENV === "production" ? CLIENT.production : CLIENT.sandbox;
 
 let PayPalButton = null;
 class PaypalButton extends React.Component {
