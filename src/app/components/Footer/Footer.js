@@ -33,7 +33,7 @@ export default function Footer(props) {
           <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>
               <a href="#" className={classes.block}>
-                IEDPU
+                IEDPU - USA
               </a>
             </ListItem>
           </List>

@@ -99,7 +99,7 @@ export default function ({ ...rest }) {
         <div className={classes.wrapper}>
           <Sidebar
             routes={routes}
-            logoText="IEDPU"
+            logoText="IEDPU - USA"
             logo={logo}
             image={bgImage}
             handleDrawerToggle={handleDrawerToggle}

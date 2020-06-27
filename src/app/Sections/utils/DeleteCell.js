@@ -82,7 +82,7 @@ export default function DeleteCell({
         <DialogTitle id="alert-dialog-title">Verify User</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure you want to remove this user as a member of IEDPU - US
+            Are you sure you want to remove this user as a member of IEDPU - USA
             branch?
           </DialogContentText>
         </DialogContent>

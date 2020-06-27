@@ -43,7 +43,7 @@ function LoginPage(props) {
       <Header
         absolute
         color="transparent"
-        brand="IEDPU"
+        brand="IEDPU - USA"
         rightLinks={<HeaderLinks />}
         {...rest}
       />

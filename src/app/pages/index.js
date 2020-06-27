@@ -30,7 +30,7 @@ export default function Index(props) {
       <Header
         color="transparent"
         routes={dashboardRoutes}
-        brand="IEDPU"
+        brand="IEDPU - USA"
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
@@ -45,7 +45,7 @@ export default function Index(props) {
           <GridContainer>
             <GridItem>
               <div className={classes.brand}>
-                <h1 className={classes.title}>Welcome to IEDPU</h1>
+                <h1 className={classes.title}>Welcome to IEDPU - USA</h1>
                 <h3 className={classes.subtitle}>
                   Ilorin Emirate Descendants Progressive Union (IEDPU) is the
                   mother of all Unions and Associations in the Ilorin Emirate.

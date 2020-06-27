@@ -4,7 +4,7 @@ const componentsStyle = {
   container,
   brand: {
     color: "#FFFFFF",
-    textAlign: "left"
+    textAlign: "center"
   },
   title: {
     fontSize: "4.2rem",
@@ -14,7 +14,7 @@ const componentsStyle = {
   },
   subtitle: {
     fontSize: "1.313rem",
-    maxWidth: "500px",
+    maxWidth: "1000px",
     lineHeight: "2"
   },
   main: {

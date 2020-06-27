@@ -162,7 +162,7 @@ function ProfilePage(props) {
     <div>
       <Header
         color="transparent"
-        brand="IEDPU"
+        brand="IEDPU - USA"
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{

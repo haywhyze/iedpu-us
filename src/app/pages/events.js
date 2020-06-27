@@ -26,7 +26,7 @@ export default function Events(props) {
       <Header
         color="transparent"
         routes={[]}
-        brand="IEDPU"
+        brand="IEDPU - USA"
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
