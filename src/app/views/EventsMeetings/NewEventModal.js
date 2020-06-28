@@ -58,7 +58,6 @@ export default function NewEventModal({
       ...values,
       author: 'Admin',
       time: selectedDate.toISOString(),
-      // imageUrl,
     };
 
     db.collection('events')
