@@ -1,5 +1,9 @@
 @import "~react-image-gallery/styles/scss/image-gallery.scss";
 
+html {
+  scroll-behavior: smooth;
+}
+
 .container-review,
 .overlay-review:before {
   background: url("../../public/img/central-mosque-1.jpg") no-repeat fixed 0 0 /

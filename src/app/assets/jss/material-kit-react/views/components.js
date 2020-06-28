@@ -18,7 +18,7 @@ const componentsStyle = {
     lineHeight: "2"
   },
   main: {
-    background: "#FFFFFF",
+    background: "#f0f7e2",
     position: "relative",
     zIndex: "3"
   },
