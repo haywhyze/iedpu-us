@@ -52,10 +52,10 @@ export default function Index(props) {
                   It is also the umbrella Union of all indigenes of Ilorin
                   Emirate both at home and abroad.
                 </h3>
-                <Link href="/login">
+                <Link href="#about">
                   <span>
                     <Button color="info" round>
-                      Join Us
+                      Read More
                     </Button>
                   </span>
                 </Link>
@@ -68,7 +68,7 @@ export default function Index(props) {
         </div>
       </Parallax>
       <div className={classNames(classes.main, classes.mainRaised)}>
-        <div className={classes.container}>
+        <div id="about" className={classes.container}>
           <HomeSection />
         </div>
       </div>

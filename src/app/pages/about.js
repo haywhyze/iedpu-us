@@ -19,7 +19,6 @@ import teamStyles from 'assets/jss/material-kit-react/views/landingPageSections/
 import organizationChartData from '../Sections/OrganizationCharts/data';
 import Panel from '../Sections/OrganizationCharts/Panel';
 
-
 const useStyles = makeStyles(styles);
 const useStyles2 = makeStyles(styles2);
 const useTypoStyles = makeStyles(typoStyles);
@@ -50,15 +49,15 @@ export default function Executives(props) {
       <Parallax small image="img/central-mosque-1.jpg">
         <div className={classes.container}>
           <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={6}>
-              <div className={typoClasses.typo}>
+            <GridItem style={{ textAlign: 'center' }} xs={12} sm={12} md={10}>
+              <div>
                 <h1 className={classes.title} style={{ color: '#fff' }}>
-                  Organization Charts
+                  About IEDPU - USA
                 </h1>
                 <h2>
                   <Small>
                     <span style={{ color: '#fff' }}>
-                      Get to know the executive and boad members of the union
+                      Get to know about Ilorin Emirate Descendants Progressive Union in the USA and the amazing people behind it.
                     </span>
                   </Small>
                 </h2>
@@ -79,6 +78,14 @@ export default function Executives(props) {
                       <CustomTabs
                         headerColor="primary"
                         tabs={[
+                          {
+                            tabName: 'About',
+                            tabContent: (
+                              <>
+                                <h3>About IEDPU - USA</h3>
+                              </>
+                            ),
+                          },
                           {
                             tabName: 'Executives',
                             tabContent: (

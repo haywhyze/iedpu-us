@@ -60,10 +60,10 @@ function HeaderLinks(props) {
         </Link>
       </ListItem></>)}
       <ListItem className={classes.listItem}>
-        <Link href="/executives">
+        <Link href="/about">
           <span>
             <Button color="transparent" className={classes.navLink}>
-              Executives
+              About Us
             </Button>
           </span>
         </Link>
