@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 import React, { useState } from 'react';
 import { Typography } from '@material-ui/core';
 import Button from 'components/CustomButtons/Button.js';
@@ -11,6 +12,7 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
+import { db } from '../../pages/_app';
 import PayPalButtons from './PayPalButtons';
 
 const useStyles = makeStyles(styles);
@@ -21,7 +23,6 @@ export default function Donate() {
   const [open, setOpen] = useState(false);
   const [amount, setAmount] = React.useState('');
 
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -30,9 +31,20 @@ export default function Donate() {
     setOpen(false);
   };
 
+  const registerDonations = (payload) => {
+    db.collection('donations')
+      .add(payload)
+      .then((docRef) => {
+        console.log('Document written with ID: ', docRef.id);
+      })
+      .catch((error) => {
+        console.log('Error adding document', error);
+      });
+  };
+
   return (
     <>
-      <Button onClick={handleClickOpen} color="success" round>
+      <Button onClick={handleClickOpen} color="primary" round>
         Donate
       </Button>
       <Dialog
@@ -42,20 +54,32 @@ export default function Donate() {
         aria-describedby="alert-dialog-description"
         style={{ textAlign: 'center' }}
       >
-        <DialogTitle id="alert-dialog-title">Donate to IEDPU</DialogTitle>
+        <DialogTitle id="alert-dialog-title">Donate to IEDPU - USA</DialogTitle>
         <DialogContent>
-          <Typography variant="body1" gutterBottom>
+          <Typography
+            variant="body1"
+            style={{ textAlign: 'justify' }}
+            gutterBottom
+          >
             As a non-governmental organisation, we need your support to help
             make a difference in the lives of people worldwide. Your
             contributions will make a difference in the health and livelihood of
             many people, and together we can help shape the future of global
             health for all.
           </Typography>
-          <Typography variant="body1" gutterBottom>
+          <Typography
+            variant="body1"
+            style={{ textAlign: 'justify' }}
+            gutterBottom
+          >
             Click the button below to help support IEDPU USA branch
           </Typography>
           <br />
-          <Typography variant="body1" gutterBottom>
+          <Typography
+            variant="body1"
+            style={{ textAlign: 'justify' }}
+            gutterBottom
+          >
             How much will you like to donate?
           </Typography>
           <br />
@@ -66,11 +90,19 @@ export default function Donate() {
               type="number"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              startAdornment={<InputAdornment position="start">$</InputAdornment>}
+              startAdornment={
+                <InputAdornment position="start">$</InputAdornment>
+              }
               labelWidth={60}
             />
           </FormControl>
-          <PayPalButtons amount={amount} />
+          <PayPalButtons
+            amount={amount}
+            setAmount={setAmount}
+            description="Donation"
+            handleClose={handleClose}
+            registerDonations={registerDonations}
+          />
         </DialogContent>
       </Dialog>
     </>

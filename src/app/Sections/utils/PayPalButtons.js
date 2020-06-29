@@ -1,10 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import scriptLoader from "react-async-script-loader";
+import Button from "components/CustomButtons/Button.js";
 
 const CLIENT = {
   sandbox: process.env.NEXT_PUBLIC_PAYPAL_SANDBOX,
-  production:""
+  production: "",
 };
 
 const CLIENT_ID =
@@ -18,7 +20,10 @@ class PaypalButton extends React.Component {
     this.state = {
       showButtons: false,
       loading: true,
-      paid: false
+      paid: false,
+      name: "",
+      email: "",
+      amountPaid: "",
     };
 
     window.React = React;
@@ -34,7 +39,7 @@ class PaypalButton extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { isScriptLoaded, isScriptLoadSucceed } = nextProps;
 
     const scriptJustLoaded =
@@ -44,68 +49,99 @@ class PaypalButton extends React.Component {
       if (isScriptLoadSucceed) {
         PayPalButton = window.paypal.Buttons.driver("react", {
           React,
-          ReactDOM
+          ReactDOM,
         });
         this.setState({ loading: false, showButtons: true });
       }
     }
-  };
+  }
 
   createOrder = (data, actions) => {
+    if (!this.props.amount) return;
     return actions.order.create({
       purchase_units: [
         {
-          description: +"Mercedes G-Wagon",
+          description: this.props.description,
           amount: {
             currency_code: "USD",
-            value: this.props.amount
-          }
-        }
-      ]
+            value: this.props.amount,
+          },
+        },
+      ],
     });
   };
 
   onApprove = (data, actions) => {
-    actions.order.capture().then(details => {
-      const paymentData = {
-        payerID: data.payerID,
-        orderID: data.orderID
-      };
-      console.log("Payment Approved: ", paymentData);
-      this.setState({ showButtons: false, paid: true });
+    actions.order.capture().then((details) => {
+      console.log("Payment Approved: ", details);
+      this.props.setAmount("");
+      this.setState({
+        showButtons: false,
+        paid: true,
+        name: details.payer.name.given_name,
+        email: details.payer.email_address,
+        amountPaid: details.purchase_units[0].amount.value,
+      });
+      this.props.registerDonations({
+        name: `${details.payer.name.given_name} ${details.payer.name.surname}`,
+        payer_id: details.payer.payer_id,
+        email: details.payer.email_address,
+        amount: details.purchase_units[0].amount.value,
+        transaction_id: details.purchase_units[0].payments.captures[0].id,
+        additional_info: "",
+        date: details.update_time,
+      });
     });
   };
 
+  onError = (err) => {
+    console.log(err);
+  };
+
   render() {
-    const { showButtons, loading, paid } = this.state;
+    const { showButtons, loading, paid, name, email, amountPaid } = this.state;
 
     return (
-      <div style={{ margin: '1rem auto', width: '70%' }} className="main">
-
-          {loading && <p>Loading</p>}
+      <div style={{ margin: "1rem auto", width: "70%" }} className="main">
+        {loading && (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              minHeight: "100%",
+            }}
+          >
+            <CircularProgress />
+          </div>
+        )}
 
         {showButtons && (
           <div>
             <PayPalButton
               createOrder={(data, actions) => this.createOrder(data, actions)}
               onApprove={(data, actions) => this.onApprove(data, actions)}
+              onError={(error) => this.onError(error)}
             />
           </div>
         )}
 
         {paid && (
-            <h2>
-              Congrats! you just paid for that picture. Work a little harder and
-              you'll be able to afford the car itself{" "}
-              <span role="img" aria-label="emoji">
-                {" "}
-                😉
-              </span>
-            </h2>
+          <>
+            <h3>
+              Thank you {name}! you just donated ${amountPaid} to IEDPU USA
+              Branch. Be rest assured that the funds will be put to good use.
+            </h3>
+            <Button onClick={this.props.handleClose} color="danger">
+              Close
+            </Button>
+          </>
         )}
       </div>
     );
   }
 }
 
-export default scriptLoader(`https://www.paypal.com/sdk/js?client-id=${CLIENT_ID}`)(PaypalButton);
+export default scriptLoader(
+  `https://www.paypal.com/sdk/js?client-id=${CLIENT_ID}`
+)(PaypalButton);
