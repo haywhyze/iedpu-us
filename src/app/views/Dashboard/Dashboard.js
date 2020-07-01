@@ -1,28 +1,26 @@
-import React, { useState } from "react";
-// react plugin for creating charts
-import ChartistGraph from "react-chartist";
+import React, { useState } from 'react';
 // @material-ui/core
-import { makeStyles } from "@material-ui/core/styles";
-import Icon from "@material-ui/core/Icon";
+import { makeStyles } from '@material-ui/core/styles';
+import Icon from '@material-ui/core/Icon';
 // @material-ui/icons
-import Store from "@material-ui/icons/Store";
-import Update from "@material-ui/icons/Update";
-import HourGlassEmpty from "@material-ui/icons/HourGlassEmpty";
-import VerifiedUser from "@material-ui/icons/VerifiedUser";
+import Store from '@material-ui/icons/Store';
+import Update from '@material-ui/icons/Update';
+import HourGlassEmpty from '@material-ui/icons/HourGlassEmpty';
+import VerifiedUser from '@material-ui/icons/VerifiedUser';
 // core components
-import GridItem from "components/Grid/GridItem.js";
-import GridContainer from "components/Grid/GridContainer.js";
-import ConfirmCell from "../../Sections/utils/ConfirmCell";
-import DeleteCell from "../../Sections/utils/DeleteCell";
-import Table from "components/Table/Table.js";
-import CustomTabs from "components/CustomTabs/CustomTabs.js";
-import Card from "components/Card/Card.js";
-import CardHeader from "components/Card/CardHeader.js";
-import CardIcon from "components/Card/CardIcon.js";
-import Notifications from "../../Sections/utils/Notification";
-import CardFooter from "components/Card/CardFooter.js";
+import GridItem from 'components/Grid/GridItem.js';
+import GridContainer from 'components/Grid/GridContainer.js';
+import Table from 'components/Table/Table.js';
+import CustomTabs from 'components/CustomTabs/CustomTabs.js';
+import Card from 'components/Card/Card.js';
+import CardHeader from 'components/Card/CardHeader.js';
+import CardIcon from 'components/Card/CardIcon.js';
+import CardFooter from 'components/Card/CardFooter.js';
 
-import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
+import styles from 'assets/jss/material-dashboard-react/views/dashboardStyle.js';
+import Notifications from '../../Sections/utils/Notification';
+import DeleteCell from '../../Sections/utils/DeleteCell';
+import ConfirmCell from '../../Sections/utils/ConfirmCell';
 
 const useStyles = makeStyles(styles);
 
@@ -30,8 +28,8 @@ export default function Dashboard({ members }) {
   const classes = useStyles();
   const [successNotification, setSuccessNotification] = useState(false);
   const [failureNotification, setFailureNotification] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const unconfirmedMembers = members.reduce((filtered, member) => {
     if (!member.verified) {
       filtered.push(member);
@@ -130,12 +128,12 @@ export default function Dashboard({ members }) {
             headerColor="primary"
             tabs={[
               {
-                tabName: "Unconfirmed",
+                tabName: 'Unconfirmed',
                 tabIcon: HourGlassEmpty,
                 tabContent: unconfirmedMembers.length ? (
                   <Table
                     tableHeaderColor="primary"
-                    tableHead={["Name", "Email Adddress", "Verify", "Remove"]}
+                    tableHead={['Name', 'Email Adddress', 'Verify', 'Remove']}
                     tableData={unconfirmedMembers.map((member) => {
                       const newValue = [];
                       newValue.push(member.displayName);
@@ -147,7 +145,7 @@ export default function Dashboard({ members }) {
                           setSuccessMessage={setSuccessMessage}
                           setSuccessNotification={setSuccessNotification}
                           setFailureNotification={setFailureNotification}
-                        />
+                        />,
                       );
                       newValue.push(
                         <DeleteCell
@@ -156,24 +154,24 @@ export default function Dashboard({ members }) {
                           setErrorMessage={setErrorMessage}
                           setSuccessNotification={setSuccessNotification}
                           setFailureNotification={setFailureNotification}
-                        />
+                        />,
                       );
                       return newValue;
                     })}
                   />
                 ) : (
-                  <h3 style={{ textAlign: "center" }}>
+                  <h3 style={{ textAlign: 'center' }}>
                     No new member request at this time
                   </h3>
                 ),
               },
               {
-                tabName: "Confirmed",
+                tabName: 'Confirmed',
                 tabIcon: VerifiedUser,
                 tabContent: (
                   <Table
                     tableHeaderColor="primary"
-                    tableHead={["Name", "Email Address"]}
+                    tableHead={['Name', 'Email Address']}
                     tableData={confirmedMembers.map((member) => {
                       const newValue = [];
                       newValue.push(member.displayName);
