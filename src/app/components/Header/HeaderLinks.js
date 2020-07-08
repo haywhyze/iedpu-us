@@ -89,7 +89,7 @@ function HeaderLinks(props) {
         >
           {user && isAuthenticated ? (
             <span>
-              <Button color="transparent" round>
+              <Button color="transparent" round className={classes.navLink}>
                 {user.displayName}
               </Button>
             </span>

@@ -43,7 +43,7 @@ function LoginPage(props) {
       <Header
         absolute
         color="transparent"
-        brand="IEDPU - USA"
+        brand={<img style={{ width: '4rem', margin: '-2rem' }} src="img/logo.png" />}
         rightLinks={<HeaderLinks />}
         {...rest}
       />
