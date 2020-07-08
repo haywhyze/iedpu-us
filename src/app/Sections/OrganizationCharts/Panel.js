@@ -28,9 +28,9 @@ export default function Panel({ data }) {
     classes.imgFluid,
   );
   return (
-    <GridContainer>
+    <GridContainer justify="center">
       {data.map((e) => (
-        <GridItem key={Date.now() + Math.random()} xs={12} sm={12} md={4}>
+        <GridItem key={Date.now() + Math.random()} xs={12} sm={12} md={6}>
           <Card plain>
             <GridItem
               xs={12}
@@ -39,17 +39,17 @@ export default function Panel({ data }) {
               className={teamClasses.itemGrid}
               style={{ margin: 'auto' }}
             >
-              <img src={team1} alt="..." className={imageClasses} />
+              <img src={e.image} alt="..." className={imageClasses} />
             </GridItem>
-            <h4 className={teamClasses.cardTitle} style={{ textAlign: 'center' }}>
+            <h3 className={teamClasses.cardTitle} style={{ textAlign: 'center' }}>
               {e.name}
               <br />
               <small className={teamClasses.smallTitle}>
                 {e.position}
               </small>
-            </h4>
+            </h3>
             <CardBody>
-              <p className={teamClasses.description} style={{ textAlign: 'center' }}>{e.bio}</p>
+              <p className={teamClasses.description} style={{ textAlign: 'center', fontSize: '120%' }}>{e.bio}</p>
             </CardBody>
             <CardFooter className={teamClasses.justifyCenter}>
               {e.socialmedia.twitter && (
