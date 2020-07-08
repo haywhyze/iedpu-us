@@ -6,7 +6,7 @@ import Button from "components/CustomButtons/Button.js";
 
 const CLIENT = {
   sandbox: process.env.NEXT_PUBLIC_PAYPAL_SANDBOX,
-  production: "",
+  production: process.env.NEXT_PUBLIC_PAYPAL_PRODUCTION,
 };
 
 const CLIENT_ID =
