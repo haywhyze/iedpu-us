@@ -115,15 +115,15 @@ export default function SectionTabs() {
                       </>
                     ),
                   },
-                  {
-                    tabName: 'Feedback',
-                    tabIcon: Feedback,
-                    tabContent: (
-                      <>
-                        <h3>Give Feedback</h3>
-                      </>
-                    ),
-                  },
+                  // {
+                  //   tabName: 'Feedback',
+                  //   tabIcon: Feedback,
+                  //   tabContent: (
+                  //     <>
+                  //       <h3>Give Feedback</h3>
+                  //     </>
+                  //   ),
+                  // },
                 ]}
               />
             </GridItem>
