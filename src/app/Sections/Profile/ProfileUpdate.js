@@ -1,8 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import Icon from '@material-ui/core/Icon';
 // @material-ui/icons
 import People from '@material-ui/icons/People';
 import Phone from '@material-ui/icons/Phone';
@@ -10,6 +9,10 @@ import Email from '@material-ui/icons/Email';
 import Work from '@material-ui/icons/Work';
 import Info from '@material-ui/icons/Info';
 import LocationCity from '@material-ui/icons/LocationCity';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+
 // core components
 import GridContainer from 'components/Grid/GridContainer.js';
 import GridItem from 'components/Grid/GridItem.js';
@@ -35,6 +38,7 @@ export default function ProfileUpdate() {
     occupation: '',
     family_house_lga: '',
   });
+  const formRef = useRef(null);
 
   const [successNotification, setSuccessNotification] = useState(false);
   const [failureNotification, setFailureNotification] = useState(false);
@@ -69,7 +73,7 @@ export default function ProfileUpdate() {
               family_house_lga: family_house_lga || '',
             });
           } else {
-          // doc.data() will be undefined in this case
+            // doc.data() will be undefined in this case
             console.log('No such document!');
           }
         })
@@ -115,10 +119,7 @@ export default function ProfileUpdate() {
           />
         )}
         {failureNotification && (
-          <Notifications
-            type="danger"
-            message={errorMessage}
-          />
+          <Notifications type="danger" message={errorMessage} />
         )}
         <GridContainer justify="center">
           <GridItem
@@ -127,18 +128,38 @@ export default function ProfileUpdate() {
             sm={12}
             md={10}
           >
-            <form className={classes.form}>
-              <CustomInput
-                labelText="Full Name"
+            <ValidatorForm
+              ref={formRef}
+              onSubmit={() => console.log('submitttttted')}
+              onError={(errors) => console.log(errors)}
+              className={classes.form}
+            >
+              <TextValidator
+                label="Full Name"
                 id="name"
-                formControlProps={{
-                  fullWidth: true,
+                fullWidth
+                onChange={_handleChange}
+                type="text"
+                style={{
+                  margin: '0 0 17px 0',
+                  paddingTop: '27px',
+                  position: 'relative',
                 }}
-                inputProps={{
-                  type: 'text',
-                  name: 'displayName',
-                  value: values.displayName,
-                  onChange: _handleChange,
+                name="displayName"
+                validators={[
+                  'required',
+                  'minStringLength:3',
+                  'maxStringLength:70',
+                  'matchRegexp:^[a-zA-Z]{3,}(?: [a-zA-Z]+){0,2}$',
+                ]}
+                errorMessages={[
+                  'Fullname is required',
+                  'Full Name cannot be less than 3 characters',
+                  'Full Name cannot be more than 70 characters',
+                  'Full name cannot end with a space character and should not be more than three names',
+                ]}
+                value={values.displayName}
+                InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
                       <People className={classes.inputIconsColor} />
@@ -165,17 +186,20 @@ export default function ProfileUpdate() {
                   ),
                 }}
               />
-              <CustomInput
-                labelText="Phone Number"
+              <TextValidator
+                label="Phone Number"
                 id="phone_number"
-                formControlProps={{
-                  fullWidth: true,
+                fullWidth
+                type="phone"
+                name="phone"
+                style={{
+                  margin: '0 0 17px 0',
+                  paddingTop: '27px',
+                  position: 'relative',
                 }}
-                inputProps={{
-                  type: 'text',
-                  name: 'phone',
-                  value: values.phone || '',
-                  onChange: _handleChange,
+                value={values.phone || ''}
+                onChange={_handleChange}
+                InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
                       <Phone className={classes.inputIconsColor} />
@@ -183,18 +207,28 @@ export default function ProfileUpdate() {
                   ),
                 }}
               />
-              <CustomInput
-                labelText="Bio"
-                id="bio"
-                formControlProps={{
-                  fullWidth: true,
+              <TextValidator
+                label="Bio - A little about yourself"
+                style={{
+                  margin: '0 0 17px 0',
+                  paddingTop: '27px',
+                  position: 'relative',
                 }}
-                inputProps={{
-                  name: 'bio',
+                id="bio"
+                fullWidth
+                type="text"
+                name="bio"
+                validators={[
+                  'maxStringLength:560',
+                ]}
+                errorMessages={[
+                  'Bio cannot be more than 560 characters',
+                ]}
+                value={values.bio || ''}
+                onChange={_handleChange}
+                InputProps={{
                   multiline: true,
-                  rows: 3,
-                  value: values.bio || '',
-                  onChange: _handleChange,
+                  rows: 4,
                   endAdornment: (
                     <InputAdornment position="end">
                       <Info className={classes.inputIconsColor} />
@@ -202,35 +236,105 @@ export default function ProfileUpdate() {
                   ),
                 }}
               />
-              <CustomInput
-                labelText="State of Residence (USA)"
-                id="location"
-                formControlProps={{
-                  fullWidth: true,
-                }}
-                inputProps={{
-                  name: 'location',
-                  type: 'text',
-                  value: values.location || '',
-                  onChange: _handleChange,
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <LocationCity className={classes.inputIconsColor} />
-                    </InputAdornment>
-                  ),
+              <Autocomplete
+                options={[
+                  'Alabama',
+                  'Alaska',
+                  'American Samoa',
+                  'Arizona',
+                  'Arkansas',
+                  'California',
+                  'Colorado',
+                  'Connecticut',
+                  'Delaware',
+                  'District of Columbia',
+                  'Federated States of Micronesia',
+                  'Florida',
+                  'Georgia',
+                  'Guam',
+                  'Hawaii',
+                  'Idaho',
+                  'Illinois',
+                  'Indiana',
+                  'Iowa',
+                  'Kansas',
+                  'Kentucky',
+                  'Louisiana',
+                  'Maine',
+                  'Marshall Islands',
+                  'Maryland',
+                  'Massachusetts',
+                  'Michigan',
+                  'Minnesota',
+                  'Mississippi',
+                  'Missouri',
+                  'Montana',
+                  'Nebraska',
+                  'Nevada',
+                  'New Hampshire',
+                  'New Jersey',
+                  'New Mexico',
+                  'New York',
+                  'North Carolina',
+                  'North Dakota',
+                  'Northern Mariana Islands',
+                  'Ohio',
+                  'Oklahoma',
+                  'Oregon',
+                  'Palau',
+                  'Pennsylvania',
+                  'Puerto Rico',
+                  'Rhode Island',
+                  'South Carolina',
+                  'South Dakota',
+                  'Tennessee',
+                  'Texas',
+                  'Utah',
+                  'Vermont',
+                  'Virgin Island',
+                  'Virginia',
+                  'Washington',
+                  'West Virginia',
+                  'Wisconsin',
+                  'Wyoming',
+                ]}
+                fullWidth
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="State of Residence (USA)"
+                    id="location"
+                    name="location"
+                    values={values.location || ''}
+                    onChange={_handleChange}
+                  />
+                )}
+                getOptionLabel={(option) => option}
+                style={{
+                  margin: '0 0 17px 0',
+                  paddingTop: '27px',
+                  position: 'relative',
                 }}
               />
-              <CustomInput
-                labelText="Family House and LGA (Ilorin)"
+              <TextValidator
+                label="Family House and LGA (Ilorin)"
                 id="family_house_lga"
-                formControlProps={{
-                  fullWidth: true,
+                style={{
+                  margin: '0 0 17px 0',
+                  paddingTop: '27px',
+                  position: 'relative',
                 }}
-                inputProps={{
-                  name: 'family_house_lga',
-                  type: 'text',
-                  value: values.family_house_lga || '',
-                  onChange: _handleChange,
+                fullWidth
+                value={values.family_house_lga || ''}
+                name="family_house_lga"
+                onChange={_handleChange}
+                validators={[
+                  'maxStringLength:70',
+                ]}
+                errorMessages={[
+                  'This field cannot be more than 70 characters',
+                ]}
+                InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
                       <LocationCity className={classes.inputIconsColor} />
@@ -238,17 +342,25 @@ export default function ProfileUpdate() {
                   ),
                 }}
               />
-              <CustomInput
-                labelText="Occupation"
+              <TextValidator
+                label="Occupation"
                 id="occupation"
-                formControlProps={{
-                  fullWidth: true,
+                fullWidth
+                value={values.occupation}
+                onChange={_handleChange}
+                name="occupation"
+                validators={[
+                  'maxStringLength:70',
+                ]}
+                style={{
+                  margin: '0 0 17px 0',
+                  paddingTop: '27px',
+                  position: 'relative',
                 }}
-                inputProps={{
-                  name: 'occupation',
-                  type: 'text',
-                  value: values.occupation || '',
-                  onChange: _handleChange,
+                errorMessages={[
+                  'This field cannot be more than 70 characters',
+                ]}
+                InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
                       <Work className={classes.inputIconsColor} />
@@ -256,10 +368,10 @@ export default function ProfileUpdate() {
                   ),
                 }}
               />
-              <Button onClick={updateProfile} round color="primary">
+              <Button type="submit" round color="primary">
                 Update Profile
               </Button>
-            </form>
+            </ValidatorForm>
           </GridItem>
         </GridContainer>
       </div>
