@@ -64,9 +64,10 @@ export default function EventsContainer() {
       <GridContainer>
         <Card plain>
           <CardBody>
+            <h3>Upcoming Events</h3>
             <GridContainer>
               {
-                events.sort((a, b) => Date.parse(a.time) - Date.parse(b.time)).map((event) => {
+                events.filter((e) => Date.now() < Date.parse(e.time)).sort((a, b) => Date.parse(a.time) - Date.parse(b.time)).map((event) => {
                   if (!event.title) {
                     return null;
                   }
@@ -79,6 +80,28 @@ export default function EventsContainer() {
                       title={event.title}
                       key={event.id}
                       id={event.id}
+                    />
+                  );
+                })
+              }
+            </GridContainer>
+            <h3>Past Events</h3>
+            <GridContainer>
+              {
+                events.filter((e) => Date.now() > Date.parse(e.time)).sort((a, b) => Date.parse(a.time) - Date.parse(b.time)).map((event) => {
+                  if (!event.title) {
+                    return null;
+                  }
+                  return (
+                    <SingleEvent
+                      image={event.imageUrl}
+                      venue={event.venue}
+                      description={event.description}
+                      time={event.time}
+                      title={event.title}
+                      key={event.id}
+                      id={event.id}
+                      past
                     />
                   );
                 })

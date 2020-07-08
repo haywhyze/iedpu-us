@@ -16,6 +16,7 @@ export default function SingleEvent({
   description,
   venue,
   time,
+  past,
   id,
 }) {
   const [classicModal, setClassicModal] = useState(false);
@@ -72,12 +73,12 @@ export default function SingleEvent({
               View Details
             </Button>
           </span>
-          <AddToCalendar
+          {!past && <AddToCalendar
             event={{
               title, description, location: venue, startTime: time,
             }}
             displayItemIcons={false}
-          />
+          />}
         </CardFooter>
       </Card>
     </GridItem>
