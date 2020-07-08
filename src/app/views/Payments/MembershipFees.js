@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-// @material-ui/core components
-import { makeStyles } from '@material-ui/core/styles';
 // core components
 import GridContainer from 'components/Grid/GridContainer.js';
 import Table from 'components/Table/Table.js';
@@ -11,40 +9,7 @@ import CardBody from 'components/Card/CardBody.js';
 import { AuthContext, db } from '../../pages/_app';
 import NewMembershipFeesModal from './NewMembershipFeesModal';
 
-const styles = {
-  cardCategoryWhite: {
-    '&,& a,& a:hover,& a:focus': {
-      color: 'rgba(255,255,255,.62)',
-      margin: '0',
-      fontSize: '14px',
-      marginTop: '0',
-      marginBottom: '0',
-    },
-    '& a,& a:hover,& a:focus': {
-      color: '#FFFFFF',
-    },
-  },
-  cardTitleWhite: {
-    color: '#FFFFFF',
-    marginTop: '0px',
-    minHeight: 'auto',
-    fontWeight: '300',
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: '3px',
-    textDecoration: 'none',
-    '& small': {
-      color: '#777',
-      fontSize: '65%',
-      fontWeight: '400',
-      lineHeight: '1',
-    },
-  },
-};
-
-const useStyles = makeStyles(styles);
-
 export default function MembershipFees({ members }) {
-  const classes = useStyles();
   const { user, isAuthenticated } = useContext(AuthContext);
   const [membershipFees, setMembershipFees] = useState([]);
   const [membershipFeesModal, setMembershipFeesModal] = useState(false);

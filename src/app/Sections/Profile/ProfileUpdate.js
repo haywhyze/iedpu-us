@@ -33,6 +33,7 @@ export default function ProfileUpdate() {
     phone: '',
     location: '',
     occupation: '',
+    family_house_lga: '',
   });
 
   const [successNotification, setSuccessNotification] = useState(false);
@@ -55,6 +56,7 @@ export default function ProfileUpdate() {
               occupation,
               phone,
               location,
+              family_house_lga,
             } = doc.data();
             setValues({
               ...values,
@@ -64,6 +66,7 @@ export default function ProfileUpdate() {
               occupation: occupation || '',
               phone: phone || '',
               location: location || '',
+              family_house_lga: family_house_lga || '',
             });
           } else {
           // doc.data() will be undefined in this case
@@ -200,7 +203,7 @@ export default function ProfileUpdate() {
                 }}
               />
               <CustomInput
-                labelText="Location"
+                labelText="State of Residence (USA)"
                 id="location"
                 formControlProps={{
                   fullWidth: true,
@@ -209,6 +212,24 @@ export default function ProfileUpdate() {
                   name: 'location',
                   type: 'text',
                   value: values.location || '',
+                  onChange: _handleChange,
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <LocationCity className={classes.inputIconsColor} />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <CustomInput
+                labelText="Family House and LGA (Ilorin)"
+                id="family_house_lga"
+                formControlProps={{
+                  fullWidth: true,
+                }}
+                inputProps={{
+                  name: 'family_house_lga',
+                  type: 'text',
+                  value: values.family_house_lga || '',
                   onChange: _handleChange,
                   endAdornment: (
                     <InputAdornment position="end">
