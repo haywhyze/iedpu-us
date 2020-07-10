@@ -130,7 +130,7 @@ export default function ProfileUpdate() {
           >
             <ValidatorForm
               ref={formRef}
-              onSubmit={() => console.log('submitttttted')}
+              onSubmit={updateProfile}
               onError={(errors) => console.log(errors)}
               className={classes.form}
             >

@@ -13,9 +13,6 @@ import CardFooter from 'components/Card/CardFooter.js';
 import styles from 'assets/jss/material-kit-react/views/profilePage.js';
 import teamStyles from 'assets/jss/material-kit-react/views/landingPageSections/teamStyle.js';
 
-
-const team1 = '/img/faces/marc.jpg';
-
 const useStyles = makeStyles(styles);
 const useTeamStyles = makeStyles(teamStyles);
 
@@ -33,8 +30,8 @@ export default function Panel({ data }) {
         <GridItem key={Date.now() + Math.random()} xs={12} sm={12} md={6}>
           <Card plain>
             <GridItem
-              xs={12}
-              sm={12}
+              xs={9}
+              sm={9}
               md={6}
               className={teamClasses.itemGrid}
               style={{ margin: 'auto' }}

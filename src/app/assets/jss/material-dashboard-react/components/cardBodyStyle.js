@@ -3,7 +3,10 @@ const cardBodyStyle = {
     padding: "0.9375rem 20px",
     flex: "1 1 auto",
     WebkitBoxFlex: "1",
-    position: "relative"
+    position: "relative",
+    '@media (max-width: 768px)': {
+      padding: '0.5rem',
+    },
   },
   cardBodyPlain: {
     paddingLeft: "5px",

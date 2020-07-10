@@ -39,19 +39,16 @@ export default function MembershipFees({
 
   return (
     <>
-      <GridContainer justify="center">
-        <GridItem xs={11} sm={11} md={11}>
-          {fees.length ? (
-            <Table
-              tableHeaderColor="info"
-              tableHead={['Name', 'Price', 'Deadline for Payment', 'Status']}
-              tableData={feesData}
-            />
-          ) : (
-            <h4 style={{ textAlign: 'center' }}>No fees record yet</h4>
-          )}
-        </GridItem>
-      </GridContainer>
+
+      {fees.length ? (
+        <Table
+          tableHeaderColor="info"
+          tableHead={['Name', 'Price', 'Deadline for Payment', 'Status']}
+          tableData={feesData}
+        />
+      ) : (
+        <h4 style={{ textAlign: 'center' }}>No fees record yet</h4>
+      )}
     </>
   );
 }

@@ -62,6 +62,10 @@ const container = {
   paddingLeft: '15px',
   marginRight: 'auto',
   marginLeft: 'auto',
+  '@media (max-width: 768px)': {
+    paddingRight: '5px',
+    paddingLeft: '5px',
+  },
 };
 
 const defaultFont = {

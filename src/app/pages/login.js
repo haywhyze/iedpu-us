@@ -64,10 +64,10 @@ function LoginPage(props) {
                     <h4>Sign in with</h4>
                     <div className={classes.socialLine}>
                       <Button color="transparent" onClick={signInWithFacebook}>
-                        <i className={"fab fa-facebook"} />
+                        <i style={{ color: 'white' }} className={"fab fa-facebook"} />
                       </Button>
                       <Button color="transparent" onClick={signInWithGoogle}>
-                        <i className={"fab fa-google"} />
+                        <i style={{ color: 'white' }} className={"fab fa-google"} />
                       </Button>
                     </div>
                     <p className={classes.divider}>
@@ -77,7 +77,7 @@ function LoginPage(props) {
                   <CardFooter className={classes.cardFooter}>
                     <Link href="/">
                       <span>
-                        <Button simple color="primary" size="lg">
+                        <Button simple color="transparent" size="lg">
                           Return to homepage
                         </Button>
                       </span>
