@@ -24,7 +24,6 @@ export default function PayFees({
   };
 
   const registerPayments = (payload) => {
-    console.log('start registration');
     const newFee = {
       amount: payload.amount,
       intent,

@@ -84,8 +84,6 @@ export default function Dashboard({ members }) {
     0,
   );
 
-  console.log(donationsTotal, feesTotal);
-
   if (loading) {
     return (
       <div
