@@ -1,18 +1,18 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import classNames from "classnames";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
 
-import Header from "components/Header/Header.js";
-import HeaderLinks from "components/Header/HeaderLinks.js";
-import Parallax from "components/Parallax/Parallax.js";
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
-import Footer from "components/Footer/Footer.js";
-import Small from "components/Typography/Small.js";
+import Header from 'components/Header/Header.js';
+import HeaderLinks from 'components/Header/HeaderLinks.js';
+import Parallax from 'components/Parallax/Parallax.js';
+import GridContainer from 'components/Grid/GridContainer.js';
+import GridItem from 'components/Grid/GridItem.js';
+import Footer from 'components/Footer/Footer.js';
+import Small from 'components/Typography/Small.js';
 
-import styles from "assets/jss/material-kit-react/views/profilePage.js";
-import typoStyles from "assets/jss/material-kit-react/views/componentsSections/typographyStyle.js";
-import { Typography } from "@material-ui/core";
+import styles from 'assets/jss/material-kit-react/views/profilePage.js';
+import typoStyles from 'assets/jss/material-kit-react/views/componentsSections/typographyStyle.js';
+import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles(styles);
 const useTypoStyles = makeStyles(typoStyles);
@@ -26,26 +26,28 @@ export default function History(props) {
       <Header
         color="transparent"
         routes={[]}
-        brand={<img style={{ width: '4rem', margin: '-2rem' }} src="img/logo.png" />}
+        brand={
+          <img style={{ width: '4rem', margin: '-2rem' }} src="img/logo.png" />
+        }
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
           height: 50,
-          color: "white",
+          color: 'white',
         }}
         {...rest}
       />
       <Parallax small image="img/central-mosque-1.jpg">
         <div className={classes.container}>
           <GridContainer justify="center">
-            <GridItem style={{ textAlign: "center" }} xs={12} sm={12} md={10}>
+            <GridItem style={{ textAlign: 'center' }} xs={12} sm={12} md={10}>
               <div>
-                <h1 className={classes.title} style={{ color: "#fff" }}>
+                <h1 className={classes.title} style={{ color: '#fff' }}>
                   History
                 </h1>
                 <h2>
                   <Small>
-                    <span style={{ color: "#fff" }}>
+                    <span style={{ color: '#fff' }}>
                       Learn more about the emirate with relevant historical
                       facts and timelines
                     </span>
@@ -59,10 +61,10 @@ export default function History(props) {
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>
           <div className={classes.container}>
-            <GridContainer style={{ textAlign: "center" }} justify="center">
+            <GridContainer style={{ textAlign: 'center' }} justify="center">
               <GridItem xs={12} sm={12} md={8}>
                 <Typography
-                  style={{ marginTop: "2rem" }}
+                  style={{ marginTop: '2rem' }}
                   variant="h4"
                   gutterBottom
                 >
@@ -77,10 +79,34 @@ export default function History(props) {
                     />
                   </GridItem>
                 </GridContainer>
+                <Typography
+                  variant="body1"
+                  style={{
+                    display: 'flex',
+                    borderBottom: '1px solid rgba(0,0,0,0.05)',
+                    borderTop: '1px solid rgba(0,0,0,0.05)',
+                    padding: '.5rem 0',
+                    margin: '1.5rem',
+                    // backgroundColor: '#eee',
+                  }}
+                  gutterBottom
+                >
+                  <img
+                    style={{ height: '3rem', width: '3rem' }}
+                    src="https://media-exp1.licdn.com/dms/image/C5603AQE-zj7hDC0k3g/profile-displayphoto-shrink_100_100/0?e=1599696000&v=beta&t=yf6SdXLT0G0q9L3QVAtsPnCOuXyxIzfZn02exMHkHgA"
+                    alt="Shakira Tahir-Mustapha"
+                    className={`${classes.imgRaised} ${classes.imgRoundedCircle} ${classes.imgFluid}`}
+                  />
+                  <a href="https://www.linkedin.com/in/shakirah-mt/" rel="noreferrer" target="_blank">
+                    <div style={{ paddingLeft: '.5rem' }}>
+                      <h5>By: Shakira Mustapha-Tahir</h5>
+                    </div>
+                  </a>
+                </Typography>
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   A highlight of Ilorin history will give you the drive to visit
@@ -91,7 +117,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   Itan, often worded in the Yoruba language means history,
@@ -104,7 +130,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   Although we no longer swap stories around the fireside,
@@ -128,7 +154,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   Ilorin, the city capital of Kwara, lies in the West-Central
@@ -140,7 +166,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   The city is a traditional emirate considered by some to be the
@@ -151,7 +177,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   When you mention a city with a confluence of cultures, Ilorin
@@ -162,7 +188,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   Although it remains a predominantly Muslim community, it is a
@@ -174,7 +200,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   The blend in a variety of ethnic groups, including the
@@ -185,7 +211,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   Evidently, social activities and religious events such as
@@ -195,7 +221,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   Also, the Ilorin Yoruba has its dialects deeply influenced by
@@ -221,7 +247,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   The town has a long history stretching back to the legend of
@@ -231,7 +257,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   He was renowned for devising the method of sharpening metal
@@ -243,7 +269,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   It was said that the Ile-Ilorin compound used to be a place of
@@ -253,7 +279,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   The remains of Okuta Ilo-rin can be found in Ile-Ilorin
@@ -278,7 +304,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   The city of Ilorin has its multiple ethnicities dating back to
@@ -288,7 +314,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   It became the provincial military outpost under the
@@ -300,7 +326,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   While in disagreement with authority at the time, Afonja
@@ -312,7 +338,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   Afonja successfully vanquished his rivals, establishing a
@@ -324,7 +350,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   After Afonja’s death, a Fulani dynasty was set up, and Ilorin
@@ -336,7 +362,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   And this was how the monarch of Ilorin held the title of Emir
@@ -345,7 +371,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   The 1900s witnessed the incorporation of Ilorin into the
@@ -372,7 +398,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   Owing to Ilorin’s unique history, first as a Yoruba military
@@ -383,7 +409,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   Balogun Gambari (Hausa), the Balogun Ajikobi (Yoruba), the
@@ -395,7 +421,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   The longest-reigning of the four Baloguns is conferred with
@@ -405,7 +431,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   Although the throne is vested in the Fulani descendants of
@@ -419,7 +445,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   In the nineteenth Century, Ilorin was a famous trading centre
@@ -430,7 +456,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   The centre of the pottery industry and lantana bead making is
@@ -453,10 +479,12 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
-                  <strong>Pottery production</strong> is derived originally from
+                  <strong>Pottery production</strong>
+                  {' '}
+                  is derived originally from
                   Old Oyo. It was mostly carried out by the Yoruba women in
                   Ilorin, centred mainly in Okelele district, the northwestern
                   area of the city.
@@ -464,7 +492,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   The pottery wares were made in red (Pupa) and black (Dudu).
@@ -475,7 +503,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   In most cases, Amu, which was useful for cooling, was gifted
@@ -485,7 +513,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   The black products were made into pots with burnished designs
@@ -495,10 +523,12 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
-                  <strong>Lantana Bead making</strong> was among the most
+                  <strong>Lantana Bead making</strong>
+                  {' '}
+                  was among the most
                   prominent trades in the 1900s. The red stone beads were called
                   lantana by the Hausas who brought the raw material to the
                   town. The stones were quarried and brought down to Ilorin by
@@ -507,7 +537,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   The beads are highly polished and reddish-brown in colour,
@@ -528,10 +558,12 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
-                  <strong>Narrow looms (Alaari and Sanyan)</strong> are notable
+                  <strong>Narrow looms (Alaari and Sanyan)</strong>
+                  {' '}
+                  are notable
                   among the most luxurious industries in Ilorin in the 1900s,
                   produced mainly by male weavers. Finished products of
                   narrow-loom clothing are of various types and styles,
@@ -555,7 +587,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   Ilorin Durbar is one festival you do not want to miss. It is
@@ -567,7 +599,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   One pretty exciting feature of the ceremony is that it is
@@ -578,7 +610,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   Here, natives pay homage with a resounding “Sheu” slogan to
@@ -589,7 +621,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   It commences with the procession of the Emir on a heavily
@@ -600,7 +632,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   Durbar festivals are considered tourist attractions celebrated
@@ -613,7 +645,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   Wedding festivity in Ilorin is an occasion people look forward
@@ -623,7 +655,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   It is full of bright colours, toe-tapping music, and
@@ -634,7 +666,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   If you want to attend a wedding that is entertainment focused,
@@ -644,7 +676,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   Couples dress elegantly in traditional attires such as Sanyan
@@ -656,7 +688,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   When it comes to Ilorin Fulani weddings, it kicks off with
@@ -668,7 +700,7 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
                   Friends and families keep their company and escort them back
@@ -689,10 +721,12 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
-                  <strong>Henna Day,</strong> Laali is a form of adornment that
+                  <strong>Henna Day,</strong>
+                  {' '}
+                  Laali is a form of adornment that
                   distinguishes the bride. It has become an event of
                   beautification for the bride’s families and her bridesmaids,
                   giving marital advice to the bride as they sing joyfully.
@@ -702,10 +736,12 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
-                  <strong>Ijo Olomoba</strong> is distinctly observed by the
+                  <strong>Ijo Olomoba</strong>
+                  {' '}
+                  is distinctly observed by the
                   sons and daughters of the royal family in Ilorin, especially
                   during their weddings. They sing and dance in rhythms to a
                   beating calabash placed in a wet mortar. Specifically, royals
@@ -716,10 +752,12 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
-                  <strong>Are-Osan</strong> meaning “afternoon party”, is
+                  <strong>Are-Osan</strong>
+                  {' '}
+                  meaning “afternoon party”, is
                   peculiar to all Ilorin weddings. Guests are dressed elegantly
                   in a colourful Ankara attire. Drummers, and wives from their
                   distinct households sing in the chorus as they escort the
@@ -728,10 +766,12 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
-                  <strong>Aisun</strong> takes place on the wedding eve.
+                  <strong>Aisun</strong>
+                  {' '}
+                  takes place on the wedding eve.
                   Traditional music (waka) is played all night for the
                   entertainment of guests of both the bride and groom.
                 </Typography>
@@ -748,20 +788,24 @@ export default function History(props) {
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
-                  <strong>Yigi (Walimat Nikkah)</strong> is the solemnization
+                  <strong>Yigi (Walimat Nikkah)</strong>
+                  {' '}
+                  is the solemnization
                   and engagement of couples by an Islamic cleric. It is done
                   with the approval of the couple, parents or guardians.
                 </Typography>
                 <br />
                 <Typography
                   variant="body1"
-                  style={{ textAlign: "justify" }}
+                  style={{ textAlign: 'justify' }}
                   gutterBottom
                 >
-                  <strong>Ilu Kengbe</strong> involves processional dances by
+                  <strong>Ilu Kengbe</strong>
+                  {' '}
+                  involves processional dances by
                   the bride’s relatives to the groom’s family home. It is the
                   way of expressing joy and unity of the families merging by the
                   marriage of their wards.
