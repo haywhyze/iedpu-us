@@ -28,7 +28,7 @@ export default function SocialMediaButtons() {
           >
             <span>
               <Button
-                href="https://twitter.com/haywhyze"
+                href="https://twitter.com/Ilorin_US"
                 target="_blank"
                 style={{
                   color: 'inherit',
@@ -57,7 +57,7 @@ export default function SocialMediaButtons() {
             </span>
           </Tooltip>
         </li>
-        <li>
+        {/* <li>
           <Tooltip
             id="instagram-facebook"
             title="Follow us on facebook"
@@ -68,7 +68,7 @@ export default function SocialMediaButtons() {
             <span>
               <Button
                 color="transparent"
-                href="https://www.facebook.com/haywhyze"
+                href="https://www.facebook.com/Ilorin-Emirate-Descendants-Progressive-Union-374126132727607"
                 target="_blank"
                 style={{
                   color: 'inherit',
@@ -96,6 +96,7 @@ export default function SocialMediaButtons() {
             </span>
           </Tooltip>
         </li>
+         */}
         <li>
           <Tooltip
             id="instagram-tooltip"
