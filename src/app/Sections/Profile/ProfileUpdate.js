@@ -61,6 +61,7 @@ export default function ProfileUpdate() {
               phone,
               location,
               family_house_lga,
+              address,
             } = doc.data();
             setValues({
               ...values,
@@ -70,6 +71,7 @@ export default function ProfileUpdate() {
               occupation: occupation || '',
               phone: phone || '',
               location: location || '',
+              address: address || '',
               family_house_lga: family_house_lga || '',
             });
           } else {
@@ -83,14 +85,23 @@ export default function ProfileUpdate() {
     }
   }, []);
 
-  const _handleChange = (e) => {
-    setValues({
-      ...values,
-      [e.target.name]: e.target.value,
-    });
+  const handleChange = (e) => {
+    if (!e.target.name) {
+      // console.log(e.target.textContent);
+      setValues({
+        ...values,
+        location: e.target.textContent,
+      });
+    } else {
+      setValues({
+        ...values,
+        [e.target.name]: e.target.value,
+      });
+    }
   };
 
   const updateProfile = () => {
+    console.log(values);
     db.collection('Users')
       .doc(user.uid)
       .update(values)
@@ -138,7 +149,7 @@ export default function ProfileUpdate() {
                 label="Full Name"
                 id="name"
                 fullWidth
-                onChange={_handleChange}
+                onChange={handleChange}
                 type="text"
                 style={{
                   margin: '0 0 17px 0',
@@ -178,7 +189,7 @@ export default function ProfileUpdate() {
                   name: 'email',
                   disabled: true,
                   value: values.email,
-                  onChange: _handleChange,
+                  onChange: handleChange,
                   endAdornment: (
                     <InputAdornment position="end">
                       <Email className={classes.inputIconsColor} />
@@ -198,7 +209,7 @@ export default function ProfileUpdate() {
                   position: 'relative',
                 }}
                 value={values.phone || ''}
-                onChange={_handleChange}
+                onChange={handleChange}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
@@ -225,7 +236,7 @@ export default function ProfileUpdate() {
                   'Bio cannot be more than 560 characters',
                 ]}
                 value={values.bio || ''}
-                onChange={_handleChange}
+                onChange={handleChange}
                 InputProps={{
                   multiline: true,
                   rows: 4,
@@ -299,14 +310,15 @@ export default function ProfileUpdate() {
                   'Wyoming',
                 ]}
                 fullWidth
+                values={values.location || ''}
+                onChange={handleChange}
+                id="location"
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    label="State of Residence (USA)"
-                    id="location"
-                    name="location"
                     values={values.location || ''}
-                    onChange={_handleChange}
+                    name="location"
+                    label="State of Residence (USA)"
                   />
                 )}
                 getOptionLabel={(option) => option}
@@ -314,6 +326,32 @@ export default function ProfileUpdate() {
                   margin: '0 0 17px 0',
                   paddingTop: '27px',
                   position: 'relative',
+                }}
+              />
+              <TextValidator
+                label="USA Address"
+                id="address"
+                style={{
+                  margin: '0 0 17px 0',
+                  paddingTop: '27px',
+                  position: 'relative',
+                }}
+                fullWidth
+                value={values.address || ''}
+                name="address"
+                onChange={handleChange}
+                validators={[
+                  'maxStringLength:70',
+                ]}
+                errorMessages={[
+                  'This field cannot be more than 70 characters',
+                ]}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <LocationCity className={classes.inputIconsColor} />
+                    </InputAdornment>
+                  ),
                 }}
               />
               <TextValidator
@@ -327,7 +365,7 @@ export default function ProfileUpdate() {
                 fullWidth
                 value={values.family_house_lga || ''}
                 name="family_house_lga"
-                onChange={_handleChange}
+                onChange={handleChange}
                 validators={[
                   'maxStringLength:70',
                 ]}
@@ -347,7 +385,7 @@ export default function ProfileUpdate() {
                 id="occupation"
                 fullWidth
                 value={values.occupation}
-                onChange={_handleChange}
+                onChange={handleChange}
                 name="occupation"
                 validators={[
                   'maxStringLength:70',

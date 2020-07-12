@@ -120,6 +120,14 @@ export default function ProfileModal({
                             <ListItemText primary={member.location} />
                           </ListItem>
                         )}
+                        {member.address && (
+                          <ListItem>
+                            <ListItemIcon>
+                              <LocationCity />
+                            </ListItemIcon>
+                            <ListItemText primary={member.address} />
+                          </ListItem>
+                        )}
                         {member.family_house_lga && (
                           <ListItem>
                             <ListItemIcon>
