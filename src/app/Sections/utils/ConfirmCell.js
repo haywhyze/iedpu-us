@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
 import Confirm from '@material-ui/icons/Check';
 import IconButton from '@material-ui/core/IconButton';
@@ -9,6 +9,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { makeStyles } from '@material-ui/core/styles';
+import { toast } from 'react-toastify';
 import styles from 'assets/jss/material-dashboard-react/views/dashboardStyle.js';
 import { db } from '../../pages/_app';
 
@@ -16,10 +17,6 @@ const useStyles = makeStyles(styles);
 
 export default function ConfirmCell({
   user,
-  setSuccessNotification,
-  setFailureNotification,
-  setErrorMessage,
-  setSuccessMessage,
 }) {
   const classes = useStyles();
 
@@ -67,18 +64,11 @@ export default function ConfirmCell({
       .doc(uid)
       .update({ verified: true })
       .then(() => {
-        console.log('Document successfully written!');
         sendWelcomeMail(uid, name);
-        setSuccessMessage('User successfully verified!');
-        setSuccessNotification(true);
-        setTimeout(() => {
-          setSuccessNotification(false);
-        }, 3000);
+        toast.success('User Successfully Verified');
       })
       .catch((error) => {
-        setFailureNotification(true);
-        setErrorMessage(error.message);
-        console.error('Error writing document: ', error);
+        toast.error(`Error verifying user, ${error.message}`);
       });
     setOpen(false);
   };

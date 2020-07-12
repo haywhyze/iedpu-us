@@ -11,7 +11,6 @@ import CardBody from 'components/Card/CardBody.js';
 import Button from 'components/CustomButtons/Button.js';
 import LaunchRoundedIcon from '@material-ui/icons/LaunchRounded';
 import ConfirmCell from '../../Sections/utils/ConfirmCell';
-import Notifications from '../../Sections/utils/Notification';
 import ProfileModal from '../../Sections/Profile/ProfileModal';
 import DeleteCell from '../../Sections/utils/DeleteCell';
 
@@ -49,10 +48,6 @@ const useStyles = makeStyles(styles);
 
 export default function Members({ members }) {
   const classes = useStyles();
-  const [successNotification, setSuccessNotification] = useState(false);
-  const [failureNotification, setFailureNotification] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
 
   const [classicModal, setClassicModal] = React.useState(false);
   const [selectedMember, setSelectedMember] = useState(null);
@@ -89,12 +84,6 @@ export default function Members({ members }) {
             </p>
           </CardHeader>
           <CardBody>
-            {successNotification && (
-              <Notifications type="success" message={successMessage} />
-            )}
-            {failureNotification && (
-              <Notifications type="danger" message={errorMessage} />
-            )}
             {unconfirmedMembers.length ? (
               <Table
                 tableHeaderColor="primary"
@@ -112,24 +101,8 @@ export default function Members({ members }) {
                       day: 'numeric',
                     }).format(date),
                   );
-                  newValue.push(
-                    <ConfirmCell
-                      user={member}
-                      setErrorMessage={setErrorMessage}
-                      setSuccessMessage={setSuccessMessage}
-                      setSuccessNotification={setSuccessNotification}
-                      setFailureNotification={setFailureNotification}
-                    />,
-                  );
-                  newValue.push(
-                    <DeleteCell
-                      user={member}
-                      setSuccessMessage={setSuccessMessage}
-                      setErrorMessage={setErrorMessage}
-                      setSuccessNotification={setSuccessNotification}
-                      setFailureNotification={setFailureNotification}
-                    />,
-                  );
+                  newValue.push(<ConfirmCell user={member} />);
+                  newValue.push(<DeleteCell />);
                   return newValue;
                 })}
               />

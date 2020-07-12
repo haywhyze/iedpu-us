@@ -52,6 +52,7 @@ export default function MembersList() {
         setClassicModal={setClassicModal}
         member={selectedMember}
       />
+      <h2>Get to know other Members</h2>
       <List>
         {members.map((member, index) => (
           <div key={member.id}>

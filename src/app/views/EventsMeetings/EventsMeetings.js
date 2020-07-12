@@ -7,7 +7,6 @@ import Card from 'components/Card/Card.js';
 import CardBody from 'components/Card/CardBody';
 import CardHeader from 'components/Card/CardHeader';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Notifications from '../../Sections/utils/Notification';
 import { AuthContext, db } from '../../pages/_app';
 import NewEventModal from './NewEventModal';
 import SingleEvent from './SingleEvent';
@@ -40,10 +39,6 @@ export default function EventsMeetings() {
   const { user, isAuthenticated } = useContext(AuthContext);
   const eventsRef = user && db.collection('events');
   const [loading, setLoading] = useState(true);
-  const [successNotification, setSuccessNotification] = useState(false);
-  const [failureNotification, setFailureNotification] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
   useEffect(() => {
     if (user) {
       eventsRef.onSnapshot((querySnapshot) => {
@@ -77,10 +72,6 @@ export default function EventsMeetings() {
         <NewEventModal
           classicModal={classicModal}
           setClassicModal={setClassicModal}
-          setSuccessMessage={setSuccessMessage}
-          setErrorMessage={setErrorMessage}
-          setSuccessNotification={setSuccessNotification}
-          setFailureNotification={setFailureNotification}
         />
       </GridContainer>
       <GridContainer>
@@ -102,12 +93,6 @@ export default function EventsMeetings() {
               </Button>
             </GridItem>
             <GridContainer space={8}>
-              {successNotification && (
-                <Notifications type="success" message={successMessage} />
-              )}
-              {failureNotification && (
-                <Notifications type="danger" message={errorMessage} />
-              )}
               {events.sort((a, b) => Date.parse(a.time) - Date.parse(b.time)).map((event) => (
                 <SingleEvent
                   title={event.title}
@@ -116,10 +101,6 @@ export default function EventsMeetings() {
                   time={event.time}
                   key={event.id}
                   id={event.id}
-                  setSuccessMessage={setSuccessMessage}
-                  setErrorMessage={setErrorMessage}
-                  setSuccessNotification={setSuccessNotification}
-                  setFailureNotification={setFailureNotification}
                 />
               ))}
             </GridContainer>

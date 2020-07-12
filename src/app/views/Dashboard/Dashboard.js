@@ -20,7 +20,6 @@ import CardFooter from 'components/Card/CardFooter.js';
 
 import styles from 'assets/jss/material-dashboard-react/views/dashboardStyle.js';
 import { AuthContext, db } from '../../pages/_app';
-import Notifications from '../../Sections/utils/Notification';
 import DeleteCell from '../../Sections/utils/DeleteCell';
 import ConfirmCell from '../../Sections/utils/ConfirmCell';
 
@@ -28,7 +27,6 @@ const useStyles = makeStyles(styles);
 
 export default function Dashboard({ members }) {
   const classes = useStyles();
-  const [successNotification, setSuccessNotification] = useState(false);
   const { user, isAuthenticated } = useContext(AuthContext);
   const membershipFeesRef = user && db.collection('membership_fees');
   const donationsRef = user && db.collection('donations');
@@ -36,9 +34,6 @@ export default function Dashboard({ members }) {
   const [donations, setDonations] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const [failureNotification, setFailureNotification] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
   const unconfirmedMembers = members.reduce((filtered, member) => {
     if (!member.verified) {
       filtered.push(member);
@@ -187,12 +182,6 @@ export default function Dashboard({ members }) {
       </GridContainer> */}
       <GridContainer>
         <GridItem xs={12} sm={12} md={8}>
-          {successNotification && (
-            <Notifications type="success" message={successMessage} />
-          )}
-          {failureNotification && (
-            <Notifications type="danger" message={errorMessage} />
-          )}
           <CustomTabs
             title="Recent Members:"
             headerColor="primary"
@@ -208,24 +197,8 @@ export default function Dashboard({ members }) {
                       const newValue = [];
                       newValue.push(member.displayName);
                       newValue.push(member.email);
-                      newValue.push(
-                        <ConfirmCell
-                          user={member}
-                          setErrorMessage={setErrorMessage}
-                          setSuccessMessage={setSuccessMessage}
-                          setSuccessNotification={setSuccessNotification}
-                          setFailureNotification={setFailureNotification}
-                        />,
-                      );
-                      newValue.push(
-                        <DeleteCell
-                          user={member}
-                          setSuccessMessage={setSuccessMessage}
-                          setErrorMessage={setErrorMessage}
-                          setSuccessNotification={setSuccessNotification}
-                          setFailureNotification={setFailureNotification}
-                        />,
-                      );
+                      newValue.push(<ConfirmCell user={member} />);
+                      newValue.push(<DeleteCell user={member} />);
                       return newValue;
                     })}
                   />

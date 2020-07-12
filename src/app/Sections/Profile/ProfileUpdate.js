@@ -18,16 +18,17 @@ import GridContainer from 'components/Grid/GridContainer.js';
 import GridItem from 'components/Grid/GridItem.js';
 import Button from 'components/CustomButtons/Button.js';
 import CustomInput from 'components/CustomInput/CustomInput.js';
+import { toast } from 'react-toastify';
 
 import styles from 'assets/jss/material-kit-react/views/componentsSections/profileStyle.js';
 import { AuthContext, db } from '../../pages/_app';
-
-import Notifications from '../utils/Notification';
 
 const useStyles = makeStyles(styles);
 
 export default function ProfileUpdate() {
   const classes = useStyles();
+  const notifySuccess = () => toast.success('Profile Updated Successfully');
+  const notifyFailure = (error) => toast.error(`Profile Update Failed, ${error}`);
   const { user } = useContext(AuthContext);
   const [values, setValues] = useState({
     displayName: '',
@@ -39,11 +40,6 @@ export default function ProfileUpdate() {
     family_house_lga: '',
   });
   const formRef = useRef(null);
-
-  const [successNotification, setSuccessNotification] = useState(false);
-  const [failureNotification, setFailureNotification] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-  // const [notifications, setNotifications] = useState(false)
 
   const docRef = user && db.collection('Users').doc(user.uid);
 
@@ -80,7 +76,7 @@ export default function ProfileUpdate() {
           }
         })
         .catch((error) => {
-          console.log('Error getting document:', error);
+          notifyFailure(error);
         });
     }
   }, []);
@@ -101,37 +97,20 @@ export default function ProfileUpdate() {
   };
 
   const updateProfile = () => {
-    console.log(values);
     db.collection('Users')
       .doc(user.uid)
       .update(values)
       .then(() => {
-        console.log('Document successfully written!');
-        // <Notifications type="success" message="Profile Successfully Updated" />;
-        setSuccessNotification(true);
-        setTimeout(() => {
-          setSuccessNotification(false);
-        }, 3000);
+        notifySuccess();
       })
       .catch((error) => {
-        setFailureNotification(true);
-        setErrorMessage(error.message);
-        console.error('Error writing document: ', error);
+        notifyFailure(error.message);
       });
   };
 
   return (
     <div className={classes.section}>
       <div className={classes.container}>
-        {successNotification && (
-          <Notifications
-            type="success"
-            message="Profile Updated Successfully"
-          />
-        )}
-        {failureNotification && (
-          <Notifications type="danger" message={errorMessage} />
-        )}
         <GridContainer justify="center">
           <GridItem
             style={{ paddingLeft: 0, paddingRight: 0 }}
@@ -139,6 +118,7 @@ export default function ProfileUpdate() {
             sm={12}
             md={10}
           >
+            <h2>Update Profile</h2>
             <ValidatorForm
               ref={formRef}
               onSubmit={updateProfile}

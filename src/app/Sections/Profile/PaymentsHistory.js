@@ -27,6 +27,7 @@ export default function PaymentsHistory({ payments }) {
   ]);
   return (
     <>
+      <h2>Track History of Payments</h2>
       <GridContainer>
         <Card plain>
           <CardBody>

@@ -15,6 +15,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 // @material-ui/icons
 import CustomInput from 'components/CustomInput/CustomInput.js';
 import CustomDateTimePicker from 'components/CustomInput/CustomDatePicker';
+import { toast } from 'react-toastify';
 import Close from '@material-ui/icons/Close';
 // core components
 import GridContainer from 'components/Grid/GridContainer.js';
@@ -36,10 +37,6 @@ Transition.displayName = 'Transition';
 export default function EditEventModal({
   classicModal,
   setClassicModal,
-  setSuccessNotification,
-  setFailureNotification,
-  setErrorMessage,
-  setSuccessMessage,
   event,
 }) {
   const classes = useStyles();
@@ -89,19 +86,10 @@ export default function EditEventModal({
         .then(() => {
           setValues({ title: '', description: '', venue: '' });
           setClassicModal(false);
-          setSuccessMessage('Event successfully updated');
-          setTimeout(() => {
-            setSuccessNotification(false);
-          }, 3000);
-          setSuccessNotification(true);
+          toast.success('Event successfully updated');
         })
         .catch((error) => {
-          console.log('Error adding document', error);
-          setErrorMessage(error.message);
-          setFailureNotification(true);
-          setTimeout(() => {
-            setFailureNotification(false);
-          }, 3000);
+          toast.error(`Error updating event, ${error.message}`);
         });
     }
   };

@@ -5,8 +5,10 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import withFirebaseAuth from 'react-with-firebase-auth';
 import * as firebase from 'firebase/app';
+import { ToastContainer } from 'react-toastify';
 import theme from '../components/theme';
 
+import 'react-toastify/dist/ReactToastify.css';
 import firebaseConfig from '../firebaseConfig';
 import 'firebase/auth';
 import 'firebase/firestore';
@@ -101,6 +103,7 @@ function MyApp(props) {
           <CssBaseline />
           <Component {...pageProps} />
         </AuthContext.Provider>
+        <ToastContainer />
       </ThemeProvider>
     </>
   );

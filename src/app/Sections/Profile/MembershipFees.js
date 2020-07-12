@@ -39,7 +39,7 @@ export default function MembershipFees({
 
   return (
     <>
-
+      <h2>Settle Membership Fees</h2>
       {fees.length ? (
         <Table
           tableHeaderColor="info"

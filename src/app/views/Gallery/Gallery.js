@@ -16,6 +16,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import { AuthContext, db } from "../../pages/_app.js";
+import { toast } from 'react-toastify';
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -107,12 +108,10 @@ export default function Gallery() {
       .doc(id)
       .delete()
       .then(() => {
-        console.log("Document successfully removed!");
-        // Notifications here
+        toast.success('Photo deleted successfully');
       })
       .catch((error) => {
-        // Notifications here
-        console.error("Error removing event: ", error);
+        toast.error(`Error removing photo, ${error.message}`);
       });
     setOpen(false);
   };
@@ -148,11 +147,10 @@ export default function Gallery() {
       .update({ caption })
       .then(() => {
         setCaption("");
-        // Notifications here
+        toast.success('Caption saved');
       })
       .catch((error) => {
-        console.log("Error adding document", error);
-        // Add notification message here
+        toast.error(`Error saving caption, ${error.message}`);
       });
   };
 
@@ -164,15 +162,13 @@ export default function Gallery() {
         created: new Date().toISOString(),
       })
       .then((docRef) => {
-        console.log("Document written with ID: ", docRef.id);
         setNewImageOn(false);
         setImageUrl("");
         setNewCaption("");
-        // Add notification message here
+        toast.success('Image saved');
       })
       .catch((error) => {
-        console.log("Error adding document", error);
-        // Add notification message here
+        toast.error(`Error saving image, ${error.message}`);
       });
   };
 

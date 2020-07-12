@@ -32,10 +32,6 @@ export default function SingleNews({
   time,
   caption,
   id,
-  setSuccessMessage,
-  setErrorMessage,
-  setSuccessNotification,
-  setFailureNotification,
 }) {
   const classes = useStyles();
 
@@ -66,25 +62,36 @@ export default function SingleNews({
         classicModal={editModal}
         setClassicModal={setEditModal}
         news={selectedNews}
-        setSuccessMessage={setSuccessMessage}
-        setErrorMessage={setErrorMessage}
-        setSuccessNotification={setSuccessNotification}
-        setFailureNotification={setFailureNotification}
       />
       <Card>
         <CardHeader>
           <img className={classes.image} src={image} alt="..." />
         </CardHeader>
-        <CardBody style={{
-          height: '350px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-        }}
+        <CardBody
+          style={{
+            height: '350px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+          }}
         >
           <h3 style={{ marginTop: '0' }}>{title}</h3>
-          <p ref={descriptionEl} style={{ whiteSpace: 'pre-wrap', overflow: 'hidden' }}>{details}</p>
+          <p
+            ref={descriptionEl}
+            style={{ whiteSpace: 'pre-wrap', overflow: 'hidden' }}
+          >
+            {details}
+          </p>
           <span>
             <Button
               onClick={() => viewNews({
-                id, image, title, details, author, time, caption,
+                id,
+                image,
+                title,
+                details,
+                author,
+                time,
+                caption,
               })}
               simple
               size="sm"
@@ -95,7 +102,6 @@ export default function SingleNews({
           </span>
           <h5>
             By
-            {' '}
             {author}
           </h5>
           <h6>
@@ -112,7 +118,13 @@ export default function SingleNews({
         <CardFooter>
           <Button
             onClick={() => editNews({
-              id, image, title, details, author, time, caption,
+              id,
+              image,
+              title,
+              details,
+              author,
+              time,
+              caption,
             })}
             className={classes.footerButton}
             color="transparent"
@@ -120,13 +132,7 @@ export default function SingleNews({
           >
             <Create />
           </Button>
-          <ConfirmDelete
-            id={id}
-            setSuccessMessage={setSuccessMessage}
-            setErrorMessage={setErrorMessage}
-            setSuccessNotification={setSuccessNotification}
-            setFailureNotification={setFailureNotification}
-          />
+          <ConfirmDelete id={id} />
         </CardFooter>
       </Card>
     </GridItem>

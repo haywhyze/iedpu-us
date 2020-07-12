@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable react/prop-types */
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import GridItem from 'components/Grid/GridItem.js';
 import Button from 'components/CustomButtons/Button.js';
@@ -28,10 +28,6 @@ export default function SingleEvent({
   venue,
   time,
   id,
-  setSuccessMessage,
-  setErrorMessage,
-  setSuccessNotification,
-  setFailureNotification,
 }) {
   const classes = useStyles();
 
@@ -60,10 +56,6 @@ export default function SingleEvent({
         classicModal={editModal}
         setClassicModal={setEditModal}
         event={selectedEvent}
-        setSuccessMessage={setSuccessMessage}
-        setErrorMessage={setErrorMessage}
-        setSuccessNotification={setSuccessNotification}
-        setFailureNotification={setFailureNotification}
       />
       <Card>
         <CardHeader>
@@ -116,10 +108,6 @@ export default function SingleEvent({
           </span>
           <ConfirmDelete
             id={id}
-            setSuccessMessage={setSuccessMessage}
-            setErrorMessage={setErrorMessage}
-            setSuccessNotification={setSuccessNotification}
-            setFailureNotification={setFailureNotification}
           />
         </CardFooter>
       </Card>

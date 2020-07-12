@@ -10,6 +10,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 // @material-ui/icons
 import CustomInput from 'components/CustomInput/CustomInput.js';
+import { toast } from 'react-toastify';
 import Close from '@material-ui/icons/Close';
 // core components
 import GridContainer from 'components/Grid/GridContainer.js';
@@ -31,10 +32,6 @@ Transition.displayName = 'Transition';
 export default function CreateNewsModal({
   classicModal,
   setClassicModal,
-  setSuccessNotification,
-  setFailureNotification,
-  setErrorMessage,
-  setSuccessMessage,
 }) {
   const classes = useStyles();
   const profileClasses = useProfileStyles();
@@ -112,25 +109,15 @@ export default function CreateNewsModal({
     db.collection('news')
       .add(newPost)
       .then((docRef) => {
-        console.log('Document written with ID: ', docRef.id);
         setValues({
           title: '', details: '', venue: '', caption: '',
         });
         setImageUrl('');
         setClassicModal(false);
-        setSuccessMessage('News post successfully created');
-        setTimeout(() => {
-          setSuccessNotification(false);
-        }, 3000);
-        setSuccessNotification(true);
+        toast.success('News post successfully created');
       })
       .catch((error) => {
-        console.log('Error adding document', error);
-        setErrorMessage(error.message);
-        setFailureNotification(true);
-        setTimeout(() => {
-          setFailureNotification(false);
-        }, 3000);
+        toast.error(`Error Creatting News Post, ${error.message}`);
       });
   };
 

@@ -9,17 +9,14 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { makeStyles } from '@material-ui/core/styles';
+import { toast } from 'react-toastify';
 import styles from 'assets/jss/material-dashboard-react/views/dashboardStyle.js';
 import { db } from '../../pages/_app';
 
 const useStyles = makeStyles(styles);
 
 export default function DeleteCell({
-  user,
-  setSuccessNotification,
-  setFailureNotification,
-  setErrorMessage,
-  setSuccessMessage,
+  user
 }) {
   const classes = useStyles();
 
@@ -39,18 +36,10 @@ export default function DeleteCell({
       .doc(uid)
       .delete()
       .then(() => {
-        setSuccessMessage('User successfully deleted!');
-        setSuccessNotification(true);
-        setTimeout(() => {
-          setSuccessNotification(false);
-        }, 3000);
+        toast.success('User successfully deleted');
       })
       .catch((error) => {
-        setFailureNotification(true);
-        setTimeout(() => {
-          setFailureNotification(false);
-        }, 3000);
-        setErrorMessage(error.message);
+        toast.error(error.message);
       });
     setOpen(false);
   };

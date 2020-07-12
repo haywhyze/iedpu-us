@@ -13,6 +13,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import { toast } from 'react-toastify';
 import DialogActions from '@material-ui/core/DialogActions';
 // @material-ui/icons
 import CustomInput from 'components/CustomInput/CustomInput.js';
@@ -98,18 +99,16 @@ export default function NewFeesModal({
     db.collection('membership_fees')
       .add(newFee)
       .then((docRef) => {
-        console.log('Document written with ID: ', docRef.id);
         setValues({
           amount: '',
           intent: '',
         });
         setSelectedMember({ displayName: '' });
         setMembershipFeesModal(false);
-        // setSuccessMessage('Fee successfully created');
+        toast.success('Membership fee recorded');
       })
       .catch((error) => {
-        console.log('Error adding document', error);
-        // setErrorMessage(error.message);
+        toast.error(`Error recording membership fee, ${error.message}`);
       });
   };
   if (loading) {

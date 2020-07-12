@@ -7,7 +7,6 @@ import Card from 'components/Card/Card.js';
 import CardBody from 'components/Card/CardBody';
 import CardHeader from 'components/Card/CardHeader';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Notifications from '../../Sections/utils/Notification';
 import { AuthContext, db } from '../../pages/_app';
 import SingleNews from './SingleNews';
 import CreateNewsModal from './CreateNewsModal';
@@ -39,10 +38,6 @@ export default function EventsMeetings() {
   const [news, setNews] = useState([]);
   const [classicModal, setClassicModal] = React.useState(false);
   const [loading, setLoading] = useState(true);
-  const [successNotification, setSuccessNotification] = useState(false);
-  const [failureNotification, setFailureNotification] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
 
   const { user, isAuthenticated } = useContext(AuthContext);
 
@@ -82,10 +77,6 @@ export default function EventsMeetings() {
         <CreateNewsModal
           classicModal={classicModal}
           setClassicModal={setClassicModal}
-          setSuccessMessage={setSuccessMessage}
-          setErrorMessage={setErrorMessage}
-          setSuccessNotification={setSuccessNotification}
-          setFailureNotification={setFailureNotification}
         />
       </GridContainer>
       <GridContainer>
@@ -102,12 +93,6 @@ export default function EventsMeetings() {
               </Button>
             </GridItem>
             <GridContainer>
-              {successNotification && (
-              <Notifications type="success" message={successMessage} />
-              )}
-              {failureNotification && (
-                <Notifications type="danger" message={errorMessage} />
-              )}
               {news.sort((a, b) => Date.parse(b.time) - Date.parse(a.time)).map((post) => (
                 <SingleNews
                   image={post.imageUrl}
@@ -118,10 +103,6 @@ export default function EventsMeetings() {
                   title={post.title}
                   key={post.id}
                   id={post.id}
-                  setSuccessMessage={setSuccessMessage}
-                  setErrorMessage={setErrorMessage}
-                  setSuccessNotification={setSuccessNotification}
-                  setFailureNotification={setFailureNotification}
                 />
               ))}
             </GridContainer>

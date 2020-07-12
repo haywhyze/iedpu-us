@@ -16,6 +16,7 @@ import CustomDateTimePicker from 'components/CustomInput/CustomDatePicker';
 import Close from '@material-ui/icons/Close';
 // core components
 import GridContainer from 'components/Grid/GridContainer.js';
+import { toast } from 'react-toastify';
 import GridItem from 'components/Grid/GridItem.js';
 import Button from 'components/CustomButtons/Button.js';
 import CardBody from 'components/Card/CardBody.js';
@@ -56,15 +57,13 @@ export default function NewFeesModal({
     db.collection('fees')
       .add(newFee)
       .then((docRef) => {
-        console.log('Document written with ID: ', docRef.id);
         setValues({ name: '', price: '' });
         handleDateChange(new Date());
         setFeesModal(false);
-        // setSuccessMessage('Fee successfully created');
+        toast.success('Fee successfully created');
       })
       .catch((error) => {
-        console.log('Error adding document', error);
-        // setErrorMessage(error.message);
+        toast.error(`Error creating fee, ${error.message}`);
       });
   };
 

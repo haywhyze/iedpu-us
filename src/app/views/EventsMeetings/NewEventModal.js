@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 // @material-ui/core components
 import InputLabel from '@material-ui/core/InputLabel';
-import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import Slide from '@material-ui/core/Slide';
 import IconButton from '@material-ui/core/IconButton';
@@ -11,6 +10,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DateFnsUtils from '@date-io/date-fns'; // choose your lib
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DialogActions from '@material-ui/core/DialogActions';
+import { toast } from 'react-toastify';
 // @material-ui/icons
 import CustomInput from 'components/CustomInput/CustomInput.js';
 import CustomDateTimePicker from 'components/CustomInput/CustomDatePicker';
@@ -33,10 +33,6 @@ Transition.displayName = 'Transition';
 export default function NewEventModal({
   classicModal,
   setClassicModal,
-  setSuccessNotification,
-  setFailureNotification,
-  setErrorMessage,
-  setSuccessMessage,
 }) {
   const classes = useStyles();
   const [values, setValues] = useState({
@@ -67,19 +63,10 @@ export default function NewEventModal({
         setValues({ title: '', description: '', venue: '' });
         handleDateChange(new Date());
         setClassicModal(false);
-        setSuccessMessage('Event successfully created');
-        setTimeout(() => {
-          setSuccessNotification(false);
-        }, 3000);
-        setSuccessNotification(true);
+        toast.success('Event successfully created');
       })
       .catch((error) => {
-        console.log('Error adding document', error);
-        setErrorMessage(error.message);
-        setFailureNotification(true);
-        setTimeout(() => {
-          setFailureNotification(false);
-        }, 3000);
+        toast.error(`Error creating event, ${error.message}`);
       });
   };
 

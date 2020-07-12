@@ -80,7 +80,6 @@ export default function SectionTabs() {
                     tabIcon: Face,
                     tabContent: (
                       <>
-                        <h3>Update Profile</h3>
                         <ProfileUpdate />
                       </>
                     ),
@@ -90,7 +89,6 @@ export default function SectionTabs() {
                     tabIcon: Money,
                     tabContent: (
                       <>
-                        <h3>Settle Membership Fees</h3>
                         <MembershipFees payments={payments} fees={fees} db={db} user={user} />
                       </>
                     ),
@@ -100,7 +98,6 @@ export default function SectionTabs() {
                     tabIcon: People,
                     tabContent: (
                       <>
-                        <h3>Get to know other Members</h3>
                         <MembersList />
                       </>
                     ),
@@ -110,7 +107,6 @@ export default function SectionTabs() {
                     tabIcon: List,
                     tabContent: (
                       <>
-                        <h3>Track History of Payments</h3>
                         <PaymentsHistory payments={payments} />
                       </>
                     ),
