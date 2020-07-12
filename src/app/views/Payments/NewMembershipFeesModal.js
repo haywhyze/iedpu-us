@@ -88,6 +88,7 @@ export default function NewFeesModal({
   };
 
   const createFee = () => {
+    if (!values.amount) return;
     const newFee = {
       ...values,
       name: selectedMember && selectedMember.displayName,

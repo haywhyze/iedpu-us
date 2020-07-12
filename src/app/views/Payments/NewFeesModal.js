@@ -49,6 +49,7 @@ export default function NewFeesModal({
   };
 
   const createFee = () => {
+    if (!values.name || !values.price) return;
     const newFee = {
       ...values,
       expiryDate: selectedDate.toISOString(),

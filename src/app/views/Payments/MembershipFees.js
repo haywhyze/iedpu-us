@@ -97,7 +97,9 @@ export default function MembershipFees({ members }) {
                   'Date',
                   'Transaction ID',
                 ]}
-                tableData={membershipFeesData}
+                tableData={membershipFeesData.sort(
+                  (a, b) => Date.parse(b[4]) - Date.parse(a[4]),
+                )}
               />
             ) : (
               <h4 style={{ textAlign: 'center' }}>No membership fees record</h4>
