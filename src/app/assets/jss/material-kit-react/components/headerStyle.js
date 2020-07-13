@@ -29,7 +29,10 @@ const headerStyle = {
     flexFlow: "row nowrap",
     justifyContent: "flex-start",
     position: "relative",
-    zIndex: "unset"
+    zIndex: "unset",
+    '@media (max-width: 768px)': {
+      padding: "10px",
+    },
   },
   absolute: {
     position: "absolute",
@@ -108,7 +111,10 @@ const headerStyle = {
     backgroundColor: "transparent !important",
     boxShadow: "none",
     paddingTop: "25px",
-    color: "#FFFFFF"
+    color: "#FFFFFF",
+    '@media (max-width: 768px)': {
+      paddingTop: "10px",
+    },
   },
   dark: {
     color: "#FFFFFF",
@@ -123,7 +129,10 @@ const headerStyle = {
     color: "#555",
     backgroundColor: "#fff !important",
     boxShadow:
-      "0 4px 18px 0px rgba(0, 0, 0, 0.12), 0 7px 10px -5px rgba(0, 0, 0, 0.15)"
+      "0 4px 18px 0px rgba(0, 0, 0, 0.12), 0 7px 10px -5px rgba(0, 0, 0, 0.15)",
+    '@media (max-width: 768px)': {
+      padding: "10px",
+    },
   },
   drawerPaper: {
     border: "none",
@@ -146,7 +155,14 @@ const headerStyle = {
     paddingRight: "0px",
     paddingLeft: "0",
     ...transition
-  }
+  },
+  logo: {
+    width: "4rem",
+    zIndex: 3,
+    '@media (max-width: 768px)': {
+      width: '3rem',
+    },
+  },
 };
 
 export default headerStyle;

@@ -30,7 +30,6 @@ export default function Index(props) {
       <Header
         color="transparent"
         routes={dashboardRoutes}
-        brand={<img style={{ width: "4rem" }} src="img/logo.png" />}
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{

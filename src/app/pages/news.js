@@ -26,7 +26,6 @@ export default function News(props) {
       <Header
         color="transparent"
         routes={[]}
-        brand={<img style={{ width: "4rem" }} src="img/logo.png" />}
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{

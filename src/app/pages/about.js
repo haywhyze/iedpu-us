@@ -39,13 +39,6 @@ export default function Executives(props) {
       <Header
         color="transparent"
         routes={[]}
-        brand={(
-          <img
-            style={{ width: '4rem', zIndex: '3' }}
-            src="img/logo.png"
-            alt="logo"
-          />
-        )}
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{

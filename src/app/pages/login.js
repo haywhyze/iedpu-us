@@ -22,7 +22,7 @@ const useStyles = makeStyles(styles);
 
 function LoginPage(props) {
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
-  setTimeout(function () {
+  setTimeout(() => {
     setCardAnimation("");
   }, 700);
   const classes = useStyles();
@@ -43,7 +43,6 @@ function LoginPage(props) {
       <Header
         absolute
         color="transparent"
-        brand={<img style={{ width: "4rem" }} src="img/logo.png" />}
         rightLinks={<HeaderLinks />}
         {...rest}
       />
@@ -66,13 +65,13 @@ function LoginPage(props) {
                       <Button color="transparent" onClick={signInWithFacebook}>
                         <i
                           style={{ color: "white" }}
-                          className={"fab fa-facebook"}
+                          className="fab fa-facebook"
                         />
                       </Button>
                       <Button color="transparent" onClick={signInWithGoogle}>
                         <i
                           style={{ color: "white" }}
-                          className={"fab fa-google"}
+                          className="fab fa-google"
                         />
                       </Button>
                     </div>
