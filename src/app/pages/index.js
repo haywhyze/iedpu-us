@@ -1,22 +1,22 @@
-import React from 'react';
-import classNames from 'classnames';
-import { makeStyles } from '@material-ui/core/styles';
+import React from "react";
+import classNames from "classnames";
+import { makeStyles } from "@material-ui/core/styles";
 
-import Header from 'components/Header/Header.js';
-import Footer from 'components/Footer/Footer.js';
-import GridContainer from 'components/Grid/GridContainer.js';
-import GridItem from 'components/Grid/GridItem.js';
-import Button from 'components/CustomButtons/Button.js';
-import HeaderLinks from 'components/Header/HeaderLinks.js';
-import Parallax from 'components/Parallax/Parallax.js';
-import Link from 'next/link';
+import Header from "components/Header/Header.js";
+import Footer from "components/Footer/Footer.js";
+import GridContainer from "components/Grid/GridContainer.js";
+import GridItem from "components/Grid/GridItem.js";
+import Button from "components/CustomButtons/Button.js";
+import HeaderLinks from "components/Header/HeaderLinks.js";
+import Parallax from "components/Parallax/Parallax.js";
+import Link from "next/link";
 
-import styles from 'assets/jss/material-kit-react/views/components.js';
+import styles from "assets/jss/material-kit-react/views/components.js";
 
 // Sections for this page
-import HomeSection from '../Sections/Homepage/HomeSection';
-import SocialMediaButtons from '../Sections/utils/SocialMediaButtons';
-import Donate from '../Sections/utils/Donate';
+import HomeSection from "../Sections/Homepage/HomeSection";
+import SocialMediaButtons from "../Sections/utils/SocialMediaButtons";
+import Donate from "../Sections/utils/Donate";
 
 const dashboardRoutes = [];
 
@@ -30,18 +30,21 @@ export default function Index(props) {
       <Header
         color="transparent"
         routes={dashboardRoutes}
-        brand={<img style={{ width: '4rem', margin: '-2rem' }} src="img/logo.png" />}
+        brand={<img style={{ width: "4rem" }} src="img/logo.png" />}
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
           height: 100,
-          color: 'white',
+          color: "white",
         }}
         {...rest}
       />
 
       <Parallax image="img/central-mosque-1.jpg">
-        <div style={{ display: 'flex', justifyContent: 'center' }} className={classes.container}>
+        <div
+          style={{ display: "flex", justifyContent: "center" }}
+          className={classes.container}
+        >
           <GridContainer>
             <GridItem>
               <div className={classes.brand}>
@@ -59,7 +62,7 @@ export default function Index(props) {
                     </Button>
                   </span>
                 </Link>
-                <span style={{ marginLeft: '1rem' }}>
+                <span style={{ marginLeft: "1rem" }}>
                   <Donate />
                 </span>
               </div>

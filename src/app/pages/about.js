@@ -1,26 +1,26 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import classNames from "classnames";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
 
-import Header from "components/Header/Header.js";
-import HeaderLinks from "components/Header/HeaderLinks.js";
-import Parallax from "components/Parallax/Parallax.js";
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
-import Small from "components/Typography/Small.js";
-import Link from "next/link";
-import CustomTabs from "components/CustomTabs/CustomTabs.js";
-import Footer from "components/Footer/Footer.js";
+import Header from 'components/Header/Header.js';
+import HeaderLinks from 'components/Header/HeaderLinks.js';
+import Parallax from 'components/Parallax/Parallax.js';
+import GridContainer from 'components/Grid/GridContainer.js';
+import GridItem from 'components/Grid/GridItem.js';
+import Button from 'components/CustomButtons/Button.js';
+import Small from 'components/Typography/Small.js';
+import Link from 'next/link';
+import CustomTabs from 'components/CustomTabs/CustomTabs.js';
+import Footer from 'components/Footer/Footer.js';
 
-import styles from "assets/jss/material-kit-react/views/profilePage.js";
-import styles2 from "assets/jss/material-kit-react/views/landingPage.js";
-import typoStyles from "assets/jss/material-kit-react/views/componentsSections/typographyStyle.js";
-import teamStyles from "assets/jss/material-kit-react/views/landingPageSections/teamStyle.js";
+import styles from 'assets/jss/material-kit-react/views/profilePage.js';
+import styles2 from 'assets/jss/material-kit-react/views/landingPage.js';
+import typoStyles from 'assets/jss/material-kit-react/views/componentsSections/typographyStyle.js';
+import teamStyles from 'assets/jss/material-kit-react/views/landingPageSections/teamStyle.js';
 
-import { Typography } from "@material-ui/core";
-import organizationChartData from "../Sections/OrganizationCharts/data";
-import Panel from "../Sections/OrganizationCharts/Panel";
+import { Typography } from '@material-ui/core';
+import organizationChartData from '../Sections/OrganizationCharts/data';
+import Panel from '../Sections/OrganizationCharts/Panel';
 
 const useStyles = makeStyles(styles);
 const useStyles2 = makeStyles(styles2);
@@ -39,17 +39,18 @@ export default function Executives(props) {
       <Header
         color="transparent"
         routes={[]}
-        brand={
+        brand={(
           <img
-            style={{ width: "4rem", margin: "-2rem", zIndex: "3" }}
+            style={{ width: '4rem', zIndex: '3' }}
             src="img/logo.png"
+            alt="logo"
           />
-        }
+        )}
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
           height: 50,
-          color: "white",
+          color: 'white',
         }}
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...rest}
@@ -57,14 +58,14 @@ export default function Executives(props) {
       <Parallax small image="img/central-mosque-1.jpg">
         <div className={classes.container}>
           <GridContainer justify="center">
-            <GridItem style={{ textAlign: "center" }} xs={12} sm={12} md={10}>
+            <GridItem style={{ textAlign: 'center' }} xs={12} sm={12} md={10}>
               <div>
-                <h1 className={classes.title} style={{ color: "#fff" }}>
+                <h1 className={classes.title} style={{ color: '#fff' }}>
                   About IEDPU - USA
                 </h1>
                 <h2>
                   <Small>
-                    <span style={{ color: "#fff" }}>
+                    <span style={{ color: '#fff' }}>
                       Get to know about Ilorin Emirate Descendants Progressive
                       Union in the USA and the amazing people behind it.
                     </span>
@@ -77,7 +78,7 @@ export default function Executives(props) {
       </Parallax>
       <div className={classNames(classes2.main, classes2.mainRaised)}>
         <div className={classes2.container}>
-          <div style={{ textAlign: "center" }} className={classes2.section}>
+          <div style={{ textAlign: 'center' }} className={classes2.section}>
             <h2 className={teamClasses.title}>.</h2>
             <div>
               <div className={classes.container}>
@@ -88,26 +89,26 @@ export default function Executives(props) {
                         headerColor="primary"
                         tabs={[
                           {
-                            tabName: "About",
+                            tabName: 'About',
                             tabContent: (
                               <div
                                 style={{
-                                  textAlign: "center",
-                                  margin: ".5rem",
+                                  textAlign: 'center',
+                                  margin: '.5rem',
                                   lineHeight: 1.5,
-                                  fontSize: "120%",
+                                  fontSize: '120%',
                                 }}
                               >
                                 <h3
-                                  style={{ fontSize: "150%", lineHeight: 1.5 }}
+                                  style={{ fontSize: '150%', lineHeight: 1.5 }}
                                 >
                                   About IEDPU - USA
                                 </h3>
                                 <Typography
                                   variant="body1"
                                   style={{
-                                    textAlign: "justify",
-                                    fontSize: "100%",
+                                    textAlign: 'justify',
+                                    fontSize: '100%',
                                     lineHeight: 1.5,
                                   }}
                                   gutterBottom
@@ -126,8 +127,8 @@ export default function Executives(props) {
                                 <Typography
                                   variant="body1"
                                   style={{
-                                    textAlign: "justify",
-                                    fontSize: "100%",
+                                    textAlign: 'justify',
+                                    fontSize: '100%',
                                     lineHeight: 1.5,
                                   }}
                                   gutterBottom
@@ -143,8 +144,8 @@ export default function Executives(props) {
                                 <Typography
                                   variant="body1"
                                   style={{
-                                    textAlign: "justify",
-                                    fontSize: "100%",
+                                    textAlign: 'justify',
+                                    fontSize: '100%',
                                     lineHeight: 1.5,
                                   }}
                                   gutterBottom
@@ -183,7 +184,7 @@ export default function Executives(props) {
                             ),
                           },
                           {
-                            tabName: "Executives",
+                            tabName: 'Executives',
                             tabContent: (
                               <>
                                 <Panel data={executives} />
@@ -191,7 +192,7 @@ export default function Executives(props) {
                             ),
                           },
                           {
-                            tabName: "Board of Trustees",
+                            tabName: 'Board of Trustees',
                             tabContent: (
                               <>
                                 <Panel data={bot} />
@@ -199,7 +200,7 @@ export default function Executives(props) {
                             ),
                           },
                           {
-                            tabName: "Advisory Council",
+                            tabName: 'Advisory Council',
                             tabContent: (
                               <>
                                 <Panel data={ac} />

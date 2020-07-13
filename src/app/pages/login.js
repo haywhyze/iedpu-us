@@ -43,7 +43,7 @@ function LoginPage(props) {
       <Header
         absolute
         color="transparent"
-        brand={<img style={{ width: '4rem', margin: '-2rem' }} src="img/logo.png" />}
+        brand={<img style={{ width: "4rem" }} src="img/logo.png" />}
         rightLinks={<HeaderLinks />}
         {...rest}
       />
@@ -64,10 +64,16 @@ function LoginPage(props) {
                     <h4>Sign in with</h4>
                     <div className={classes.socialLine}>
                       <Button color="transparent" onClick={signInWithFacebook}>
-                        <i style={{ color: 'white' }} className={"fab fa-facebook"} />
+                        <i
+                          style={{ color: "white" }}
+                          className={"fab fa-facebook"}
+                        />
                       </Button>
                       <Button color="transparent" onClick={signInWithGoogle}>
-                        <i style={{ color: 'white' }} className={"fab fa-google"} />
+                        <i
+                          style={{ color: "white" }}
+                          className={"fab fa-google"}
+                        />
                       </Button>
                     </div>
                     <p className={classes.divider}>

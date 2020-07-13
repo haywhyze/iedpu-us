@@ -26,7 +26,7 @@ export default function Events(props) {
       <Header
         color="transparent"
         routes={[]}
-        brand={<img style={{ width: '4rem', margin: '-2rem' }} src="img/logo.png" />}
+        brand={<img style={{ width: "4rem" }} src="img/logo.png" />}
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{

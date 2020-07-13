@@ -61,7 +61,7 @@ export default function Header(props) {
     [classes.absolute]: absolute,
     [classes.fixed]: fixed
   });
-  const brandComponent = <Link href="/"><span><Button className={classes.title}>{brand}</Button></span></Link>;
+  const brandComponent = <Link href="/">{brand}</Link>;
   return (
     <AppBar className={appBarClasses}>
       <Toolbar className={classes.container}>
