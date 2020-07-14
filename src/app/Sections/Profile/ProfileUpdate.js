@@ -39,6 +39,7 @@ export default function ProfileUpdate() {
     occupation: '',
     family_house_lga: '',
   });
+  const [locationValue, setLocationValue] = useState(values.location);
   const formRef = useRef(null);
 
   const docRef = user && db.collection('Users').doc(user.uid);
@@ -84,10 +85,6 @@ export default function ProfileUpdate() {
   const handleChange = (e) => {
     if (!e.target.name) {
       // console.log(e.target.textContent);
-      setValues({
-        ...values,
-        location: e.target.textContent,
-      });
     } else {
       setValues({
         ...values,
@@ -229,6 +226,7 @@ export default function ProfileUpdate() {
               />
               <Autocomplete
                 options={[
+                  '',
                   'Alabama',
                   'Alaska',
                   'American Samoa',
@@ -290,13 +288,18 @@ export default function ProfileUpdate() {
                   'Wyoming',
                 ]}
                 fullWidth
-                values={values.location || ''}
-                onChange={handleChange}
+                value={locationValue}
+                onChange={(event, newValue) => {
+                  setLocationValue(newValue);
+                }}
+                inputValue={values.location}
+                onInputChange={(event, newInputValue) => {
+                  setValues({ ...values, location: newInputValue });
+                }}
                 id="location"
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    values={values.location || ''}
                     name="location"
                     label="State of Residence (USA)"
                   />

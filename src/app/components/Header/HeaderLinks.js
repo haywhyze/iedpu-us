@@ -95,6 +95,9 @@ function HeaderLinks(props) {
             </span>
           ) : (
             <span>
+              <Button color="transparent" round className={classes.navLink}>
+                Sign In
+              </Button>
               <Button color="primary" round>
                 Join Us
               </Button>
