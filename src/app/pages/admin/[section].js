@@ -11,7 +11,6 @@ import { AuthContext, db } from '../_app';
 
 import routes from '../../routes';
 
-
 const bgImage = '../img/sidebar-2.jpg';
 const logo = '../img/logo.png';
 
@@ -20,7 +19,9 @@ const useStyles = makeStyles(styles);
 export default function ({ ...rest }) {
   const router = useRouter();
   const { section } = router.query;
-  const { user, isAdmin, isAuthenticated } = useContext(AuthContext);
+  const {
+    user, isAdmin, isAuthenticated, signOut,
+  } = useContext(AuthContext);
   const docRef = user && db.collection('Users').orderBy('displayName');
   const eventsRef = user && db.collection('events');
   const classes = useStyles();
@@ -87,7 +88,7 @@ export default function ({ ...rest }) {
   }, []);
 
   if (!isAdmin) {
-    Router.push('/login');
+    Router.push('/admin-login');
     return null;
   }
 
@@ -99,7 +100,7 @@ export default function ({ ...rest }) {
         <div className={classes.wrapper}>
           <Sidebar
             routes={routes}
-            logoText="IEDPU"
+            logoText="IEDPU - USA"
             logo={logo}
             image={bgImage}
             handleDrawerToggle={handleDrawerToggle}

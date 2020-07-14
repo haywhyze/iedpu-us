@@ -8,17 +8,14 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { toast } from 'react-toastify';
 import { makeStyles } from '@material-ui/core/styles';
 import styles from 'assets/jss/material-dashboard-react/views/dashboardStyle.js';
 import { db } from '../../pages/_app.js';
 
 const useStyles = makeStyles(styles);
 
-export default function DeleteCell({
-  id,
-  setFailureNotification,
-  setErrorMessage,
-}) {
+export default function DeleteCell({ id }) {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
@@ -37,20 +34,10 @@ export default function DeleteCell({
       .doc(uid)
       .delete()
       .then(() => {
-        console.log('Document successfully removed!');
-        setErrorMessage('Event successfully deleted!');
-        setFailureNotification(true);
-        setTimeout(() => {
-          setFailureNotification(false);
-        }, 3000);
+        toast.success('Event successfully deleted!');
       })
       .catch((error) => {
-        setFailureNotification(true);
-        setTimeout(() => {
-          setFailureNotification(false);
-        }, 3000);
-        setErrorMessage(error.message);
-        console.error('Error removing event: ', error);
+        toast.error(`Error removing event, ${error.message}`);
       });
     setOpen(false);
   };
@@ -59,7 +46,7 @@ export default function DeleteCell({
     <>
       <Tooltip
         id="tooltip-top"
-        title="Delete Member"
+        title="Delete Event"
         placement="top"
         classes={{ tooltip: classes.tooltip }}
       >

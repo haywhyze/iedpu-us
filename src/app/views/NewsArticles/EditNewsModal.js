@@ -11,6 +11,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 // @material-ui/icons
 import CustomInput from 'components/CustomInput/CustomInput.js';
+import { toast } from 'react-toastify';
 import Close from '@material-ui/icons/Close';
 // core components
 import GridContainer from 'components/Grid/GridContainer.js';
@@ -32,10 +33,6 @@ Transition.displayName = 'Transition';
 export default function EditEventModal({
   classicModal,
   setClassicModal,
-  setSuccessNotification,
-  setFailureNotification,
-  setErrorMessage,
-  setSuccessMessage,
   news,
 }) {
   const classes = useStyles();
@@ -131,19 +128,10 @@ export default function EditEventModal({
         });
         setImageUrl('');
         setClassicModal(false);
-        setSuccessMessage('News post successfully updated');
-        setTimeout(() => {
-          setSuccessNotification(false);
-        }, 3000);
-        setSuccessNotification(true);
+        toast.success('News post successfully updated');
       })
       .catch((error) => {
-        console.log('Error adding document', error);
-        setErrorMessage(error.message);
-        setFailureNotification(true);
-        setTimeout(() => {
-          setFailureNotification(false);
-        }, 3000);
+        toast.error(`Error updating news post, ${error.message}`);
       });
   };
   return (

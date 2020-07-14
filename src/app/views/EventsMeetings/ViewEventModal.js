@@ -68,24 +68,14 @@ export default function ProfileModal({ classicModal, setClassicModal, event }) {
               className={classes.modalBody}
             >
               <div className={profileClasses.container}>
-                <h3 style={{ textAlign: 'center' }}>{event.title}</h3>
                 <GridContainer justify="center">
-                  <GridItem xs={12} sm={12} md={6}>
-                    <img
-                      style={{
-                        width: '100%',
-                        height: '15rem',
-                        objectFit: 'cover',
-                        borderRadius: 'calc(.25rem - 1px)',
-                      }}
-                      src={event.image}
-                      alt="..."
-                    />
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={6}>
+                  <h3 style={{ textAlign: 'center' }}>{event.title}</h3>
+                  <GridItem xs={12} sm={12}>
                     <GridItem xs={12} sm={12}>
-                      <p>{event.description}</p>
+                      <p style={{ whiteSpace: 'pre-wrap' }}>{event.description}</p>
                     </GridItem>
+                    {event.venue
+                    && (
                     <GridItem xs={12} sm={12}>
                       <h5>
                         <LocationCity fontSize="small" />
@@ -93,8 +83,9 @@ export default function ProfileModal({ classicModal, setClassicModal, event }) {
                         {event.venue}
                       </h5>
                     </GridItem>
+                    )}
                     <GridItem xs={12} sm={12}>
-                      <h6>
+                      <h5>
                         {new Intl.DateTimeFormat('en-US', {
                           weekday: 'long',
                           year: 'numeric',
@@ -103,7 +94,7 @@ export default function ProfileModal({ classicModal, setClassicModal, event }) {
                           hour: 'numeric',
                           minute: 'numeric',
                         }).format(new Date(event.time))}
-                      </h6>
+                      </h5>
                     </GridItem>
                   </GridItem>
                 </GridContainer>

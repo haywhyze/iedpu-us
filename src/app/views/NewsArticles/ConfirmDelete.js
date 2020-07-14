@@ -9,6 +9,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { makeStyles } from '@material-ui/core/styles';
+import { toast } from 'react-toastify';
 import styles from 'assets/jss/material-dashboard-react/views/dashboardStyle.js';
 import { db } from '../../pages/_app';
 
@@ -16,8 +17,6 @@ const useStyles = makeStyles(styles);
 
 export default function DeleteCell({
   id,
-  setFailureNotification,
-  setErrorMessage,
 }) {
   const classes = useStyles();
 
@@ -37,20 +36,10 @@ export default function DeleteCell({
       .doc(uid)
       .delete()
       .then(() => {
-        console.log('Document successfully removed!');
-        setErrorMessage('News post successfully deleted!');
-        setFailureNotification(true);
-        setTimeout(() => {
-          setFailureNotification(false);
-        }, 3000);
+        toast.success('News post successfully deleted!');
       })
       .catch((error) => {
-        setFailureNotification(true);
-        setTimeout(() => {
-          setFailureNotification(false);
-        }, 3000);
-        setErrorMessage(error.message);
-        console.error('Error removing event: ', error);
+        toast.error(`Error removing event, ${error.message}`);
       });
     setOpen(false);
   };

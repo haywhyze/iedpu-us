@@ -1,3 +1,6 @@
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/extensions */
 import React, { useContext, useState } from "react";
 import Router from "next/router";
 // nodejs library that concatenates classes
@@ -5,7 +8,7 @@ import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
-import { css } from "@emotion/core";
+// import { css } from '@emotion/core';
 
 import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
@@ -13,15 +16,15 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
-import SectionTabs from "../Sections/SectionTabs";
 import AddAPhoto from "@material-ui/icons/AddAPhoto";
 import Button from "components/CustomButtons/Button.js";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { db } from "./_app";
-
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
-import { AuthContext } from "./_app";
-import UnderReview from "../Sections/UnderReview";
+import { db, AuthContext } from "./_app";
+
+import SectionTabs from "../Sections/Profile/SectionTabs";
+
+import UnderReview from "../Sections/Profile/UnderReview";
 
 const useStyles = makeStyles(styles);
 
@@ -43,28 +46,36 @@ function ProfilePage(props) {
   const [verified, setVerified] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const override = css`
-    display: block;
-    margin: 0 auto;
-    border-color: purple;
-  `;
-
-  !isAdmin &&
-    user &&
-    db
-      .collection("Users")
-      .doc(user.uid)
-      .onSnapshot(function (doc) {
-        if (doc.exists) {
-          setLoading(false);
-          if (!doc.data().verified) {
+  React.useEffect(() => {
+    let unsubscribe;
+    if (!isAdmin && user) {
+      unsubscribe = db
+        .collection("Users")
+        .doc(user.uid)
+        .onSnapshot(
+          (doc) => {
+            if (doc.exists) {
+              setLoading(false);
+              if (!doc.data().verified) {
+                setVerified(false);
+                return;
+              }
+              setVerified(true);
+              setDisplayName(doc.data().displayName);
+              setPhotoURL(doc.data().photoURL);
+            } else setLoading(false);
+          },
+          (error) => {
+            console.log(error.message);
             setVerified(false);
-            return;
-          } else setVerified(true);
-          setDisplayName(doc.data().displayName);
-          setPhotoURL(doc.data().photoURL);
-        } else setLoading(false);
-      });
+            setLoading(false);
+          }
+        );
+    }
+    return () => {
+      typeof unsubscribe === "function" ? unsubscribe() : null;
+    };
+  }, [isAdmin, user, verified]);
 
   React.useEffect(() => {
     if (!isAuthenticated) {
@@ -116,10 +127,10 @@ function ProfilePage(props) {
             db.collection("Users")
               .doc(user.uid)
               .update({ photoURL: info.info.secure_url })
-              .then(function () {
+              .then(() => {
                 console.log("Document successfully written!");
               })
-              .catch(function (error) {
+              .catch((error) => {
                 console.error("Error writing document: ", error);
               });
             console.log("Upload Widget event - ", info);
@@ -129,7 +140,7 @@ function ProfilePage(props) {
     );
   };
 
-  if (authLoading || loading)
+  if (authLoading || loading) {
     return (
       <div
         style={{
@@ -142,6 +153,7 @@ function ProfilePage(props) {
         <CircularProgress />
       </div>
     );
+  }
 
   if (!isAdmin && !verified) {
     return <UnderReview />;
@@ -151,7 +163,6 @@ function ProfilePage(props) {
     <div>
       <Header
         color="transparent"
-        brand="IEDPU"
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
@@ -169,7 +180,7 @@ function ProfilePage(props) {
                 <div className={classes.profile}>
                   <div>
                     <img
-                      src={photoURL + "?height=400" || "img/profile.png"}
+                      src={`${photoURL}?height=400` || "img/profile.png"}
                       alt="..."
                       className={imageClasses}
                     />

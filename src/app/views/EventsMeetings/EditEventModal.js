@@ -15,6 +15,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 // @material-ui/icons
 import CustomInput from 'components/CustomInput/CustomInput.js';
 import CustomDateTimePicker from 'components/CustomInput/CustomDatePicker';
+import { toast } from 'react-toastify';
 import Close from '@material-ui/icons/Close';
 // core components
 import GridContainer from 'components/Grid/GridContainer.js';
@@ -36,10 +37,6 @@ Transition.displayName = 'Transition';
 export default function EditEventModal({
   classicModal,
   setClassicModal,
-  setSuccessNotification,
-  setFailureNotification,
-  setErrorMessage,
-  setSuccessMessage,
   event,
 }) {
   const classes = useStyles();
@@ -54,65 +51,19 @@ export default function EditEventModal({
     description: '',
     venue: '',
   });
-  const [imageUrl, setImageUrl] = useState('');
   const [selectedDate, handleDateChange] = useState(new Date());
-
 
   useEffect(() => {
     if (event) {
       const {
-        title, description, venue, time, image,
+        title, description, venue, time,
       } = event;
       setValues({ title, description, venue });
-      setImageUrl(image);
       handleDateChange(new Date(time));
     }
   }, [event]);
 
   if (!event) return null;
-  const uploadPhoto = () => {
-    window.cloudinary.openUploadWidget(
-      {
-        cloudName: 'haywhyze',
-        uploadPreset: 'ittv3vvm',
-        sources: ['local', 'camera', 'facebook', 'instagram'],
-        showAdvancedOptions: true,
-        cropping: true,
-        multiple: false,
-        defaultSource: 'local',
-        styles: {
-          palette: {
-            window: '#FFFFFF',
-            windowBorder: '#90A0B3',
-            tabIcon: '#0078FF',
-            menuIcons: '#5A616A',
-            textDark: '#000000',
-            textLight: '#FFFFFF',
-            link: '#0078FF',
-            action: '#FF620C',
-            inactiveTabIcon: '#0E2F5A',
-            error: '#F44235',
-            inProgress: '#0078FF',
-            complete: '#20B832',
-            sourceBg: '#E4EBF1',
-          },
-          fonts: {
-            default: {
-              active: true,
-            },
-          },
-        },
-      },
-      (err, info) => {
-        if (!err) {
-          if (info.event === 'success') {
-            // console.log(info.info.secure_url)
-            setImageUrl(info.info.secure_url);
-          }
-        }
-      },
-    );
-  };
 
   const handleChange = (e) => {
     setValues({
@@ -126,7 +77,6 @@ export default function EditEventModal({
       ...values,
       author: 'Admin',
       time: selectedDate.toISOString(),
-      imageUrl,
     };
 
     if (event) {
@@ -135,21 +85,11 @@ export default function EditEventModal({
         .update(newEvent)
         .then(() => {
           setValues({ title: '', description: '', venue: '' });
-          setImageUrl('');
           setClassicModal(false);
-          setSuccessMessage('Event successfully updated');
-          setTimeout(() => {
-            setSuccessNotification(false);
-          }, 3000);
-          setSuccessNotification(true);
+          toast.success('Event successfully updated');
         })
         .catch((error) => {
-          console.log('Error adding document', error);
-          setErrorMessage(error.message);
-          setFailureNotification(true);
-          setTimeout(() => {
-            setFailureNotification(false);
-          }, 3000);
+          toast.error(`Error updating event, ${error.message}`);
         });
     }
   };
@@ -191,7 +131,7 @@ export default function EditEventModal({
               <CardBody>
                 <GridContainer>
                   <GridItem xs={12}>
-                    <h2>Edit Event</h2>
+                    <h3>Edit Event</h3>
                   </GridItem>
                   <GridItem xs={12}>
                     <CustomInput
@@ -231,24 +171,6 @@ export default function EditEventModal({
                       />
                       <InputLabel>Date and Time</InputLabel>
                     </MuiPickersUtilsProvider>
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={6}>
-                    <Button
-                      className="makeStyles-formControl-428"
-                      onClick={uploadPhoto}
-                      color="info"
-                    >
-                      <i className={`${classes.socials} fas fa-camera`} />
-                      Upload Image
-                    </Button>
-                    <img
-                      src={imageUrl || '../img/profile.png'}
-                      alt="..."
-                      width={50}
-                      height={50}
-                      style={{ objectFit: 'cover' }}
-                      className={`${imageClasses} makeStyles-formControl-428`}
-                    />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={12}>
                     <CustomInput

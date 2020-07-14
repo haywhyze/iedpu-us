@@ -29,7 +29,11 @@ const conatinerFluid = {
   paddingLeft: "15px",
   marginRight: "auto",
   marginLeft: "auto",
-  width: "100%"
+  width: "100%",
+  '@media (max-width: 768px)': {
+    paddingRight: '5px',
+    paddingLeft: '5px',
+  },
 };
 const container = {
   ...conatinerFluid,
