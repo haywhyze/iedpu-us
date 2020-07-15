@@ -17,6 +17,7 @@ const createProfile = (user, context) => {
     'tahirlanre@gmail.com',
     'haywhyze@hotmail.com',
     'haywhyze@gmail.com',
+    'wahabson@gmail.com',
   ];
 
   if (user.email && admins.includes(user.email)) {
