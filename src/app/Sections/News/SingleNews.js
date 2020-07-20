@@ -11,7 +11,7 @@ const styles = {
   image: {
     width: '100%',
     height: '10rem',
-    objectFit: 'cover',
+    objectFit: 'contain',
   },
   footerButton: {
     padding: '10px',

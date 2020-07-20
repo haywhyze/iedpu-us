@@ -76,7 +76,7 @@ export default function ProfileModal({ classicModal, setClassicModal, news }) {
                     style={{
                       width: '100%',
                       height: '15rem',
-                      objectFit: 'cover',
+                      objectFit: 'contain',
                       borderTopRightRadius: 'calc(.4rem - 1px)',
                       borderTopLeftRadius: 'calc(.4rem - 1px)',
                     }}
