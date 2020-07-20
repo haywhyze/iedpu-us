@@ -46,7 +46,7 @@ export default function SingleEvent({
   };
 
   return (
-    <GridItem xs={12} sm={6} md={4} lg={3}>
+    <GridItem style={{ display: 'flex' }} xs={12} sm={6} md={4} lg={3}>
       <ViewEventModal
         classicModal={classicModal}
         setClassicModal={setClassicModal}
@@ -62,7 +62,7 @@ export default function SingleEvent({
           <h4>{title}</h4>
         </CardHeader>
         <CardBody style={{
-          display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+          display: 'flex', flexDirection: 'column', justifyContent: 'center',
         }}
         >
           {venue && (
