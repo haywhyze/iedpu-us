@@ -13,6 +13,7 @@ import firebaseConfig from '../firebaseConfig';
 import 'firebase/auth';
 import 'firebase/firestore';
 
+import 'react-quill/dist/quill.snow.css';
 import 'assets/scss/material-kit-react.scss?v=1.8.0';
 import 'assets/scss/style.scss';
 

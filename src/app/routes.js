@@ -1,6 +1,7 @@
 import Dashboard from "@material-ui/icons/Dashboard";
 import People from "@material-ui/icons/People";
 import LibraryBooks from "@material-ui/icons/LibraryBooks";
+import Info from "@material-ui/icons/Info";
 import LocalAtm from "@material-ui/icons/LocalAtm";
 import Event from "@material-ui/icons/Event";
 import PhotoLibrary from "@material-ui/icons/PhotoLibrary";
@@ -10,6 +11,7 @@ import Members from "views/Members/Members.js";
 import Payments from "views/Payments/Payments.js";
 import EventsMeetings from "views/EventsMeetings/EventsMeetings.js";
 import NewsArticles from "views/NewsArticles/NewsArticles.js";
+import About from "views/About/About";
 import GalleryPage from "views/Gallery/Gallery.js";
 // core components/views for RTL layout
 
@@ -47,6 +49,13 @@ const dashboardRoutes = [
     name: "News and Articles",
     icon: LibraryBooks,
     component: NewsArticles,
+    layout: "/admin",
+  },
+  {
+    path: "/about-section",
+    name: "About Section",
+    icon: Info,
+    component: About,
     layout: "/admin",
   },
   {

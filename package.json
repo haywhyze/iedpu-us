@@ -44,6 +44,8 @@
     "react-dom": "^16.13.1",
     "react-image-gallery": "^1.0.7",
     "react-material-ui-form-validator": "^2.0.10",
+    "react-no-ssr": "^1.1.0",
+    "react-quill": "^1.3.5",
     "react-router-dom": "^5.2.0",
     "react-slick": "^0.25.2",
     "react-spinners": "^0.8.3",
