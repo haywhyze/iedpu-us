@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from "react";
 // core components
-import GridContainer from 'components/Grid/GridContainer.js';
-import Table from 'components/Table/Table.js';
-import Card from 'components/Card/Card.js';
-import Button from 'components/CustomButtons/Button.js';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import CardBody from 'components/Card/CardBody.js';
-import { AuthContext, db } from '../../pages/_app';
-import NewMembershipFeesModal from './NewMembershipFeesModal';
+import GridContainer from "components/Grid/GridContainer.js";
+import Table from "components/Table/Table.js";
+import Card from "components/Card/Card.js";
+import Button from "components/CustomButtons/Button.js";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import CardBody from "components/Card/CardBody.js";
+import { AuthContext, db } from "../../pages/_app";
+import NewMembershipFeesModal from "./NewMembershipFeesModal";
 
 export default function MembershipFees({ members }) {
   const { user, isAuthenticated } = useContext(AuthContext);
@@ -15,7 +15,7 @@ export default function MembershipFees({ members }) {
   const [membershipFeesModal, setMembershipFeesModal] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const membershipFeesRef = user && db.collection('membership_fees');
+  const membershipFeesRef = user && db.collection("membership_fees");
 
   useEffect(() => {
     if (user) {
@@ -32,7 +32,7 @@ export default function MembershipFees({ members }) {
         (err) => {
           console.log(err);
           setLoading(false);
-        },
+        }
       );
     }
   }, [isAuthenticated, user]);
@@ -40,10 +40,10 @@ export default function MembershipFees({ members }) {
     return (
       <div
         style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          minHeight: '100%',
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "100%",
         }}
       >
         <CircularProgress />
@@ -54,18 +54,18 @@ export default function MembershipFees({ members }) {
   const membershipFeesData = membershipFees.map((fees) => [
     fees.name,
     fees.email,
-    new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
+    new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
     }).format(fees.amount),
     fees.intent,
-    new Intl.DateTimeFormat('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-      second: 'numeric',
+    new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
     }).format(fees.date),
     fees.transaction_id,
   ]);
@@ -90,19 +90,19 @@ export default function MembershipFees({ members }) {
               <Table
                 tableHeaderColor="info"
                 tableHead={[
-                  'Name',
-                  'Email',
-                  'Amount',
-                  'Payment for',
-                  'Date',
-                  'Transaction ID',
+                  "Name",
+                  "Email",
+                  "Amount",
+                  "Payment for",
+                  "Date",
+                  "Transaction ID",
                 ]}
                 tableData={membershipFeesData.sort(
-                  (a, b) => Date.parse(b[4]) - Date.parse(a[4]),
+                  (a, b) => Date.parse(b[4]) - Date.parse(a[4])
                 )}
               />
             ) : (
-              <h4 style={{ textAlign: 'center' }}>No membership fees record</h4>
+              <h4 style={{ textAlign: "center" }}>No membership fees record</h4>
             )}
           </CardBody>
         </Card>

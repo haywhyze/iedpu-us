@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 
@@ -14,33 +14,47 @@ import Footer from 'components/Footer/Footer.js';
 
 import styles from 'assets/jss/material-kit-react/views/profilePage.js';
 import styles2 from 'assets/jss/material-kit-react/views/landingPage.js';
-import typoStyles from 'assets/jss/material-kit-react/views/componentsSections/typographyStyle.js';
 import teamStyles from 'assets/jss/material-kit-react/views/landingPageSections/teamStyle.js';
 import { toast } from 'react-toastify';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import organizationChartData from '../Sections/OrganizationCharts/data';
 import Panel from '../Sections/OrganizationCharts/Panel';
-import { AuthContext, db } from './_app';
+import { db } from './_app';
 
 const useStyles = makeStyles(styles);
 const useStyles2 = makeStyles(styles2);
-const useTypoStyles = makeStyles(typoStyles);
 const useTeamStyles = makeStyles(teamStyles);
 
 export default function Executives(props) {
   const [loading, setLoading] = useState(true);
-  const { user, isAuthenticated } = useContext(AuthContext);
   const [text, setText] = useState('');
+  const [allExcos, setAllExcos] = useState([]);
 
   const classes = useStyles();
   const classes2 = useStyles2();
-  const typoClasses = useTypoStyles();
   const teamClasses = useTeamStyles();
   const { ...rest } = props;
-  const { executives, bot, ac } = organizationChartData;
 
   const aboutRef = db.collection('about').doc('hFOSsA2VgSRQpVGjOPCW');
+  const executivesRef = db.collection('executives');
+
+  useEffect(() => {
+    executivesRef
+      .get()
+      .then((doc) => {
+        const data = [];
+        doc.forEach((newDoc) => {
+          // doc.data() is never undefined for query doc snapshots
+          data.push({ ...newDoc.data(), id: doc.id });
+        });
+        setAllExcos(data);
+        // console.log(data);
+      })
+      .catch((error) => {
+        setLoading(false);
+        toast.error(`Error fetching about us, ${error.message}`);
+      });
+  }, []);
 
   useEffect(() => {
     if (aboutRef) {
@@ -65,6 +79,10 @@ export default function Executives(props) {
   function createMarkup() {
     return { __html: text };
   }
+
+  const excos = allExcos.filter((e) => e.type === 'executives');
+  const bot = allExcos.filter((e) => e.type === 'BOT');
+  const ac = allExcos.filter((e) => e.type === 'council');
 
   return (
     <div>
@@ -130,11 +148,21 @@ export default function Executives(props) {
                                   </div>
                                 ) : (
                                   <div>
-                                    <div className="about-us" dangerouslySetInnerHTML={createMarkup()} />
+                                    <div
+                                      className="about-us"
+                                      dangerouslySetInnerHTML={createMarkup()}
+                                    />
                                     <div>
-                                      <a href="/iedpu-us_constitution.pdf" download>
+                                      <a
+                                        href="/iedpu-us_constitution.pdf"
+                                        download
+                                      >
                                         <span>
-                                          <Button color="primary" size="lg" round>
+                                          <Button
+                                            color="primary"
+                                            size="lg"
+                                            round
+                                          >
                                             Download Constitution
                                           </Button>
                                         </span>
@@ -160,7 +188,19 @@ export default function Executives(props) {
                             tabName: 'Executives',
                             tabContent: (
                               <>
-                                <Panel data={executives} />
+                                {loading ? (
+                                  <div
+                                    style={{
+                                      display: 'flex',
+                                      justifyContent: 'center',
+                                      alignItems: 'center',
+                                      minHeight: '40vh',
+                                    }}
+                                  >
+                                    <CircularProgress />
+                                  </div>
+                                ) : (
+                                  <Panel data={excos} />)}
                               </>
                             ),
                           },
@@ -168,7 +208,19 @@ export default function Executives(props) {
                             tabName: 'Board of Trustees',
                             tabContent: (
                               <>
-                                <Panel data={bot} />
+                                {loading ? (
+                                  <div
+                                    style={{
+                                      display: 'flex',
+                                      justifyContent: 'center',
+                                      alignItems: 'center',
+                                      minHeight: '40vh',
+                                    }}
+                                  >
+                                    <CircularProgress />
+                                  </div>
+                                ) : (
+                                  <Panel data={bot} />)}
                               </>
                             ),
                           },
@@ -176,7 +228,19 @@ export default function Executives(props) {
                             tabName: 'Advisory Council',
                             tabContent: (
                               <>
-                                <Panel data={ac} />
+                                {loading ? (
+                                  <div
+                                    style={{
+                                      display: 'flex',
+                                      justifyContent: 'center',
+                                      alignItems: 'center',
+                                      minHeight: '40vh',
+                                    }}
+                                  >
+                                    <CircularProgress />
+                                  </div>
+                                ) : (
+                                  <Panel data={ac} />)}
                               </>
                             ),
                           },

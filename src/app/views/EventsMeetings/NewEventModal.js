@@ -1,44 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 // @material-ui/core components
-import InputLabel from '@material-ui/core/InputLabel';
-import { makeStyles } from '@material-ui/core/styles';
-import Slide from '@material-ui/core/Slide';
-import IconButton from '@material-ui/core/IconButton';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import DateFnsUtils from '@date-io/date-fns'; // choose your lib
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import DialogActions from '@material-ui/core/DialogActions';
-import { toast } from 'react-toastify';
+import InputLabel from "@material-ui/core/InputLabel";
+import { makeStyles } from "@material-ui/core/styles";
+import Slide from "@material-ui/core/Slide";
+import IconButton from "@material-ui/core/IconButton";
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import DateFnsUtils from "@date-io/date-fns"; // choose your lib
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import DialogActions from "@material-ui/core/DialogActions";
+import { toast } from "react-toastify";
 // @material-ui/icons
-import CustomInput from 'components/CustomInput/CustomInput.js';
-import CustomDateTimePicker from 'components/CustomInput/CustomDatePicker';
-import Close from '@material-ui/icons/Close';
+import CustomInput from "components/CustomInput/CustomInput.js";
+import CustomDateTimePicker from "components/CustomInput/CustomDatePicker";
+import Close from "@material-ui/icons/Close";
 // core components
-import GridContainer from 'components/Grid/GridContainer.js';
-import GridItem from 'components/Grid/GridItem.js';
-import Button from 'components/CustomButtons/Button.js';
-import CardBody from 'components/Card/CardBody.js';
+import GridContainer from "components/Grid/GridContainer.js";
+import GridItem from "components/Grid/GridItem.js";
+import Button from "components/CustomButtons/Button.js";
+import CardBody from "components/Card/CardBody.js";
 
-import styles from 'assets/jss/material-kit-react/views/componentsSections/javascriptStyles.js';
-import { db } from '../../pages/_app.js';
+import styles from "assets/jss/material-kit-react/views/componentsSections/javascriptStyles.js";
+import { db } from "../../pages/_app.js";
 
 const useStyles = makeStyles(styles);
 
-const Transition = React.forwardRef((props, ref) => <Slide direction="down" ref={ref} {...props} />);
+const Transition = React.forwardRef((props, ref) => (
+  <Slide direction="down" ref={ref} {...props} />
+));
 
-Transition.displayName = 'Transition';
+Transition.displayName = "Transition";
 
-export default function NewEventModal({
-  classicModal,
-  setClassicModal,
-}) {
+export default function NewEventModal({ classicModal, setClassicModal }) {
   const classes = useStyles();
   const [values, setValues] = useState({
-    title: '',
-    description: '',
-    venue: '',
+    title: "",
+    description: "",
+    venue: "",
   });
   const [selectedDate, handleDateChange] = useState(new Date());
 
@@ -52,18 +51,18 @@ export default function NewEventModal({
   const createEvent = () => {
     const newEvent = {
       ...values,
-      author: 'Admin',
+      author: "Admin",
       time: selectedDate.toISOString(),
     };
 
-    db.collection('events')
+    db.collection("events")
       .add(newEvent)
       .then((docRef) => {
-        console.log('Document written with ID: ', docRef.id);
-        setValues({ title: '', description: '', venue: '' });
+        console.log("Document written with ID: ", docRef.id);
+        setValues({ title: "", description: "", venue: "" });
         handleDateChange(new Date());
         setClassicModal(false);
-        toast.success('Event successfully created');
+        toast.success("Event successfully created");
       })
       .catch((error) => {
         toast.error(`Error creating event, ${error.message}`);
@@ -117,7 +116,7 @@ export default function NewEventModal({
                         fullWidth: true,
                       }}
                       inputProps={{
-                        name: 'title',
+                        name: "title",
                         value: values.title,
                         onChange: handleChange,
                       }}
@@ -130,7 +129,7 @@ export default function NewEventModal({
                         fullWidth: true,
                       }}
                       inputProps={{
-                        name: 'venue',
+                        name: "venue",
                         value: values.venue,
                         onChange: handleChange,
                       }}
@@ -157,7 +156,7 @@ export default function NewEventModal({
                         fullWidth: true,
                       }}
                       inputProps={{
-                        name: 'description',
+                        name: "description",
                         value: values.description,
                         onChange: handleChange,
                         multiline: true,

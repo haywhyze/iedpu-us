@@ -16,7 +16,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import { AuthContext, db } from "../../pages/_app.js";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -108,7 +108,7 @@ export default function Gallery() {
       .doc(id)
       .delete()
       .then(() => {
-        toast.success('Photo deleted successfully');
+        toast.success("Photo deleted successfully");
       })
       .catch((error) => {
         toast.error(`Error removing photo, ${error.message}`);
@@ -147,7 +147,7 @@ export default function Gallery() {
       .update({ caption })
       .then(() => {
         setCaption("");
-        toast.success('Caption saved');
+        toast.success("Caption saved");
       })
       .catch((error) => {
         toast.error(`Error saving caption, ${error.message}`);
@@ -165,7 +165,7 @@ export default function Gallery() {
         setNewImageOn(false);
         setImageUrl("");
         setNewCaption("");
-        toast.success('Image saved');
+        toast.success("Image saved");
       })
       .catch((error) => {
         toast.error(`Error saving image, ${error.message}`);
@@ -288,7 +288,14 @@ export default function Gallery() {
               {photos
                 .sort((a, b) => Date.parse(b.created) - Date.parse(a.created))
                 .map((photo) => (
-                  <GridItem style={{ margin: '1rem' }} key={photo.id} xs={12} sm={6} md={4} lg={3}>
+                  <GridItem
+                    style={{ margin: "1rem" }}
+                    key={photo.id}
+                    xs={12}
+                    sm={6}
+                    md={4}
+                    lg={3}
+                  >
                     <img
                       src={photo.imageUrl}
                       alt="..."
@@ -305,7 +312,7 @@ export default function Gallery() {
                         height: "15rem",
                       }}
                     />
-                    {selectedImage?.id === photo.id && editOn ? (
+                    {selectedImage && selectedImage.id === photo.id && editOn ? (
                       ""
                     ) : (
                       <h5>{photo.caption}</h5>
@@ -335,7 +342,7 @@ export default function Gallery() {
                           color="info"
                           size="sm"
                         >
-                          {selectedImage?.id === photo.id && editOn
+                          {selectedImage && selectedImage.id === photo.id && editOn
                             ? "Update Caption"
                             : "Edit Caption"}
                         </Button>

@@ -33,7 +33,7 @@ He is married with kids.
       bio:
         'Waziri Abdulrazzaq Sallah Fulani, is a great descendant of Usman Olufadi of the Balogun Fulani Family (Mayaki Fulani) in Ilorin South Local Government Area of the Emirate. Mallam Waziri is an I.T Technical Analyst by profession, lives in New York States with his family. Since 2019, Waziri Abdulrazzaq has been the Pro tem Secretary-General of IEDPU – USA Branch. Mallam Waziri hobbies includes Horse Racing, Polo, Chess Game, Arts Work and also like involving in NGOs & Community Service.',
       socialmedia: {
-        // facebook: '',
+        facebook: '',
         twitter: '',
         instagram: '',
       },
@@ -43,7 +43,7 @@ He is married with kids.
       position: 'Financial Secretary',
       image: '/img/faces/alaya.png',
       bio:
-        `Alhaji (Engr. ) Tajudeen Olawale Alaya is from Alaya's compound in Balogun Fulani Ward II, Ilorin South LGA. He lives in Staten Island, New York with his family. Alhaji Tajudeen is currently working as a Chief Engineer with the New York State Department of Works and has been the pro tem Financial secretary of IEDPU USA branch.`,
+        "Alhaji (Engr. ) Tajudeen Olawale Alaya is from Alaya's compound in Balogun Fulani Ward II, Ilorin South LGA. He lives in Staten Island, New York with his family. Alhaji Tajudeen is currently working as a Chief Engineer with the New York State Department of Works and has been the pro tem Financial secretary of IEDPU USA branch.",
       socialmedia: {
         facebook: '',
         twitter: '',
@@ -90,8 +90,7 @@ He is married with kids.
       name: 'Mr. SULYMAN KOLAPO AYEGUN',
       position: 'Asst. Publicity Secretary',
       image: '/img/faces/ayegun.png',
-      bio:
-        '',
+      bio: '',
       socialmedia: {
         facebook: '',
         twitter: '',
@@ -119,8 +118,7 @@ He is married with kids.
       name: 'Alhaji BABATUNDE ONIMAGO-ISHIAKA',
       position: 'Secretary, Board of Trustee',
       image: '/img/faces/onimago.png',
-      bio:
-        `
+      bio: `
         Babatunde Onimago-Ishiaka is from Ilorin, Onimago compound, Balogun Alanamu Central, Ilorin West, Kwara State, Nigeria. Tunde Graduated from George Washington University, Washington D.C, school of Medicine & Health Science where he studied Health Science Laboratory Technology.
 He obtained his Master Degree in Physician Assistant Studies at DYouville college, Buffalo N.Y. He acquired N.C.E certification in Biology/Agricultural Science & Education from University of Ilorin, Kwara State College of Education. Alhaji Onimago-Ishiaka lives in Dallas/Grand Prairie area, U.S.A with his family and currently work Surgical Physician Assistant with U.S Department of Veterans Affairs. Prior, he was with U.S Dept. of Defense as a civilian Employee. A proud United States Armed Forces Veteran and a Formal U.S Navy Corpsman.
         `,
@@ -139,7 +137,7 @@ He obtained his Master Degree in Physician Assistant Studies at DYouville colleg
 Alhaji Lambe lives in Altanta, Georgia, United States of America. He is married with children.
       `,
       socialmedia: {
-        // facebook: '',
+        facebook: '',
         twitter: '',
         instagram: '',
       },
@@ -164,8 +162,7 @@ Alhaji Lambe lives in Altanta, Georgia, United States of America. He is married 
       name: 'Prince ALIYU ATOLABGE SHUAIB',
       position: 'Adviser on Cultural Heritage',
       image: '/img/faces/shuaib.png',
-      bio:
-        `
+      bio: `
         Prince Aliyu Atolagbe Shuaib, RN, MSN. EdD (PhD) in progress. Professional Registered Psychiatric Nurse. From Shitta ruling house. Graduated 1981 at school of Psychiatric Nursing Aro-Abeokuta. Working in the states since 1992. Married with children and five grandchildren.
         `,
       socialmedia: {
@@ -178,13 +175,12 @@ Alhaji Lambe lives in Altanta, Georgia, United States of America. He is married 
       name: 'Dr. IBRAHIM DARE OMORE, MD',
       position: 'Adviser on Medical and Health Matters',
       image: '/img/faces/dare.png',
-      bio:
-        `
+      bio: `
         Dr. Ibrahim was born and brought up in Ilorin, attended both primary and secondary school in Ilorin and obtain my medical degree from the University of Ilorin
 Dr. Ibrahim practiced for about a decade in Nigeria including few years at the National Hospital Abuja, before moving to the United States and currently practice in New York City with the New York City Health and Hospital Corporation. Married with 2 children
         `,
       socialmedia: {
-        // facebook: '',
+        facebook: '',
         twitter: '',
         instagram: '',
       },
@@ -193,8 +189,7 @@ Dr. Ibrahim practiced for about a decade in Nigeria including few years at the N
       name: 'Hajia AYODELE GOBIR-OJULARI',
       position: 'Adviser on Social Welfare',
       image: '/img/faces/gobir.png',
-      bio:
-        `Ayodele A. Ojulari was born September 2, 1959 in Ilorin, Kwara State Nigeria from the Gobir family.
+      bio: `Ayodele A. Ojulari was born September 2, 1959 in Ilorin, Kwara State Nigeria from the Gobir family.
         A wife/widow and a mother of four. She currently resides in Chicago, Illinois where she works in the nursing field. Ayodele hobbies include cooking, sewing, and social gatherings.`,
       socialmedia: {
         facebook: '',

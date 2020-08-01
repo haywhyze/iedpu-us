@@ -15,9 +15,7 @@ import { db } from '../../pages/_app';
 
 const useStyles = makeStyles(styles);
 
-export default function ConfirmCell({
-  user,
-}) {
+export default function ConfirmCell({ user }) {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
@@ -31,11 +29,12 @@ export default function ConfirmCell({
   };
 
   const sendWelcomeMail = (uid, name) => {
-    db.collection('mail').add({
-      toUids: [uid],
-      message: {
-        subject: 'Welcome to the IEDPU - USA Family!',
-        text: `
+    db.collection('mail')
+      .add({
+        toUids: [uid],
+        message: {
+          subject: 'Welcome to the IEDPU - USA Family!',
+          text: `
         Hi, ${name}
         Your account has been verified and you can now connect with other members of the community.
 
@@ -45,7 +44,7 @@ export default function ConfirmCell({
         
         Click https://iedpuusa.org/profile to update your profile
         `,
-        html: `
+          html: `
         <p>Hi, ${name}</p>
         <p>Your account has been verified and you can now connect with other members of the community.</p>
         <p>You can also keep up with the latest news and events and also settle your membership fees with ease.</p>
@@ -54,8 +53,10 @@ export default function ConfirmCell({
         <p>Best Regards,</p>
         <p>IEDPU - USA Team.</p>
         `,
-      },
-    }).then(() => console.log('Queued email for delivery')).catch((err) => console.log(err));
+        },
+      })
+      .then(() => console.log('Queued email for delivery'))
+      .catch((err) => console.log(err));
   };
 
   const verifyUser = (uid, name) => {
@@ -105,7 +106,10 @@ export default function ConfirmCell({
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => verifyUser(user.id, user.displayName)} color="primary">
+          <Button
+            onClick={() => verifyUser(user.id, user.displayName)}
+            color="primary"
+          >
             Yes, please
           </Button>
           <Button onClick={handleClose} color="primary" autoFocus>

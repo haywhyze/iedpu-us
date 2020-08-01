@@ -1,11 +1,11 @@
-import React, { useState, useContext, useEffect } from 'react';
-import Router from 'next/router';
-import GridContainer from 'components/Grid/GridContainer.js';
-import Card from 'components/Card/Card.js';
-import CardBody from 'components/Card/CardBody';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { AuthContext, db } from '../../pages/_app';
-import SingleEvent from './SingleEvent';
+import React, { useState, useContext, useEffect } from "react";
+import Router from "next/router";
+import GridContainer from "components/Grid/GridContainer.js";
+import Card from "components/Card/Card.js";
+import CardBody from "components/Card/CardBody";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { AuthContext, db } from "../../pages/_app";
+import SingleEvent from "./SingleEvent";
 
 export default function EventsContainer() {
   const [events, setEvents] = useState([]);
@@ -14,7 +14,7 @@ export default function EventsContainer() {
 
   const { user, isAuthenticated } = useContext(AuthContext);
 
-  const eventsRef = user && db.collection('events');
+  const eventsRef = user && db.collection("events");
 
   useEffect(() => {
     let unsubscribeEvents;
@@ -29,17 +29,17 @@ export default function EventsContainer() {
           setEvents(data);
         },
         (error) => {
-          console.log('Not verified yet', error.message);
+          console.log("Not verified yet", error.message);
           setLoading(false);
-          Router.push('/');
-        },
+          Router.push("/");
+        }
       );
     }
     if (!isAuthenticated) {
-      Router.push('/login');
+      Router.push("/login");
     }
     return () => {
-      if (typeof unsubscribeEvents === 'function') {
+      if (typeof unsubscribeEvents === "function") {
         unsubscribeEvents();
       }
     };
@@ -49,10 +49,10 @@ export default function EventsContainer() {
     return (
       <div
         style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          minHeight: '100%',
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "100%",
         }}
       >
         <CircularProgress />
@@ -66,8 +66,10 @@ export default function EventsContainer() {
           <CardBody>
             <h3>Upcoming Events</h3>
             <GridContainer>
-              {
-                events.filter((e) => Date.now() < Date.parse(e.time)).sort((a, b) => Date.parse(a.time) - Date.parse(b.time)).map((event) => {
+              {events
+                .filter((e) => Date.now() < Date.parse(e.time))
+                .sort((a, b) => Date.parse(a.time) - Date.parse(b.time))
+                .map((event) => {
                   if (!event.title) {
                     return null;
                   }
@@ -82,13 +84,14 @@ export default function EventsContainer() {
                       id={event.id}
                     />
                   );
-                })
-              }
+                })}
             </GridContainer>
             <h3>Past Events</h3>
             <GridContainer>
-              {
-                events.filter((e) => Date.now() > Date.parse(e.time)).sort((a, b) => Date.parse(a.time) - Date.parse(b.time)).map((event) => {
+              {events
+                .filter((e) => Date.now() > Date.parse(e.time))
+                .sort((a, b) => Date.parse(a.time) - Date.parse(b.time))
+                .map((event) => {
                   if (!event.title) {
                     return null;
                   }
@@ -104,8 +107,7 @@ export default function EventsContainer() {
                       past
                     />
                   );
-                })
-              }
+                })}
             </GridContainer>
           </CardBody>
         </Card>

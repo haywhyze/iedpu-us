@@ -1,24 +1,24 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from "react";
 // @material-ui/core components
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 
 // @material-ui/icons
-import Face from '@material-ui/icons/Face';
-import List from '@material-ui/icons/List';
-import Money from '@material-ui/icons/Money';
-import People from '@material-ui/icons/People';
-import Feedback from '@material-ui/icons/FeedbackOutlined';
+import Face from "@material-ui/icons/Face";
+import List from "@material-ui/icons/List";
+import Money from "@material-ui/icons/Money";
+import People from "@material-ui/icons/People";
+import Feedback from "@material-ui/icons/FeedbackOutlined";
 // core components
-import GridContainer from 'components/Grid/GridContainer.js';
-import GridItem from 'components/Grid/GridItem.js';
-import CustomTabs from 'components/CustomTabs/CustomTabs.js';
-import styles from 'assets/jss/material-kit-react/views/componentsSections/tabsStyle.js';
-import { db, AuthContext } from '../../pages/_app';
-import ProfileUpdate from './ProfileUpdate';
-import MembershipFees from './MembershipFees';
+import GridContainer from "components/Grid/GridContainer.js";
+import GridItem from "components/Grid/GridItem.js";
+import CustomTabs from "components/CustomTabs/CustomTabs.js";
+import styles from "assets/jss/material-kit-react/views/componentsSections/tabsStyle.js";
+import { db, AuthContext } from "../../pages/_app";
+import ProfileUpdate from "./ProfileUpdate";
+import MembershipFees from "./MembershipFees";
 
-import MembersList from './MembersList';
-import PaymentsHistory from './PaymentsHistory';
+import MembersList from "./MembersList";
+import PaymentsHistory from "./PaymentsHistory";
 
 const useStyles = makeStyles(styles);
 
@@ -27,13 +27,14 @@ export default function SectionTabs() {
   const classes = useStyles();
   const [fees, setFees] = useState([]);
   const [payments, setPayments] = useState([]);
-  const paymentsRef = user
-    && db
-      .collection('membership_fees')
-      .where('userId', '==', user.uid)
-      .orderBy('date');
+  const paymentsRef =
+    user &&
+    db
+      .collection("membership_fees")
+      .where("userId", "==", user.uid)
+      .orderBy("date");
 
-  const feesRef = user && db.collection('fees');
+  const feesRef = user && db.collection("fees");
 
   useEffect(() => {
     if (user) {
@@ -48,7 +49,7 @@ export default function SectionTabs() {
         },
         (err) => {
           console.log(err);
-        },
+        }
       );
 
       feesRef
@@ -61,7 +62,7 @@ export default function SectionTabs() {
           setFees(data);
         })
         .catch((error) => {
-          console.log('Error getting document:', error);
+          console.log("Error getting document:", error);
         });
     }
   }, []);
@@ -76,7 +77,7 @@ export default function SectionTabs() {
                 headerColor="primary"
                 tabs={[
                   {
-                    tabName: 'Profile',
+                    tabName: "Profile",
                     tabIcon: Face,
                     tabContent: (
                       <>
@@ -85,16 +86,21 @@ export default function SectionTabs() {
                     ),
                   },
                   {
-                    tabName: 'Membership Fees',
+                    tabName: "Membership Fees",
                     tabIcon: Money,
                     tabContent: (
                       <>
-                        <MembershipFees payments={payments} fees={fees} db={db} user={user} />
+                        <MembershipFees
+                          payments={payments}
+                          fees={fees}
+                          db={db}
+                          user={user}
+                        />
                       </>
                     ),
                   },
                   {
-                    tabName: 'Members List',
+                    tabName: "Members List",
                     tabIcon: People,
                     tabContent: (
                       <>
@@ -103,7 +109,7 @@ export default function SectionTabs() {
                     ),
                   },
                   {
-                    tabName: 'Payments History',
+                    tabName: "Payments History",
                     tabIcon: List,
                     tabContent: (
                       <>

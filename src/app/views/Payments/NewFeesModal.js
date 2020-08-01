@@ -1,43 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 // @material-ui/core components
-import InputLabel from '@material-ui/core/InputLabel';
-import { makeStyles } from '@material-ui/core/styles';
-import Slide from '@material-ui/core/Slide';
-import IconButton from '@material-ui/core/IconButton';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import DateFnsUtils from '@date-io/date-fns'; // choose your lib
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import DialogActions from '@material-ui/core/DialogActions';
+import InputLabel from "@material-ui/core/InputLabel";
+import { makeStyles } from "@material-ui/core/styles";
+import Slide from "@material-ui/core/Slide";
+import IconButton from "@material-ui/core/IconButton";
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import DateFnsUtils from "@date-io/date-fns"; // choose your lib
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import DialogActions from "@material-ui/core/DialogActions";
 // @material-ui/icons
-import CustomInput from 'components/CustomInput/CustomInput.js';
-import CustomDateTimePicker from 'components/CustomInput/CustomDatePicker';
-import Close from '@material-ui/icons/Close';
+import CustomInput from "components/CustomInput/CustomInput.js";
+import CustomDateTimePicker from "components/CustomInput/CustomDatePicker";
+import Close from "@material-ui/icons/Close";
 // core components
-import GridContainer from 'components/Grid/GridContainer.js';
-import { toast } from 'react-toastify';
-import GridItem from 'components/Grid/GridItem.js';
-import Button from 'components/CustomButtons/Button.js';
-import CardBody from 'components/Card/CardBody.js';
+import GridContainer from "components/Grid/GridContainer.js";
+import { toast } from "react-toastify";
+import GridItem from "components/Grid/GridItem.js";
+import Button from "components/CustomButtons/Button.js";
+import CardBody from "components/Card/CardBody.js";
 
-import styles from 'assets/jss/material-kit-react/views/componentsSections/javascriptStyles.js';
-import { db } from '../../pages/_app.js';
+import styles from "assets/jss/material-kit-react/views/componentsSections/javascriptStyles.js";
+import { db } from "../../pages/_app.js";
 
 const useStyles = makeStyles(styles);
 
-const Transition = React.forwardRef((props, ref) => <Slide direction="down" ref={ref} {...props} />);
+const Transition = React.forwardRef((props, ref) => (
+  <Slide direction="down" ref={ref} {...props} />
+));
 
-Transition.displayName = 'Transition';
+Transition.displayName = "Transition";
 
-export default function NewFeesModal({
-  feesModal,
-  setFeesModal,
-}) {
+export default function NewFeesModal({ feesModal, setFeesModal }) {
   const classes = useStyles();
   const [values, setValues] = useState({
-    name: '',
-    price: '',
+    name: "",
+    price: "",
   });
   const [selectedDate, handleDateChange] = useState(new Date());
 
@@ -55,13 +54,13 @@ export default function NewFeesModal({
       expiryDate: selectedDate.toISOString(),
     };
 
-    db.collection('fees')
+    db.collection("fees")
       .add(newFee)
       .then((docRef) => {
-        setValues({ name: '', price: '' });
+        setValues({ name: "", price: "" });
         handleDateChange(new Date());
         setFeesModal(false);
-        toast.success('Fee successfully created');
+        toast.success("Fee successfully created");
       })
       .catch((error) => {
         toast.error(`Error creating fee, ${error.message}`);
@@ -115,7 +114,7 @@ export default function NewFeesModal({
                         fullWidth: true,
                       }}
                       inputProps={{
-                        name: 'name',
+                        name: "name",
                         value: values.name,
                         onChange: handleChange,
                       }}
@@ -128,8 +127,8 @@ export default function NewFeesModal({
                         fullWidth: true,
                       }}
                       inputProps={{
-                        name: 'price',
-                        type: 'number',
+                        name: "price",
+                        type: "number",
                         value: values.price,
                         onChange: handleChange,
                       }}

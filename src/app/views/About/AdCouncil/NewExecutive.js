@@ -103,7 +103,7 @@ export default function NewExecutive({
       ...values,
       time: new Date().toISOString(),
       image,
-      type: 'Advisory Council',
+      type: 'council',
     };
 
     db.collection('executives')

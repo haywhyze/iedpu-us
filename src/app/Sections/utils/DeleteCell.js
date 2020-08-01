@@ -1,23 +1,21 @@
-import React from 'react';
-import Tooltip from '@material-ui/core/Tooltip';
-import Delete from '@material-ui/icons/Delete';
-import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import { makeStyles } from '@material-ui/core/styles';
-import { toast } from 'react-toastify';
-import styles from 'assets/jss/material-dashboard-react/views/dashboardStyle.js';
-import { db } from '../../pages/_app';
+import React from "react";
+import Tooltip from "@material-ui/core/Tooltip";
+import Delete from "@material-ui/icons/Delete";
+import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import { makeStyles } from "@material-ui/core/styles";
+import { toast } from "react-toastify";
+import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
+import { db } from "../../pages/_app";
 
 const useStyles = makeStyles(styles);
 
-export default function DeleteCell({
-  user
-}) {
+export default function DeleteCell({ user }) {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
@@ -32,11 +30,11 @@ export default function DeleteCell({
 
   const deleteUser = (uid) => {
     // console.log(uid);
-    db.collection('Users')
+    db.collection("Users")
       .doc(uid)
       .delete()
       .then(() => {
-        toast.success('User successfully deleted');
+        toast.success("User successfully deleted");
       })
       .catch((error) => {
         toast.error(error.message);

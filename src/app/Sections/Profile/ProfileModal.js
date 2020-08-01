@@ -1,38 +1,40 @@
-import React from 'react';
+import React from "react";
 // @material-ui/core components
-import classNames from 'classnames';
-import { makeStyles } from '@material-ui/core/styles';
-import Slide from '@material-ui/core/Slide';
-import IconButton from '@material-ui/core/IconButton';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogActions from '@material-ui/core/DialogActions';
+import classNames from "classnames";
+import { makeStyles } from "@material-ui/core/styles";
+import Slide from "@material-ui/core/Slide";
+import IconButton from "@material-ui/core/IconButton";
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogActions from "@material-ui/core/DialogActions";
 // @material-ui/icons
-import Close from '@material-ui/icons/Close';
+import Close from "@material-ui/icons/Close";
 // core components
-import GridContainer from 'components/Grid/GridContainer.js';
-import GridItem from 'components/Grid/GridItem.js';
-import Button from 'components/CustomButtons/Button.js';
-import Typography from '@material-ui/core/Typography';
+import GridContainer from "components/Grid/GridContainer.js";
+import GridItem from "components/Grid/GridItem.js";
+import Button from "components/CustomButtons/Button.js";
+import Typography from "@material-ui/core/Typography";
 
-import styles from 'assets/jss/material-kit-react/views/componentsSections/javascriptStyles.js';
-import profileStyles from 'assets/jss/material-kit-react/views/profilePage.js';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Phone from '@material-ui/icons/Phone';
-import Email from '@material-ui/icons/Email';
-import Work from '@material-ui/icons/Work';
-import LocationCity from '@material-ui/icons/LocationCity';
+import styles from "assets/jss/material-kit-react/views/componentsSections/javascriptStyles.js";
+import profileStyles from "assets/jss/material-kit-react/views/profilePage.js";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import Phone from "@material-ui/icons/Phone";
+import Email from "@material-ui/icons/Email";
+import Work from "@material-ui/icons/Work";
+import LocationCity from "@material-ui/icons/LocationCity";
 
 const useStyles = makeStyles(styles);
 const useProfileStyles = makeStyles(profileStyles);
 
-const Transition = React.forwardRef((props, ref) => <Slide direction="down" ref={ref} {...props} />);
+const Transition = React.forwardRef((props, ref) => (
+  <Slide direction="down" ref={ref} {...props} />
+));
 
-Transition.displayName = 'Transition';
+Transition.displayName = "Transition";
 
 export default function ProfileModal({
   classicModal,
@@ -43,7 +45,7 @@ export default function ProfileModal({
   const profileClasses = useProfileStyles();
   const imageClasses = classNames(
     profileClasses.imgRaised,
-    profileClasses.imgRoundedCircle,
+    profileClasses.imgRoundedCircle
     // profileClasses.imgFluid
   );
   if (!member) return null;
@@ -87,7 +89,7 @@ export default function ProfileModal({
                   <div className={profileClasses.profile}>
                     <div>
                       <img
-                        style={{ transform: 'translate3d(0, -5%, 0)' }}
+                        style={{ transform: "translate3d(0, -5%, 0)" }}
                         src={`${member.photoURL}?height=300`}
                         alt={member.displayName}
                         className={imageClasses}

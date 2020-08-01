@@ -1,29 +1,29 @@
-import React, { useState, useEffect, useContext } from 'react';
-import Router from 'next/router';
-import { makeStyles } from '@material-ui/core/styles';
-import GridContainer from 'components/Grid/GridContainer.js';
-import Card from 'components/Card/Card.js';
-import CardBody from 'components/Card/CardBody';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { AuthContext, db } from '../../pages/_app';
-import SingleNews from './SingleNews';
+import React, { useState, useEffect, useContext } from "react";
+import Router from "next/router";
+import { makeStyles } from "@material-ui/core/styles";
+import GridContainer from "components/Grid/GridContainer.js";
+import Card from "components/Card/Card.js";
+import CardBody from "components/Card/CardBody";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { AuthContext, db } from "../../pages/_app";
+import SingleNews from "./SingleNews";
 
 const styles = {
   cardCategoryWhite: {
-    color: 'rgba(255,255,255,.62)',
-    margin: '0',
-    fontSize: '14px',
-    marginTop: '0',
-    marginBottom: '0',
+    color: "rgba(255,255,255,.62)",
+    margin: "0",
+    fontSize: "14px",
+    marginTop: "0",
+    marginBottom: "0",
   },
   cardTitleWhite: {
-    color: '#FFFFFF',
-    marginTop: '0px',
-    minHeight: 'auto',
-    fontWeight: '300',
+    color: "#FFFFFF",
+    marginTop: "0px",
+    minHeight: "auto",
+    fontWeight: "300",
     fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: '3px',
-    textDecoration: 'none',
+    marginBottom: "3px",
+    textDecoration: "none",
   },
 };
 
@@ -38,7 +38,7 @@ export default function NewsContainer() {
 
   const { user, isAuthenticated } = useContext(AuthContext);
 
-  const newsRef = user && db.collection('news');
+  const newsRef = user && db.collection("news");
 
   useEffect(() => {
     let unsubscribe;
@@ -53,17 +53,17 @@ export default function NewsContainer() {
           setNews(data);
         },
         (error) => {
-          console.log('Not verified yet', error.message);
+          console.log("Not verified yet", error.message);
           setLoading(false);
-          Router.push('/');
-        },
+          Router.push("/");
+        }
       );
     }
     if (!isAuthenticated) {
-      Router.push('/login');
+      Router.push("/login");
     }
     return () => {
-      if (typeof unsubscribe === 'function') unsubscribe();
+      if (typeof unsubscribe === "function") unsubscribe();
     };
   }, [isAuthenticated, user]);
 
@@ -71,10 +71,10 @@ export default function NewsContainer() {
     return (
       <div
         style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          minHeight: '100%',
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "100%",
         }}
       >
         <CircularProgress />

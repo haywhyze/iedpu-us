@@ -6,6 +6,7 @@ import CustomTabs from 'components/CustomTabs/CustomTabs';
 import AboutUs from './AboutUs';
 import Executives from './Executives/Executives';
 import BOT from './BOT/Executives';
+import AdCouncil from './AdCouncil/Executives';
 
 export default function EventsMeetings() {
   return (
@@ -43,7 +44,7 @@ export default function EventsMeetings() {
                 tabName: 'Advisory Council',
                 tabContent: (
                   <>
-                    {/* <AdCouncil /> */}
+                    <AdCouncil />
                   </>
                 ),
               },

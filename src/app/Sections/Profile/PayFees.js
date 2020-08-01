@@ -1,18 +1,15 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable import/extensions */
-import React, { useState } from 'react';
-import { Typography } from '@material-ui/core';
-import Button from 'components/CustomButtons/Button.js';
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import React, { useState } from "react";
+import { Typography } from "@material-ui/core";
+import Button from "components/CustomButtons/Button.js";
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
-import PayPalButtons from './PayPalButtons';
+import PayPalButtons from "./PayPalButtons";
 
-
-export default function PayFees({
-  amount, user, intent, db,
-}) {
+export default function PayFees({ amount, user, intent, db }) {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -33,13 +30,13 @@ export default function PayFees({
       userId: user.uid,
       date: Date.parse(payload.date),
     };
-    db.collection('membership_fees')
+    db.collection("membership_fees")
       .add(newFee)
       .then((docRef) => {
-        console.log('Document written with ID: ', docRef.id);
+        console.log("Document written with ID: ", docRef.id);
       })
       .catch((error) => {
-        console.log('Error adding document', error);
+        console.log("Error adding document", error);
       });
   };
 
@@ -53,24 +50,17 @@ export default function PayFees({
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
-        style={{ textAlign: 'center' }}
+        style={{ textAlign: "center" }}
         maxWidth="md"
       >
         <DialogTitle id="alert-dialog-title">Pay Membership Fees</DialogTitle>
         <DialogContent>
           <Typography
             variant="body1"
-            style={{ textAlign: 'center' }}
+            style={{ textAlign: "center" }}
             gutterBottom
           >
-            Click either of the button below to pay
-            {' '}
-            $
-            {amount}
-            {' '}
-            for
-            {' '}
-            {intent}
+            Click either of the button below to pay ${amount} for {intent}
           </Typography>
           <br />
           <PayPalButtons

@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 // @material-ui/core components
 // core components
-import GridItem from 'components/Grid/GridItem.js';
-import GridContainer from 'components/Grid/GridContainer.js';
-import CustomTabs from 'components/CustomTabs/CustomTabs.js';
-import Donations from './Donations';
-import MembershipFees from './MembershipFees';
-import PayableFees from './Fees';
+import GridItem from "components/Grid/GridItem.js";
+import GridContainer from "components/Grid/GridContainer.js";
+import CustomTabs from "components/CustomTabs/CustomTabs.js";
+import Donations from "./Donations";
+import MembershipFees from "./MembershipFees";
+import PayableFees from "./Fees";
 
 export default function Payments({ members }) {
   return (
@@ -17,7 +17,7 @@ export default function Payments({ members }) {
             headerColor="primary"
             tabs={[
               {
-                tabName: 'Donations',
+                tabName: "Donations",
                 tabContent: (
                   <>
                     <Donations />
@@ -25,7 +25,7 @@ export default function Payments({ members }) {
                 ),
               },
               {
-                tabName: 'Membership Fees',
+                tabName: "Membership Fees",
                 tabContent: (
                   <>
                     <MembershipFees members={members} />
@@ -33,7 +33,7 @@ export default function Payments({ members }) {
                 ),
               },
               {
-                tabName: 'Payable Fees',
+                tabName: "Payable Fees",
                 tabContent: (
                   <>
                     <PayableFees />

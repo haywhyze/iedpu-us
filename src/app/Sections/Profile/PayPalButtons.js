@@ -127,7 +127,8 @@ class PaypalButton extends React.Component {
         {paid && (
           <>
             <h3>
-              Thank you {name}! you just paid ${amountPaid} for {this.props.description}.
+              Thank you {name}! you just paid ${amountPaid} for{" "}
+              {this.props.description}.
             </h3>
             <Button onClick={this.props.handleClose} color="danger">
               Close

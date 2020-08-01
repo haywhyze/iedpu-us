@@ -1,31 +1,31 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from "react";
 // @material-ui/core components
-import InputLabel from '@material-ui/core/InputLabel';
-import { makeStyles } from '@material-ui/core/styles';
-import Slide from '@material-ui/core/Slide';
-import IconButton from '@material-ui/core/IconButton';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import { toast } from 'react-toastify';
-import DialogActions from '@material-ui/core/DialogActions';
+import InputLabel from "@material-ui/core/InputLabel";
+import { makeStyles } from "@material-ui/core/styles";
+import Slide from "@material-ui/core/Slide";
+import IconButton from "@material-ui/core/IconButton";
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import { toast } from "react-toastify";
+import DialogActions from "@material-ui/core/DialogActions";
 // @material-ui/icons
-import CustomInput from 'components/CustomInput/CustomInput.js';
-import Close from '@material-ui/icons/Close';
+import CustomInput from "components/CustomInput/CustomInput.js";
+import Close from "@material-ui/icons/Close";
 // core components
-import GridContainer from 'components/Grid/GridContainer.js';
-import GridItem from 'components/Grid/GridItem.js';
-import Button from 'components/CustomButtons/Button.js';
-import CardBody from 'components/Card/CardBody.js';
+import GridContainer from "components/Grid/GridContainer.js";
+import GridItem from "components/Grid/GridItem.js";
+import Button from "components/CustomButtons/Button.js";
+import CardBody from "components/Card/CardBody.js";
 
-import styles from 'assets/jss/material-kit-react/views/componentsSections/javascriptStyles.js';
-import { AuthContext, db } from '../../pages/_app.js';
+import styles from "assets/jss/material-kit-react/views/componentsSections/javascriptStyles.js";
+import { AuthContext, db } from "../../pages/_app.js";
 
 const useStyles = makeStyles(styles);
 
@@ -33,7 +33,7 @@ const Transition = React.forwardRef((props, ref) => (
   <Slide direction="down" ref={ref} {...props} />
 ));
 
-Transition.displayName = 'Transition';
+Transition.displayName = "Transition";
 
 export default function NewFeesModal({
   membershipFeesModal,
@@ -43,7 +43,7 @@ export default function NewFeesModal({
   const classes = useStyles();
   const { user, isAuthenticated } = useContext(AuthContext);
   const [fees, setFees] = useState([]);
-  const feesRef = user && db.collection('fees');
+  const feesRef = user && db.collection("fees");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -61,23 +61,21 @@ export default function NewFeesModal({
         (err) => {
           console.log(err);
           setLoading(false);
-        },
+        }
       );
     }
   }, [isAuthenticated, user]);
 
-  const [selectedMember, setSelectedMember] = useState({ displayName: '' });
+  const [selectedMember, setSelectedMember] = useState({ displayName: "" });
 
   const handleMemberSelect = (event) => {
-    setSelectedMember(
-      members.filter((e) => event.target.value === e.id)[0],
-    );
+    setSelectedMember(members.filter((e) => event.target.value === e.id)[0]);
   };
 
   const [values, setValues] = useState({
-    amount: '',
-    intent: '',
-    transaction_id: 'Manual',
+    amount: "",
+    intent: "",
+    transaction_id: "Manual",
   });
 
   const handleChange = (e) => {
@@ -97,16 +95,16 @@ export default function NewFeesModal({
       date: Date.now(),
     };
 
-    db.collection('membership_fees')
+    db.collection("membership_fees")
       .add(newFee)
       .then((docRef) => {
         setValues({
-          amount: '',
-          intent: '',
+          amount: "",
+          intent: "",
         });
-        setSelectedMember({ displayName: '' });
+        setSelectedMember({ displayName: "" });
         setMembershipFeesModal(false);
-        toast.success('Membership fee recorded');
+        toast.success("Membership fee recorded");
       })
       .catch((error) => {
         toast.error(`Error recording membership fee, ${error.message}`);
@@ -116,9 +114,9 @@ export default function NewFeesModal({
     return (
       <div
         style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
         <CircularProgress />
@@ -171,9 +169,9 @@ export default function NewFeesModal({
                       fullWidth
                       className={classes.formControl}
                       style={{
-                        margin: '27px 0 0 0',
-                        position: 'relative',
-                        paddingBottom: '10px',
+                        margin: "27px 0 0 0",
+                        position: "relative",
+                        paddingBottom: "10px",
                       }}
                     >
                       <InputLabel id="demo-simple-select-helper-label">
@@ -182,14 +180,15 @@ export default function NewFeesModal({
                       <Select
                         labelId="demo-simple-select-helper-label"
                         id="demo-simple-select-helper"
-                        value={((selectedMember && selectedMember.id) || '')}
+                        value={(selectedMember && selectedMember.id) || ""}
                         onChange={handleMemberSelect}
                       >
-                        {members.length && members.map((e) => (
-                          <MenuItem key={e.id} value={e.id}>
-                            {e.displayName}
-                          </MenuItem>
-                        ))}
+                        {members.length &&
+                          members.map((e) => (
+                            <MenuItem key={e.id} value={e.id}>
+                              {e.displayName}
+                            </MenuItem>
+                          ))}
                       </Select>
                     </FormControl>
                   </GridItem>
@@ -198,9 +197,9 @@ export default function NewFeesModal({
                       fullWidth
                       className={classes.formControl}
                       style={{
-                        margin: '27px 0 0 0',
-                        position: 'relative',
-                        paddingBottom: '10px',
+                        margin: "27px 0 0 0",
+                        position: "relative",
+                        paddingBottom: "10px",
                       }}
                     >
                       <InputLabel id="demo-simple-select-helper-label">
@@ -228,8 +227,8 @@ export default function NewFeesModal({
                         fullWidth: true,
                       }}
                       inputProps={{
-                        name: 'amount',
-                        type: 'number',
+                        name: "amount",
+                        type: "number",
                         value: values.amount,
                         onChange: handleChange,
                       }}

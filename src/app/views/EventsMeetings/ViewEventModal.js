@@ -1,3 +1,6 @@
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/extensions */
 /* eslint-disable react/prop-types */
 import React from 'react';
 // @material-ui/core components
@@ -72,17 +75,18 @@ export default function ProfileModal({ classicModal, setClassicModal, event }) {
                   <h3 style={{ textAlign: 'center' }}>{event.title}</h3>
                   <GridItem xs={12} sm={12}>
                     <GridItem xs={12} sm={12}>
-                      <p style={{ whiteSpace: 'pre-wrap' }}>{event.description}</p>
+                      <p style={{ whiteSpace: 'pre-wrap' }}>
+                        {event.description}
+                      </p>
                     </GridItem>
-                    {event.venue
-                    && (
-                    <GridItem xs={12} sm={12}>
-                      <h5>
-                        <LocationCity fontSize="small" />
-                        {' '}
-                        {event.venue}
-                      </h5>
-                    </GridItem>
+                    {event.venue && (
+                      <GridItem xs={12} sm={12}>
+                        <h5>
+                          <LocationCity fontSize="small" />
+                          {' '}
+                          {event.venue}
+                        </h5>
+                      </GridItem>
                     )}
                     <GridItem xs={12} sm={12}>
                       <h5>
