@@ -43,7 +43,8 @@ export default function Footer(props) {
                   <br />
                   United States of America (USA) Branch Inc., <br />
                   63 S Devoe Avenue, Yonkers, <br />
-                  NY 10705, <br />
+                  P.O Box 979,
+                  Yonkers NY 10704, <br />
                   New York, USA.
                 </address>
               </ListItem>
