@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 // import ReactQuill from 'react-quill';
 let ReactQuill;
 
-const TextEditor = ({ text, setText }) => {
+const TextEditor = ({ text, setText, options }) => {
   const [showEditor, setShowEditor] = useState(false);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const TextEditor = ({ text, setText }) => {
 
   const modules = {
     toolbar: [
-      [{ header: [2, 3, false] }],
+      // [{ header: [2, 3, false] }],
       ['bold', 'italic', 'underline', 'strike', 'blockquote', 'link'],
       [
         { list: 'ordered' },
@@ -29,7 +29,7 @@ const TextEditor = ({ text, setText }) => {
   };
 
   const formats = [
-    'header',
+    // 'header',
     'bold',
     'italic',
     'underline',
@@ -48,8 +48,8 @@ const TextEditor = ({ text, setText }) => {
           theme="snow"
           onChange={handleChange}
           value={text}
-          modules={modules}
-          formats={formats}
+          modules={options ? { toolbar: [options] } : modules}
+          formats={options || formats}
         />
       ) : 'Loading Editor'}
     </div>

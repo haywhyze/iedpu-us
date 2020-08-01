@@ -21,6 +21,7 @@ import Button from 'components/CustomButtons/Button.js';
 import styles from 'assets/jss/material-kit-react/views/componentsSections/javascriptStyles.js';
 import profileStyles from 'assets/jss/material-kit-react/views/profilePage.js';
 import LocationCity from '@material-ui/icons/LocationCity';
+import { createMarkup } from '../../pages/about';
 
 const useStyles = makeStyles(styles);
 const useProfileStyles = makeStyles(profileStyles);
@@ -75,16 +76,15 @@ export default function ProfileModal({ classicModal, setClassicModal, event }) {
                   <h3 style={{ textAlign: 'center' }}>{event.title}</h3>
                   <GridItem xs={12} sm={12}>
                     <GridItem xs={12} sm={12}>
-                      <p style={{ whiteSpace: 'pre-wrap' }}>
-                        {event.description}
-                      </p>
+                      {/* <p style={{ whiteSpace: 'pre-wrap' }}> */}
+                      <div dangerouslySetInnerHTML={createMarkup(event.description)} />
+                      {/* </p> */}
                     </GridItem>
-                    {event.venue && (
+                    {event.venue && event.venue !== '<p><br></p>' && (
                       <GridItem xs={12} sm={12}>
                         <h5>
                           <LocationCity fontSize="small" />
-                          {' '}
-                          {event.venue}
+                          <div dangerouslySetInnerHTML={createMarkup(event.venue)} />
                         </h5>
                       </GridItem>
                     )}

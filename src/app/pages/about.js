@@ -25,6 +25,10 @@ const useStyles = makeStyles(styles);
 const useStyles2 = makeStyles(styles2);
 const useTeamStyles = makeStyles(teamStyles);
 
+export function createMarkup(text) {
+  return { __html: text };
+}
+
 export default function Executives(props) {
   const [loading, setLoading] = useState(true);
   const [text, setText] = useState('');
@@ -75,10 +79,6 @@ export default function Executives(props) {
         });
     }
   }, [aboutRef]);
-
-  function createMarkup() {
-    return { __html: text };
-  }
 
   const excos = allExcos.filter((e) => e.type === 'executives');
   const bot = allExcos.filter((e) => e.type === 'BOT');
@@ -150,7 +150,7 @@ export default function Executives(props) {
                                   <div>
                                     <div
                                       className="about-us"
-                                      dangerouslySetInnerHTML={createMarkup()}
+                                      dangerouslySetInnerHTML={createMarkup(text)}
                                     />
                                     <div>
                                       <a

@@ -25,6 +25,7 @@ import CardBody from 'components/Card/CardBody.js';
 
 import styles from 'assets/jss/material-kit-react/views/componentsSections/javascriptStyles.js';
 import profileStyles from 'assets/jss/material-kit-react/views/profilePage.js';
+import TextEditor from '../../Sections/utils/TextEditor';
 import { db } from '../../pages/_app.js';
 
 const useStyles = makeStyles(styles);
@@ -48,17 +49,19 @@ export default function EditEventModal({
   );
   const [values, setValues] = useState({
     title: '',
-    description: '',
-    venue: '',
   });
+  const [description, setDescription] = useState('');
+  const [venue, setVenue] = useState('');
   const [selectedDate, handleDateChange] = useState(new Date());
 
   useEffect(() => {
     if (event) {
       const {
-        title, description, venue, time,
+        title, time,
       } = event;
-      setValues({ title, description, venue });
+      setValues({ title });
+      setDescription(event.description);
+      setVenue(event.venue);
       handleDateChange(new Date(time));
     }
   }, [event]);
@@ -75,6 +78,8 @@ export default function EditEventModal({
   const createEvent = () => {
     const newEvent = {
       ...values,
+      venue,
+      description,
       author: 'Admin',
       time: selectedDate.toISOString(),
     };
@@ -105,6 +110,7 @@ export default function EditEventModal({
             open={classicModal}
             TransitionComponent={Transition}
             keepMounted
+            fullScreen
             onClose={() => setClassicModal(false)}
             aria-labelledby="classic-modal-slide-title"
             aria-describedby="classic-modal-slide-description"
@@ -147,17 +153,16 @@ export default function EditEventModal({
                     />
                   </GridItem>
                   <GridItem xs={12}>
-                    <CustomInput
-                      labelText="Venue"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        name: 'venue',
-                        value: values.venue,
-                        onChange: handleChange,
-                      }}
-                    />
+                    <div style={{ paddingLeft: '1rem' }}>
+                      <InputLabel style={{ margin: '2rem 0 0.5rem 0' }}>Venue</InputLabel>
+                      <TextEditor text={venue} setText={setVenue} options={['link']} />
+                    </div>
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={12}>
+                    <div style={{ paddingLeft: '1rem' }}>
+                      <InputLabel style={{ margin: '2rem 0 0.5rem 0' }}>Description</InputLabel>
+                      <TextEditor text={description} setText={setDescription} />
+                    </div>
                   </GridItem>
                   <GridItem xs={12} sm={12} md={6}>
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -171,22 +176,6 @@ export default function EditEventModal({
                       />
                       <InputLabel>Date and Time</InputLabel>
                     </MuiPickersUtilsProvider>
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={12}>
-                    <CustomInput
-                      labelText="Description"
-                      id="about-me"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        name: 'description',
-                        value: values.description,
-                        onChange: handleChange,
-                        multiline: true,
-                        rows: 5,
-                      }}
-                    />
                   </GridItem>
                 </GridContainer>
               </CardBody>

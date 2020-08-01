@@ -1,28 +1,29 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 // @material-ui/core components
-import InputLabel from "@material-ui/core/InputLabel";
-import { makeStyles } from "@material-ui/core/styles";
-import Slide from "@material-ui/core/Slide";
-import IconButton from "@material-ui/core/IconButton";
-import Dialog from "@material-ui/core/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent";
-import DateFnsUtils from "@date-io/date-fns"; // choose your lib
-import { MuiPickersUtilsProvider } from "@material-ui/pickers";
-import DialogActions from "@material-ui/core/DialogActions";
-import { toast } from "react-toastify";
+import InputLabel from '@material-ui/core/InputLabel';
+import { makeStyles } from '@material-ui/core/styles';
+import Slide from '@material-ui/core/Slide';
+import IconButton from '@material-ui/core/IconButton';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import DateFnsUtils from '@date-io/date-fns'; // choose your lib
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import DialogActions from '@material-ui/core/DialogActions';
+import { toast } from 'react-toastify';
 // @material-ui/icons
-import CustomInput from "components/CustomInput/CustomInput.js";
-import CustomDateTimePicker from "components/CustomInput/CustomDatePicker";
-import Close from "@material-ui/icons/Close";
+import CustomInput from 'components/CustomInput/CustomInput.js';
+import CustomDateTimePicker from 'components/CustomInput/CustomDatePicker';
+import Close from '@material-ui/icons/Close';
 // core components
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
-import CardBody from "components/Card/CardBody.js";
+import GridContainer from 'components/Grid/GridContainer.js';
+import GridItem from 'components/Grid/GridItem.js';
+import Button from 'components/CustomButtons/Button.js';
+import CardBody from 'components/Card/CardBody.js';
 
-import styles from "assets/jss/material-kit-react/views/componentsSections/javascriptStyles.js";
-import { db } from "../../pages/_app.js";
+import styles from 'assets/jss/material-kit-react/views/componentsSections/javascriptStyles.js';
+import TextEditor from '../../Sections/utils/TextEditor';
+import { db } from '../../pages/_app.js';
 
 const useStyles = makeStyles(styles);
 
@@ -30,15 +31,15 @@ const Transition = React.forwardRef((props, ref) => (
   <Slide direction="down" ref={ref} {...props} />
 ));
 
-Transition.displayName = "Transition";
+Transition.displayName = 'Transition';
 
 export default function NewEventModal({ classicModal, setClassicModal }) {
   const classes = useStyles();
   const [values, setValues] = useState({
-    title: "",
-    description: "",
-    venue: "",
+    title: '',
   });
+  const [description, setDescription] = useState('');
+  const [venue, setVenue] = useState('');
   const [selectedDate, handleDateChange] = useState(new Date());
 
   const handleChange = (e) => {
@@ -51,18 +52,20 @@ export default function NewEventModal({ classicModal, setClassicModal }) {
   const createEvent = () => {
     const newEvent = {
       ...values,
-      author: "Admin",
+      author: 'Admin',
+      venue,
+      description,
       time: selectedDate.toISOString(),
     };
 
-    db.collection("events")
+    db.collection('events')
       .add(newEvent)
       .then((docRef) => {
-        console.log("Document written with ID: ", docRef.id);
-        setValues({ title: "", description: "", venue: "" });
+        console.log('Document written with ID: ', docRef.id);
+        setValues({ title: '', description: '', venue: '' });
         handleDateChange(new Date());
         setClassicModal(false);
-        toast.success("Event successfully created");
+        toast.success('Event successfully created');
       })
       .catch((error) => {
         toast.error(`Error creating event, ${error.message}`);
@@ -81,6 +84,7 @@ export default function NewEventModal({ classicModal, setClassicModal }) {
             open={classicModal}
             TransitionComponent={Transition}
             keepMounted
+            fullScreen
             onClose={() => setClassicModal(false)}
             aria-labelledby="classic-modal-slide-title"
             aria-describedby="classic-modal-slide-description"
@@ -116,24 +120,23 @@ export default function NewEventModal({ classicModal, setClassicModal }) {
                         fullWidth: true,
                       }}
                       inputProps={{
-                        name: "title",
+                        name: 'title',
                         value: values.title,
                         onChange: handleChange,
                       }}
                     />
                   </GridItem>
                   <GridItem xs={12}>
-                    <CustomInput
-                      labelText="Venue"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        name: "venue",
-                        value: values.venue,
-                        onChange: handleChange,
-                      }}
-                    />
+                    <div style={{ paddingLeft: '1rem' }}>
+                      <InputLabel style={{ margin: '2rem 0 0.5rem 0' }}>Venue</InputLabel>
+                      <TextEditor text={venue} setText={setVenue} options={['link']} />
+                    </div>
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={12}>
+                    <div style={{ paddingLeft: '1rem' }}>
+                      <InputLabel style={{ margin: '2rem 0 0.5rem 0' }}>Description</InputLabel>
+                      <TextEditor text={description} setText={setDescription} />
+                    </div>
                   </GridItem>
                   <GridItem xs={12} sm={12} md={6}>
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -147,22 +150,6 @@ export default function NewEventModal({ classicModal, setClassicModal }) {
                       />
                       <InputLabel>Date and Time</InputLabel>
                     </MuiPickersUtilsProvider>
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={12}>
-                    <CustomInput
-                      labelText="Description"
-                      id="about-me"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        name: "description",
-                        value: values.description,
-                        onChange: handleChange,
-                        multiline: true,
-                        rows: 5,
-                      }}
-                    />
                   </GridItem>
                 </GridContainer>
               </CardBody>

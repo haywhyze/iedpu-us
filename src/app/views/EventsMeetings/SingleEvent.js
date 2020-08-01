@@ -1,28 +1,31 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable react/prop-types */
-import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody";
-import CardHeader from "components/Card/CardHeader";
-import CardFooter from "components/Card/CardFooter.js";
-import Create from "@material-ui/icons/Create";
-import LocationOn from "@material-ui/icons/LocationOn";
-import ConfirmDelete from "./ConfirmDelete";
-import ViewEventModal from "./ViewEventModal";
-import EditEventModal from "./EditEventModal";
+import React, { useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import GridItem from 'components/Grid/GridItem.js';
+import Button from 'components/CustomButtons/Button.js';
+import Card from 'components/Card/Card.js';
+import CardBody from 'components/Card/CardBody';
+import CardHeader from 'components/Card/CardHeader';
+import CardFooter from 'components/Card/CardFooter.js';
+import Create from '@material-ui/icons/Create';
+import LocationOn from '@material-ui/icons/LocationOn';
+import ConfirmDelete from './ConfirmDelete';
+import ViewEventModal from './ViewEventModal';
+import EditEventModal from './EditEventModal';
+import { createMarkup } from '../../pages/about';
 
 const styles = {
   footerButton: {
-    padding: "10px",
+    padding: '10px',
   },
 };
 
 const useStyles = makeStyles(styles);
 
-export default function SingleEvent({ title, description, venue, time, id }) {
+export default function SingleEvent({
+  title, description, venue, time, id,
+}) {
   const classes = useStyles();
 
   const [classicModal, setClassicModal] = useState(false);
@@ -40,7 +43,7 @@ export default function SingleEvent({ title, description, venue, time, id }) {
   };
 
   return (
-    <GridItem style={{ display: "flex" }} xs={12} sm={6} md={4} lg={3}>
+    <GridItem style={{ display: 'flex' }} xs={12} sm={6} md={4} lg={3}>
       <ViewEventModal
         classicModal={classicModal}
         setClassicModal={setClassicModal}
@@ -57,38 +60,38 @@ export default function SingleEvent({ title, description, venue, time, id }) {
         </CardHeader>
         <CardBody
           style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
           }}
         >
-          {venue && (
-            <h5>
-              <LocationOn fontSize="small" /> {venue}
-            </h5>
+          {venue && venue !== '<p><br></p>' && (
+          <h5>
+            <LocationOn fontSize="small" />
+            {' '}
+            <div dangerouslySetInnerHTML={createMarkup(venue)} />
+          </h5>
           )}
           <h5>
-            {new Intl.DateTimeFormat("en-US", {
-              weekday: "long",
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-              hour: "numeric",
-              minute: "numeric",
+            {new Intl.DateTimeFormat('en-US', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+              hour: 'numeric',
+              minute: 'numeric',
             }).format(new Date(time))}
           </h5>
         </CardBody>
-        <CardFooter style={{ borderTop: "1px solid rgba(40,40,40, .05)" }}>
+        <CardFooter style={{ borderTop: '1px solid rgba(40,40,40, .05)' }}>
           <Button
-            onClick={() =>
-              editEvent({
-                title,
-                description,
-                venue,
-                time,
-                id,
-              })
-            }
+            onClick={() => editEvent({
+              title,
+              description,
+              venue,
+              time,
+              id,
+            })}
             className={classes.footerButton}
             color="transparent"
             round
@@ -97,15 +100,13 @@ export default function SingleEvent({ title, description, venue, time, id }) {
           </Button>
           <span>
             <Button
-              onClick={() =>
-                viewEvent({
-                  time,
-                  title,
-                  description,
-                  venue,
-                  id,
-                })
-              }
+              onClick={() => viewEvent({
+                time,
+                title,
+                description,
+                venue,
+                id,
+              })}
               simple
               size="sm"
               color="info"
