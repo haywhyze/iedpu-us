@@ -92,17 +92,50 @@ export default function EventsMeetings() {
                 Create New event
               </Button>
             </GridItem>
+            <h3>Upcoming Events</h3>
             <GridContainer space={8}>
-              {events.sort((a, b) => Date.parse(a.time) - Date.parse(b.time)).map((event) => (
-                <SingleEvent
-                  title={event.title}
-                  description={event.description}
-                  venue={event.venue}
-                  time={event.time}
-                  key={event.id}
-                  id={event.id}
-                />
-              ))}
+              {events
+                .filter((e) => Date.now() < Date.parse(e.time))
+                .sort((a, b) => Date.parse(a.time) - Date.parse(b.time))
+                .map((event) => {
+                  if (!event.title) {
+                    return null;
+                  }
+                  return (
+                    <SingleEvent
+                      image={event.imageUrl}
+                      venue={event.venue}
+                      description={event.description}
+                      time={event.time}
+                      title={event.title}
+                      key={event.id}
+                      id={event.id}
+                    />
+                  );
+                })}
+            </GridContainer>
+            <h3>Past Events</h3>
+            <GridContainer space={8}>
+              {events
+                .filter((e) => Date.now() > Date.parse(e.time))
+                .sort((a, b) => Date.parse(a.time) - Date.parse(b.time))
+                .map((event) => {
+                  if (!event.title) {
+                    return null;
+                  }
+                  return (
+                    <SingleEvent
+                      image={event.imageUrl}
+                      venue={event.venue}
+                      description={event.description}
+                      time={event.time}
+                      title={event.title}
+                      key={event.id}
+                      id={event.id}
+                      past
+                    />
+                  );
+                })}
             </GridContainer>
           </CardBody>
         </Card>

@@ -1,27 +1,29 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 // @material-ui/core components
-import classNames from "classnames";
-import { makeStyles } from "@material-ui/core/styles";
-import Slide from "@material-ui/core/Slide";
-import IconButton from "@material-ui/core/IconButton";
-import Dialog from "@material-ui/core/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogActions from "@material-ui/core/DialogActions";
+import classNames from 'classnames';
+import { makeStyles } from '@material-ui/core/styles';
+import Slide from '@material-ui/core/Slide';
+import IconButton from '@material-ui/core/IconButton';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogActions from '@material-ui/core/DialogActions';
 // @material-ui/icons
-import CustomInput from "components/CustomInput/CustomInput.js";
-import { toast } from "react-toastify";
-import Close from "@material-ui/icons/Close";
+import CustomInput from 'components/CustomInput/CustomInput.js';
+import { toast } from 'react-toastify';
+import Close from '@material-ui/icons/Close';
 // core components
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
-import CardBody from "components/Card/CardBody.js";
+import InputLabel from '@material-ui/core/InputLabel';
+import GridContainer from 'components/Grid/GridContainer.js';
+import GridItem from 'components/Grid/GridItem.js';
+import Button from 'components/CustomButtons/Button.js';
+import CardBody from 'components/Card/CardBody.js';
 
-import styles from "assets/jss/material-kit-react/views/componentsSections/javascriptStyles.js";
-import profileStyles from "assets/jss/material-kit-react/views/profilePage.js";
-import { db } from "../../pages/_app.js";
+import styles from 'assets/jss/material-kit-react/views/componentsSections/javascriptStyles.js';
+import profileStyles from 'assets/jss/material-kit-react/views/profilePage.js';
+import TextEditor from '../../Sections/utils/TextEditor';
+import { db } from '../../pages/_app.js';
 
 const useStyles = makeStyles(styles);
 const useProfileStyles = makeStyles(profileStyles);
@@ -30,7 +32,7 @@ const Transition = React.forwardRef((props, ref) => (
   <Slide direction="down" ref={ref} {...props} />
 ));
 
-Transition.displayName = "Transition";
+Transition.displayName = 'Transition';
 
 export default function EditEventModal({
   classicModal,
@@ -41,20 +43,23 @@ export default function EditEventModal({
   const profileClasses = useProfileStyles();
   const imageClasses = classNames(
     profileClasses.imgRaised,
-    profileClasses.imgRoundedCircle
+    profileClasses.imgRoundedCircle,
     // profileClasses.imgFluid
   );
   const [values, setValues] = useState({
-    title: "",
-    details: "",
-    caption: "",
+    title: '',
+    caption: '',
   });
-  const [imageUrl, setImageUrl] = useState("");
+  const [details, setDetails] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
 
   useEffect(() => {
     if (news) {
-      const { title, details, caption, id, image } = news;
-      setValues({ title, details, caption });
+      const {
+        title, caption, id, image,
+      } = news;
+      setValues({ title, caption });
+      setDetails(news.details);
       setImageUrl(image);
     }
   }, [news]);
@@ -63,28 +68,28 @@ export default function EditEventModal({
   const uploadPhoto = () => {
     window.cloudinary.openUploadWidget(
       {
-        cloudName: "haywhyze",
-        uploadPreset: "ittv3vvm",
-        sources: ["local", "camera", "facebook", "instagram"],
+        cloudName: 'haywhyze',
+        uploadPreset: 'ittv3vvm',
+        sources: ['local', 'camera', 'facebook', 'instagram'],
         showAdvancedOptions: true,
         cropping: true,
         multiple: false,
-        defaultSource: "local",
+        defaultSource: 'local',
         styles: {
           palette: {
-            window: "#FFFFFF",
-            windowBorder: "#90A0B3",
-            tabIcon: "#0078FF",
-            menuIcons: "#5A616A",
-            textDark: "#000000",
-            textLight: "#FFFFFF",
-            link: "#0078FF",
-            action: "#FF620C",
-            inactiveTabIcon: "#0E2F5A",
-            error: "#F44235",
-            inProgress: "#0078FF",
-            complete: "#20B832",
-            sourceBg: "#E4EBF1",
+            window: '#FFFFFF',
+            windowBorder: '#90A0B3',
+            tabIcon: '#0078FF',
+            menuIcons: '#5A616A',
+            textDark: '#000000',
+            textLight: '#FFFFFF',
+            link: '#0078FF',
+            action: '#FF620C',
+            inactiveTabIcon: '#0E2F5A',
+            error: '#F44235',
+            inProgress: '#0078FF',
+            complete: '#20B832',
+            sourceBg: '#E4EBF1',
           },
           fonts: {
             default: {
@@ -95,12 +100,12 @@ export default function EditEventModal({
       },
       (err, info) => {
         if (!err) {
-          if (info.event === "success") {
+          if (info.event === 'success') {
             // console.log(info.info.secure_url)
             setImageUrl(info.info.secure_url);
           }
         }
-      }
+      },
     );
   };
 
@@ -114,24 +119,25 @@ export default function EditEventModal({
   const createNews = () => {
     const newPost = {
       ...values,
-      author: "Admin",
+      details,
+      author: 'Admin',
       time: new Date().toISOString(),
       imageUrl,
     };
 
-    db.collection("news")
+    db.collection('news')
       .doc(news.id)
       .update(newPost)
       .then(() => {
         setValues({
-          title: "",
-          details: "",
-          venue: "",
-          caption: "",
+          title: '',
+          venue: '',
+          caption: '',
         });
-        setImageUrl("");
+        setDetails('');
+        setImageUrl('');
         setClassicModal(false);
-        toast.success("News post successfully updated");
+        toast.success('News post successfully updated');
       })
       .catch((error) => {
         toast.error(`Error updating news post, ${error.message}`);
@@ -185,30 +191,20 @@ export default function EditEventModal({
                         fullWidth: true,
                       }}
                       inputProps={{
-                        name: "title",
+                        name: 'title',
                         value: values.title,
                         onChange: handleChange,
                       }}
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={12}>
-                    <CustomInput
-                      labelText="Details"
-                      id="details-modal"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        name: "details",
-                        value: values.details,
-                        onChange: handleChange,
-                        multiline: true,
-                        rows: 5,
-                      }}
-                    />
+                    <div style={{ paddingLeft: '1rem' }}>
+                      <InputLabel style={{ margin: '2rem 0 0.5rem 0' }}>Details</InputLabel>
+                      <TextEditor text={details} setText={setDetails} />
+                    </div>
                   </GridItem>
                   <GridItem
-                    style={{ marginTop: "27px" }}
+                    style={{ marginTop: '27px' }}
                     xs={12}
                     sm={12}
                     md={6}
@@ -222,11 +218,11 @@ export default function EditEventModal({
                       Upload Image
                     </Button>
                     <img
-                      src={imageUrl || "../img/profile.png"}
+                      src={imageUrl || '../img/profile.png'}
                       alt="..."
                       width={50}
                       height={50}
-                      style={{ objectFit: "cover" }}
+                      style={{ objectFit: 'cover' }}
                       className={`${imageClasses} makeStyles-formControl-428`}
                     />
                   </GridItem>
@@ -238,7 +234,7 @@ export default function EditEventModal({
                         fullWidth: true,
                       }}
                       inputProps={{
-                        name: "caption",
+                        name: 'caption',
                         value: values.caption,
                         onChange: handleChange,
                       }}

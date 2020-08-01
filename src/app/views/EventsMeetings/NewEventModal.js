@@ -62,7 +62,9 @@ export default function NewEventModal({ classicModal, setClassicModal }) {
       .add(newEvent)
       .then((docRef) => {
         console.log('Document written with ID: ', docRef.id);
-        setValues({ title: '', description: '', venue: '' });
+        setValues({ title: '' });
+        setDescription('');
+        setVenue('');
         handleDateChange(new Date());
         setClassicModal(false);
         toast.success('Event successfully created');

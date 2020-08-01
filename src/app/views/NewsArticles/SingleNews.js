@@ -1,24 +1,25 @@
-import React, { useState, useRef } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody";
-import CardHeader from "components/Card/CardHeader";
-import CardFooter from "components/Card/CardFooter.js";
-import Create from "@material-ui/icons/Create";
-import ConfirmDelete from "./ConfirmDelete";
-import EditNewsModal from "./EditNewsModal";
-import ViewNewsModal from "./ViewNewsModal";
+import React, { useState, useRef } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import GridItem from 'components/Grid/GridItem.js';
+import Button from 'components/CustomButtons/Button.js';
+import Card from 'components/Card/Card.js';
+import CardBody from 'components/Card/CardBody';
+import CardHeader from 'components/Card/CardHeader';
+import CardFooter from 'components/Card/CardFooter.js';
+import Create from '@material-ui/icons/Create';
+import ConfirmDelete from './ConfirmDelete';
+import EditNewsModal from './EditNewsModal';
+import ViewNewsModal from './ViewNewsModal';
+import { createMarkup } from '../../pages/about';
 
 const styles = {
   image: {
-    width: "100%",
-    height: "10rem",
-    objectFit: "contain",
+    width: '100%',
+    height: '10rem',
+    objectFit: 'contain',
   },
   footerButton: {
-    padding: "10px",
+    padding: '10px',
   },
 };
 
@@ -69,55 +70,19 @@ export default function SingleNews({
         </CardHeader>
         <CardBody
           style={{
-            height: "350px",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
+            height: '350px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
           }}
         >
-          <h3 style={{ marginTop: "0" }}>{title}</h3>
-          <p
-            ref={descriptionEl}
-            style={{ whiteSpace: "pre-wrap", overflow: "hidden" }}
-          >
-            {details}
-          </p>
+          <h3 style={{ marginTop: '0' }}>{title}</h3>
+          {details && details !== '<p><br></p>' && (
+            <div style={{ overflow: 'hidden' }} dangerouslySetInnerHTML={createMarkup(details)} />
+          )}
           <span>
             <Button
-              onClick={() =>
-                viewNews({
-                  id,
-                  image,
-                  title,
-                  details,
-                  author,
-                  time,
-                  caption,
-                })
-              }
-              simple
-              size="sm"
-              color="info"
-            >
-              View Details
-            </Button>
-          </span>
-          <h5>By {author}</h5>
-          <h6>
-            {new Intl.DateTimeFormat("en-US", {
-              weekday: "long",
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-              hour: "numeric",
-              minute: "numeric",
-            }).format(new Date(time))}
-          </h6>
-        </CardBody>
-        <CardFooter>
-          <Button
-            onClick={() =>
-              editNews({
+              onClick={() => viewNews({
                 id,
                 image,
                 title,
@@ -125,8 +90,40 @@ export default function SingleNews({
                 author,
                 time,
                 caption,
-              })
-            }
+              })}
+              simple
+              size="sm"
+              color="info"
+            >
+              View Details
+            </Button>
+          </span>
+          <h5>
+            By
+            {author}
+          </h5>
+          <h6>
+            {new Intl.DateTimeFormat('en-US', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+              hour: 'numeric',
+              minute: 'numeric',
+            }).format(new Date(time))}
+          </h6>
+        </CardBody>
+        <CardFooter>
+          <Button
+            onClick={() => editNews({
+              id,
+              image,
+              title,
+              details,
+              author,
+              time,
+              caption,
+            })}
             className={classes.footerButton}
             color="transparent"
             round
