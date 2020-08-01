@@ -42,7 +42,6 @@ export default function Footer(props) {
                   Ilorin Emirate Descendants Progressive Union (IEDPU),
                   <br />
                   United States of America (USA) Branch Inc., <br />
-                  63 S Devoe Avenue, Yonkers, <br />
                   P.O Box 979,
                   Yonkers NY 10704, <br />
                   New York, USA.

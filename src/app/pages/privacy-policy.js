@@ -53,8 +53,8 @@ export default function PrivacyPolicy() {
               (referred to as either &quot;the
               Company&quot;, &quot;We&quot;, &quot;Us&quot; or &quot;Our&quot; in
               this Agreement) refers to Ilorin Emirate Descendants Progressive
-              Union (IEDPU), United States of America (USA) Branch Inc., 63 S
-              Devoe Avenue, P.O Box 979 Yonkers NY 10704.
+              Union (IEDPU), United States of America (USA) Branch Inc.,
+              P.O Box 979 Yonkers NY 10704.
             </p>
           </li>
           <li>
