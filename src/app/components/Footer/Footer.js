@@ -58,7 +58,7 @@ export default function Footer(props) {
             }}
             sm={6}
           >
-            <a href="https://sitasysng.com/" className={aClasses}>
+            <a href="/privacy-policy" className={aClasses}>
               Privacy Policy
             </a>
             <div className="space" style={{ flex: "1 1 0%" }}></div>
