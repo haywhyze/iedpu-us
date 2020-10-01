@@ -102,7 +102,7 @@ export default function Members({ members }) {
                     }).format(date)
                   );
                   newValue.push(<ConfirmCell user={member} />);
-                  newValue.push(<DeleteCell />);
+                  newValue.push(<DeleteCell user={member} />);
                   return newValue;
                 })}
               />
@@ -125,7 +125,13 @@ export default function Members({ members }) {
           <CardBody>
             <Table
               tableHeaderColor="primary"
-              tableHead={["Name", "Email", "Created", "View Details"]}
+              tableHead={[
+                "Name",
+                "Email",
+                "Created",
+                "View Details",
+                "Delete User",
+              ]}
               tableData={confirmedMembers.map((member) => {
                 const newValue = [];
                 const date = new Date(member.created);
@@ -152,6 +158,7 @@ export default function Members({ members }) {
                     <LaunchRoundedIcon fontSize="small" />
                   </Button>
                 );
+                newValue.push(<DeleteCell user={member} />);
                 return newValue;
               })}
             />
