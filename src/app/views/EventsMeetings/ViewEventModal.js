@@ -72,16 +72,13 @@ export default function ProfileModal({ classicModal, setClassicModal, event }) {
                   <h3 style={{ textAlign: 'center' }}>{event.title}</h3>
                   <GridItem xs={12} sm={12}>
                     <GridItem xs={12} sm={12}>
-                      <p style={{ whiteSpace: 'pre-wrap' }}>{event.description}</p>
+                      <p style={{ whiteSpace: 'pre-wrap' }} dangerouslySetInnerHTML={{__html: event.description}} />
                     </GridItem>
                     {event.venue
                     && (
                     <GridItem xs={12} sm={12}>
-                      <h5>
-                        <LocationCity fontSize="small" />
-                        {' '}
-                        {event.venue}
-                      </h5>
+                      <LocationCity fontSize="small" />
+                      <h5 dangerouslySetInnerHTML={{__html: event.venue }} />
                     </GridItem>
                     )}
                     <GridItem xs={12} sm={12}>

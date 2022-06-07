@@ -50,8 +50,8 @@ function ProfilePage(props) {
 
   React.useEffect(() => {
     let unsubscribe;
-    if (isAdmin) Router.push('/admin');
-    if (!isAdmin && user) {
+    // if (isAdmin) Router.push('/admin');
+    if (isAdmin || user) {
       unsubscribe = db
         .collection('Users')
         .doc(user.uid)

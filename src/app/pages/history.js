@@ -88,12 +88,6 @@ export default function History(props) {
                   }}
                   gutterBottom
                 >
-                  <img
-                    style={{ height: "3rem", width: "3rem" }}
-                    src="https://media-exp1.licdn.com/dms/image/C5603AQE-zj7hDC0k3g/profile-displayphoto-shrink_100_100/0?e=1599696000&v=beta&t=yf6SdXLT0G0q9L3QVAtsPnCOuXyxIzfZn02exMHkHgA"
-                    alt="Shakira Tahir-Mustapha"
-                    className={`${classes.imgRaised} ${classes.imgRoundedCircle} ${classes.imgFluid}`}
-                  />
                   <a
                     href="https://www.linkedin.com/in/shakirah-mt/"
                     rel="noreferrer"

@@ -38,16 +38,18 @@ export default function SingleEvent({
         <CardHeader>
           <h4>{title}</h4>
         </CardHeader>
-        <CardBody style={{
-          display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-        }}
+        <CardBody
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+          }}
         >
           {venue && (
-          <h5>
-            <LocationOn fontSize="small" />
-            {' '}
-            {venue}
-          </h5>
+            <>
+              <LocationOn fontSize='small' />
+              <h5 dangerouslySetInnerHTML={{ __html: venue }}></h5>
+            </>
           )}
           <h5>
             {new Intl.DateTimeFormat('en-US', {
@@ -60,25 +62,38 @@ export default function SingleEvent({
             }).format(new Date(time))}
           </h5>
         </CardBody>
-        <CardFooter style={{ borderTop: '1px solid rgba(40,40,40, .05)', zIndex: 30 }}>
+        <CardFooter
+          style={{ borderTop: '1px solid rgba(40,40,40, .05)', zIndex: 30 }}
+        >
           <span>
             <Button
-              onClick={() => viewEvent({
-                time, title, description, venue, id,
-              })}
+              onClick={() =>
+                viewEvent({
+                  time,
+                  title,
+                  description,
+                  venue,
+                  id,
+                })
+              }
               simple
-              size="sm"
-              color="info"
+              size='sm'
+              color='info'
             >
               View Details
             </Button>
           </span>
-          {!past && <AddToCalendar
-            event={{
-              title, description, location: venue, startTime: time,
-            }}
-            displayItemIcons={false}
-          />}
+          {!past && (
+            <AddToCalendar
+              event={{
+                title,
+                description,
+                location: venue,
+                startTime: time,
+              }}
+              displayItemIcons={false}
+            />
+          )}
         </CardFooter>
       </Card>
     </GridItem>

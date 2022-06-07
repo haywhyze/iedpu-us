@@ -57,7 +57,7 @@ export default function SingleNews({
         }}
         >
           <h3 style={{ marginTop: '0' }}>{title}</h3>
-          <p ref={descriptionEl} style={{ whiteSpace: 'pre-wrap', overflow: 'hidden' }}>{details}</p>
+          <p ref={descriptionEl} style={{ whiteSpace: 'pre-wrap', overflow: 'hidden' }} dangerouslySetInnerHTML={{__html: details}} />
           <span>
             <Button
               onClick={() => viewNews({
