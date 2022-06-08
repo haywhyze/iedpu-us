@@ -100,7 +100,7 @@ export default function Footer(props) {
             <p>
               © 2022, made with{' '}
               <svg
-=                className={classNames(MuiSvgIconRoot, jss106)}
+                className={classNames(MuiSvgIconRoot, jss106)}
                 focusable='false'
                 viewBox='0 0 24 24'
                 aria-hidden='true'
