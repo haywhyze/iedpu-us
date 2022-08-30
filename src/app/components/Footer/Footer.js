@@ -80,7 +80,7 @@ export default function Footer(props) {
             </a>
             <div className='space' style={{ flex: '1 1 0%' }}></div>
             <div>
-              +1(914)772-1407, (713)269-2027, (317)560-3493 <br />
+              (915)593-9302, (405)921-0928, (757)515-5337 <br />
               iedpu.usa@yahoo.com, ilorinemirate19@gmail.com <br />
               Follow us on
               <a
