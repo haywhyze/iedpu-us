@@ -66,11 +66,10 @@ export default function SingleEvent({
         }}
         >
           {venue && (
-          <h5>
+          <>
             <LocationOn fontSize="small" />
-            {' '}
-            {venue}
-          </h5>
+            <h5 dangerouslySetInnerHTML={{ __html: venue }} />
+          </>
           )}
           <h5>
             {new Intl.DateTimeFormat('en-US', {

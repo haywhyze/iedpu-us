@@ -1,15 +1,17 @@
+/* eslint-disable react/jsx-filename-extension */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import GridItem from 'components/Grid/GridItem.js';
-import Button from 'components/CustomButtons/Button.js';
-import Card from 'components/Card/Card.js';
+import { atcb_action } from 'add-to-calendar-button';
+import GridItem from 'components/Grid/GridItem';
+import Button from 'components/CustomButtons/Button';
+import Card from 'components/Card/Card';
 import CardBody from 'components/Card/CardBody';
 import CardHeader from 'components/Card/CardHeader';
 import LocationOn from '@material-ui/icons/LocationOn';
-import CardFooter from 'components/Card/CardFooter.js';
-import AddToCalendar from 'react-add-to-calendar';
+import CardFooter from 'components/Card/CardFooter';
 import ViewEventModal from '../../views/EventsMeetings/ViewEventModal';
+import 'add-to-calendar-button/assets/css/atcb.css';
 
 export default function SingleEvent({
   title,
@@ -47,8 +49,8 @@ export default function SingleEvent({
         >
           {venue && (
             <>
-              <LocationOn fontSize='small' />
-              <h5 dangerouslySetInnerHTML={{ __html: venue }}></h5>
+              <LocationOn fontSize="small" />
+              <h5 dangerouslySetInnerHTML={{ __html: venue }} />
             </>
           )}
           <h5>
@@ -67,32 +69,37 @@ export default function SingleEvent({
         >
           <span>
             <Button
-              onClick={() =>
-                viewEvent({
-                  time,
-                  title,
-                  description,
-                  venue,
-                  id,
-                })
-              }
+              onClick={() => viewEvent({
+                time,
+                title,
+                description,
+                venue,
+                id,
+              })}
               simple
-              size='sm'
-              color='info'
+              size="sm"
+              color="info"
             >
               View Details
             </Button>
           </span>
           {!past && (
-            <AddToCalendar
-              event={{
-                title,
-                description,
-                location: venue,
-                startTime: time,
+            <Button
+              simple
+              color="info"
+              size="sm"
+              onClick={(e) => {
+                e.preventDefault();
+                atcb_action({
+                  name: title,
+                  startDate: time,
+                  options: ['Apple', 'Google', 'iCal', 'Microsoft365', 'Outlook.com', 'Yahoo'],
+                  iCalFileName: title,
+                });
               }}
-              displayItemIcons={false}
-            />
+            >
+              Add to calendar
+            </Button>
           )}
         </CardFooter>
       </Card>
