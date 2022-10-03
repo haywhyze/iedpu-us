@@ -58,6 +58,7 @@ export default function ProfileModal({
             }}
             open={classicModal}
             TransitionComponent={Transition}
+            maxWidth="md"
             keepMounted
             onClose={() => setClassicModal(false)}
             aria-labelledby="classic-modal-slide-title"

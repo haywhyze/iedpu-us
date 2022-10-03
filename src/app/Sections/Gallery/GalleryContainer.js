@@ -73,9 +73,10 @@ export default function GalleryContainer() {
                     description: photo.caption,
                     thumbnail: photo.imageUrl,
                     originalClass: 'img-gallery',
+                    created: photo.created,
                   };
                   return image;
-                })}
+                }).sort((a, b) => Date.parse(b.created) - Date.parse(a.created))}
               />
             </GridContainer>
           </CardBody>

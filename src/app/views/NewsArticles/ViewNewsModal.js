@@ -44,6 +44,7 @@ export default function ProfileModal({ classicModal, setClassicModal, news }) {
               paper: classes.modal,
             }}
             open={classicModal}
+            maxWidth="md"
             TransitionComponent={Transition}
             keepMounted
             onClose={() => setClassicModal(false)}
@@ -75,7 +76,7 @@ export default function ProfileModal({ classicModal, setClassicModal, news }) {
                   <img
                     style={{
                       width: '100%',
-                      height: '15rem',
+                      height: 'auto',
                       objectFit: 'cover',
                       borderTopRightRadius: 'calc(.4rem - 1px)',
                       borderTopLeftRadius: 'calc(.4rem - 1px)',
@@ -87,12 +88,7 @@ export default function ProfileModal({ classicModal, setClassicModal, news }) {
                     <p style={{ marginBottom: '0', marginTop: '10px' }}>{news.caption}</p>
                   </CardFooter>
                 </Card>
-                <p style={{ whiteSpace: 'pre-wrap' }}>{news.details}</p>
-                <h5>
-                  By
-                  {' '}
-                  {news.author}
-                </h5>
+                <p style={{ whiteSpace: 'pre-wrap' }} dangerouslySetInnerHTML={{__html: news.details}} />
                 <h6>
                   {new Intl.DateTimeFormat('en-US', {
                     weekday: 'long',

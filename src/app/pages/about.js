@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import classNames from 'classnames';
 
 import Header from 'components/Header/Header.js';
@@ -9,7 +10,6 @@ import GridContainer from 'components/Grid/GridContainer.js';
 import GridItem from 'components/Grid/GridItem.js';
 import Button from 'components/CustomButtons/Button.js';
 import Small from 'components/Typography/Small.js';
-import Link from 'next/link';
 import CustomTabs from 'components/CustomTabs/CustomTabs.js';
 import Footer from 'components/Footer/Footer.js';
 
@@ -21,6 +21,7 @@ import teamStyles from 'assets/jss/material-kit-react/views/landingPageSections/
 import { Typography } from '@material-ui/core';
 import organizationChartData from '../Sections/OrganizationCharts/data';
 import Panel from '../Sections/OrganizationCharts/Panel';
+import { db } from './_app';
 
 const useStyles = makeStyles(styles);
 const useStyles2 = makeStyles(styles2);
@@ -28,12 +29,58 @@ const useTypoStyles = makeStyles(typoStyles);
 const useTeamStyles = makeStyles(teamStyles);
 
 export default function Executives(props) {
+  const executivesRef = db.collection('executives');
+  const [excos, setExcos] = useState([]);
+  const [loading, setLoading] = useState(false);
   const classes = useStyles();
   const classes2 = useStyles2();
   const typoClasses = useTypoStyles();
   const teamClasses = useTeamStyles();
   const { ...rest } = props;
-  const { executives, bot, ac } = organizationChartData;
+  const { executives: pastExcos } = organizationChartData;
+  const executives = excos.filter((ex) => ex.type === 'executives');
+  const bot = excos.filter((ex) => ex.type === 'BOT');
+  const ac = excos.filter((ex) => ex.type === 'council');
+
+  useEffect(() => {
+    setLoading(true);
+    const unsubscribeEvents = executivesRef.onSnapshot(
+      (querySnapshot) => {
+        const data = [];
+        querySnapshot.forEach((doc) => {
+          data.push({ ...doc.data(), id: doc.id });
+        });
+        setLoading(false);
+        setExcos(data);
+      },
+      (error) => {
+        console.log('Not verified yet', error.message);
+        setLoading(false);
+      },
+    );
+
+    return () => {
+      if (typeof unsubscribeEvents === 'function') {
+        unsubscribeEvents();
+      }
+    };
+  }, []);
+
+  if (loading) {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '100%',
+        }}
+      >
+        <CircularProgress />
+      </div>
+    );
+  }
+
   return (
     <div>
       <Header
@@ -197,6 +244,14 @@ export default function Executives(props) {
                             tabContent: (
                               <>
                                 <Panel data={ac} />
+                              </>
+                            ),
+                          },
+                          {
+                            tabName: 'Past Executives',
+                            tabContent: (
+                              <>
+                                <Panel data={pastExcos} />
                               </>
                             ),
                           },

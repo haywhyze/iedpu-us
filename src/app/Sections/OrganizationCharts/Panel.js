@@ -36,7 +36,7 @@ export default function Panel({ data }) {
               className={teamClasses.itemGrid}
               style={{ margin: 'auto' }}
             >
-              <img src={e.image} alt="..." className={imageClasses} />
+              <img style={{ height: '15rem', width: '15rem', objectFit: 'cover', objectPosition: 'top' }} src={e.image} alt="..." className={imageClasses} />
             </GridItem>
             <h3 className={teamClasses.cardTitle} style={{ textAlign: 'center' }}>
               {e.name}
@@ -49,7 +49,7 @@ export default function Panel({ data }) {
               <p className={teamClasses.description} style={{ textAlign: 'center', fontSize: '120%' }}>{e.bio}</p>
             </CardBody>
             <CardFooter className={teamClasses.justifyCenter}>
-              {e.socialmedia.twitter && (
+              {e.socialmedia?.twitter && (
               <Button
                 href={`https://twitter.com/${e.socialmedia.twitter}`}
                 justIcon
@@ -62,7 +62,7 @@ export default function Panel({ data }) {
                 />
               </Button>
               )}
-              {e.socialmedia.instagram && (
+              {e.socialmedia?.instagram && (
               <Button
                 href={`https://instagram.com/${e.socialmedia.instagram}`}
                 target="_blank"
@@ -75,7 +75,7 @@ export default function Panel({ data }) {
                 />
               </Button>
               )}
-              {e.socialmedia.facebook && (
+              {e.socialmedia?.facebook && (
               <Button
                 href={`https://facebook.com/${e.socialmedia.facebook}`}
                 justIcon

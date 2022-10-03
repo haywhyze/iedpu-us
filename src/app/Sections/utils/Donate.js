@@ -61,11 +61,11 @@ export default function Donate() {
             style={{ textAlign: 'justify' }}
             gutterBottom
           >
-            As a non-governmental organisation, we need your support to help
-            make a difference in the lives of people worldwide. Your
-            contributions will make a difference in the health and livelihood of
-            many people, and together we can help shape the future of global
-            health for all.
+            Ilorin Emirate Descendants Progressive Union (IEDPU) is a sole entity,
+            commonly regarded as the mother of associations in Ilorin Emirate,
+            with branches caught across the five Local Government Areas in Ilorin
+            (Asa, Ilorin East, Ilorin South, Ilorin West, and Moro Local Government)
+            and other parts of the world.
           </Typography>
           <Typography
             variant="body1"

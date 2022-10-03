@@ -10,7 +10,7 @@ import ViewNewsModal from './ViewNewsModal';
 const styles = {
   image: {
     width: '100%',
-    height: '10rem',
+    height: '20rem',
     objectFit: 'cover',
   },
   footerButton: {
@@ -53,38 +53,35 @@ export default function SingleNews({
           <img className={classes.image} src={image} alt="..." />
         </CardHeader>
         <CardBody style={{
-          height: '350px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+          height: '200px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
         }}
         >
-          <h3 style={{ marginTop: '0' }}>{title}</h3>
-          <p ref={descriptionEl} style={{ whiteSpace: 'pre-wrap', overflow: 'hidden' }} dangerouslySetInnerHTML={{__html: details}} />
-          <span>
-            <Button
-              onClick={() => viewNews({
-                id, image, title, details, author, time, caption,
-              })}
-              simple
-              size="sm"
-              color="info"
-            >
-              View Details
-            </Button>
-          </span>
-          <h5>
-            By
-            {' '}
-            {author}
-          </h5>
-          <h6>
-            {new Intl.DateTimeFormat('en-US', {
-              weekday: 'long',
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-              hour: 'numeric',
-              minute: 'numeric',
-            }).format(new Date(time))}
-          </h6>
+          <h4 style={{ marginTop: '0' }}>{title}</h4>
+          {/* <p ref={descriptionEl} style={{ whiteSpace: 'pre-wrap', overflow: 'hidden' }} dangerouslySetInnerHTML={{ __html: details }} /> */}
+          <div>
+            <span>
+              <Button
+                onClick={() => viewNews({
+                  id, image, title, details, author, time, caption,
+                })}
+                simple
+                size="sm"
+                color="info"
+              >
+                View Details
+              </Button>
+            </span>
+            <h6>
+              {new Intl.DateTimeFormat('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+              }).format(new Date(time))}
+            </h6>
+          </div>
         </CardBody>
       </Card>
     </GridItem>

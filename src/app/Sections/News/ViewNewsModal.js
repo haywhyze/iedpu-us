@@ -43,6 +43,7 @@ export default function ProfileModal({ classicModal, setClassicModal, news }) {
               root: classes.center,
               paper: classes.modal,
             }}
+            maxWidth="md"
             open={classicModal}
             TransitionComponent={Transition}
             keepMounted
@@ -75,7 +76,7 @@ export default function ProfileModal({ classicModal, setClassicModal, news }) {
                   <img
                     style={{
                       width: '100%',
-                      height: '15rem',
+                      height: 'auto',
                       objectFit: 'cover',
                       borderTopRightRadius: 'calc(.4rem - 1px)',
                       borderTopLeftRadius: 'calc(.4rem - 1px)',
