@@ -227,7 +227,7 @@ export default function Executives(props) {
                             tabName: 'Executives',
                             tabContent: (
                               <>
-                                <Panel data={executives} />
+                                <Panel data={executives.sort((a, b) => a.rank - b.rank)} />
                               </>
                             ),
                           },
