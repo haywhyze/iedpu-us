@@ -11,6 +11,8 @@ import Payments from 'views/Payments/Payments.js';
 import EventsMeetings from 'views/EventsMeetings/EventsMeetings.js';
 import NewsArticles from 'views/NewsArticles/NewsArticles.js';
 import Executives from 'views/Executives/NewsArticles.js';
+import BOT from 'views/BOT/NewsArticles.js';
+import Council from 'views/Council/NewsArticles.js';
 import GalleryPage from 'views/Gallery/Gallery.js';
 // core components/views for RTL layout
 
@@ -55,6 +57,20 @@ const dashboardRoutes = [
     name: 'Executives',
     icon: People,
     component: Executives,
+    layout: '/admin',
+  },
+  {
+    path: '/bot',
+    name: 'Board of Trustees',
+    icon: People,
+    component: BOT,
+    layout: '/admin',
+  },
+  {
+    path: '/advisory-council',
+    name: 'Advisory Council',
+    icon: People,
+    component: Council,
     layout: '/admin',
   },
   {

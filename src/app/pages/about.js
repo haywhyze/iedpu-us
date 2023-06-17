@@ -34,7 +34,6 @@ export default function Executives(props) {
   const [loading, setLoading] = useState(false);
   const classes = useStyles();
   const classes2 = useStyles2();
-  const typoClasses = useTypoStyles();
   const teamClasses = useTeamStyles();
   const { ...rest } = props;
   const { executives: pastExcos } = organizationChartData;
@@ -235,7 +234,7 @@ export default function Executives(props) {
                             tabName: 'Board of Trustees',
                             tabContent: (
                               <>
-                                <Panel data={bot} />
+                                <Panel data={bot.sort((a, b) => a.rank - b.rank)} />
                               </>
                             ),
                           },
@@ -243,7 +242,7 @@ export default function Executives(props) {
                             tabName: 'Advisory Council',
                             tabContent: (
                               <>
-                                <Panel data={ac} />
+                                <Panel data={ac.sort((a, b) => a.rank - b.rank)} />
                               </>
                             ),
                           },
