@@ -1,25 +1,22 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
 import ImageGallery from 'react-image-gallery';
 import GridContainer from 'components/Grid/GridContainer.js';
 import Card from 'components/Card/Card.js';
 import CardBody from 'components/Card/CardBody';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { AuthContext, db } from '../../pages/_app';
+import { db } from '../../pages/_app';
 
 export default function GalleryContainer() {
   const [photos, setPhotos] = useState([]);
-  const [images, setImages] = useState([]);
 
   const [loading, setLoading] = useState(true);
 
-  const { user, isAuthenticated } = useContext(AuthContext);
-
-  const photosRef = user && db.collection('photos');
+  const photosRef = db.collection('photos');
 
   useEffect(() => {
     let unsubscribePhotos;
-    if (user) {
+    if (photosRef) {
       unsubscribePhotos = photosRef.onSnapshot(
         (querySnapshot) => {
           const data = [];
@@ -36,15 +33,12 @@ export default function GalleryContainer() {
         },
       );
     }
-    if (!isAuthenticated) {
-      Router.push('/login');
-    }
     return () => {
       if (typeof unsubscribePhotos === 'function') {
         unsubscribePhotos();
       }
     };
-  }, [isAuthenticated, user]);
+  }, [photosRef]);
 
   if (loading) {
     return (

@@ -1,10 +1,10 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
 import GridContainer from 'components/Grid/GridContainer.js';
 import Card from 'components/Card/Card.js';
 import CardBody from 'components/Card/CardBody';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { AuthContext, db } from '../../pages/_app';
+import { db } from '../../pages/_app';
 import SingleEvent from './SingleEvent';
 
 export default function EventsContainer() {
@@ -12,13 +12,11 @@ export default function EventsContainer() {
 
   const [loading, setLoading] = useState(true);
 
-  const { user, isAuthenticated } = useContext(AuthContext);
-
-  const eventsRef = user && db.collection('events');
+  const eventsRef = db.collection('events');
 
   useEffect(() => {
     let unsubscribeEvents;
-    if (user) {
+    if (eventsRef) {
       unsubscribeEvents = eventsRef.onSnapshot(
         (querySnapshot) => {
           const data = [];
@@ -35,15 +33,12 @@ export default function EventsContainer() {
         },
       );
     }
-    if (!isAuthenticated) {
-      Router.push('/login');
-    }
     return () => {
       if (typeof unsubscribeEvents === 'function') {
         unsubscribeEvents();
       }
     };
-  }, [isAuthenticated, user]);
+  }, [eventsRef]);
 
   if (loading) {
     return (
