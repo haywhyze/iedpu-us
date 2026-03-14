@@ -50,23 +50,30 @@ function ProfilePage(props) {
 
   React.useEffect(() => {
     let unsubscribe;
-    // if (isAdmin) Router.push('/admin');
-    if (isAdmin && user) {
+    let docCreated = false;
+    if (user) {
       unsubscribe = db
         .collection('Users')
         .doc(user.uid)
         .onSnapshot(
           (doc) => {
+            setLoading(false);
             if (doc.exists) {
-              setLoading(false);
-              if (!doc.data().verified) {
-                setVerified(false);
-                return;
-              }
-              setVerified(true);
-              setDisplayName(doc.data().displayName);
-              setPhotoURL(doc.data().photoURL);
-            } else setLoading(false);
+              const data = doc.data();
+              setPhotoURL(data.photoURL || user.photoURL || '');
+              setDisplayName(data.displayName || user.displayName || '');
+              setVerified(!!data.verified);
+            } else if (!docCreated) {
+              // Document doesn't exist (e.g. admin users) — create it once
+              docCreated = true;
+              db.collection('Users').doc(user.uid).set({
+                email: user.email,
+                displayName: user.displayName,
+                photoURL: user.photoURL || '',
+              }, { merge: true });
+              setDisplayName(user.displayName || '');
+              setPhotoURL(user.photoURL || '');
+            }
           },
           (error) => {
             console.log(error.message);
@@ -78,7 +85,7 @@ function ProfilePage(props) {
     return () => {
       if (typeof unsubscribe === 'function') unsubscribe();
     };
-  }, [isAdmin, user, verified]);
+  }, [user]);
 
   React.useEffect(() => {
     if (!isAuthenticated) {
@@ -126,10 +133,9 @@ function ProfilePage(props) {
       (err, info) => {
         if (!err) {
           if (info.event === 'success') {
-            // console.log(info.info.secure_url)
             db.collection('Users')
               .doc(user.uid)
-              .update({ photoURL: info.info.secure_url })
+              .set({ photoURL: info.info.secure_url }, { merge: true })
               .then(() => {
                 console.log('Document successfully written!');
               })
@@ -183,7 +189,7 @@ function ProfilePage(props) {
                 <div className={classes.profile}>
                   <div>
                     <img
-                      src={`${photoURL}?height=400` || 'img/profile.png'}
+                      src={photoURL || 'img/profile.png'}
                       alt="..."
                       className={imageClasses}
                     />

@@ -89,7 +89,7 @@ export default function ProfileModal({
                     <div>
                       <img
                         style={{ transform: 'translate3d(0, -5%, 0)' }}
-                        src={`${member.photoURL}?height=300`}
+                        src={member.photoURL || 'img/profile.png'}
                         alt={member.displayName}
                         className={imageClasses}
                       />

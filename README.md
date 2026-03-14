@@ -1,105 +1,106 @@
-# With Firebase Hosting example
+# IEDPU-USA
 
-The goal is to host the Next.js app on Firebase Cloud Functions with Firebase Hosting rewrite rules so our app is served from our Firebase Hosting URL. Each individual `page` bundle is served in a new call to the Cloud Function which performs the initial server render.
+Web application for the **Ilorin Emirate Descendants Progressive Union** (USA Chapter). The platform serves as a hub for members to stay connected, access organization news, view events, and manage their profiles. Admins can manage members, payments, events, news articles, leadership records, and the photo gallery.
 
-This is based off of the work at https://github.com/geovanisouza92/serverless-firebase & https://github.com/jthegedus/firebase-functions-next-example as described [here](https://medium.com/@jthegedus/next-js-on-cloud-functions-for-firebase-with-firebase-hosting-7911465298f2).
+## Tech Stack
 
-If you're having issues, feel free to tag @jthegedus in the [issue you create on the next.js repo](https://github.com/zeit/next.js/issues/new)
+- **Frontend:** Next.js 12, React 17, Material-UI, Emotion, SASS
+- **Backend:** Firebase Cloud Functions (Node.js 16)
+- **Database:** Cloud Firestore
+- **Auth:** Firebase Authentication (Email/Password, Google, Facebook)
+- **Hosting:** Firebase Hosting with Cloud Function rewrites
+- **Media:** Cloudinary (profile photo uploads)
 
-## How to use
+## Project Structure
 
-### Using `create-next-app`
-
-Execute [`create-next-app`](https://github.com/zeit/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
-
-```bash
-npm init next-app --example with-firebase-hosting with-firebase-hosting-app
-# or
-yarn create next-app --example with-firebase-hosting with-firebase-hosting-app
+```
+src/
+├── app/                  # Next.js application
+│   ├── pages/            # Routes (index, about, events, news, gallery, history, profile, admin)
+│   ├── components/       # Reusable UI components (Header, Footer, Navbar, Sidebar, etc.)
+│   ├── Sections/         # Page-specific content sections
+│   ├── views/            # Admin dashboard views
+│   ├── assets/           # Styles (JSS, SCSS) and static images
+│   ├── firebaseConfig.js # Firebase client config
+│   └── routes.js         # Admin dashboard route definitions
+└── functions/            # Firebase Cloud Functions
+    └── index.js          # Auth triggers + Next.js SSR handler
 ```
 
-<details>
-<summary><b>Download manually</b></summary>
+## Public Pages
 
-Download the example:
+- **Home** — Landing page with hero section and donate button
+- **About** — Organization info, Executives, Board of Trustees, Advisory Council
+- **Events** — Upcoming and past events
+- **News** — Articles and updates
+- **Gallery** — Photo gallery
+- **History** — Historical content about Ilorin Emirate
+- **Profile** — Member profile management
 
-```bash
-curl https://codeload.github.com/zeit/next.js/tar.gz/canary | tar -xz --strip=2 next.js-canary/examples/with-firebase-hosting
-cd with-firebase-hosting
-```
+## Admin Dashboard
 
-</details>
+Accessible to authorized admins. Sections include:
 
-<details>
-<summary><b>Set up firebase</b></summary>
+- Dashboard overview
+- Members management
+- Payments & donations tracking
+- Events & meetings (CRUD)
+- News & articles (CRUD)
+- Executives, Board of Trustees, Advisory Council management
+- Gallery management
 
-- install Firebase Tools: `npm i -g firebase-tools`
-- create a project through the [firebase web console](https://console.firebase.google.com/)
-- grab the projects ID from the web consoles URL: `https://console.firebase.google.com/project/<projectId>`
-- update the `.firebaserc` default project ID to the newly created project
-- login to the Firebase CLI tool with `firebase login`
+## Getting Started
 
-</details>
+### Prerequisites
 
-<details>
-<summary><b>Install Project</b></summary>
+- Node.js 16+
+- Firebase CLI: `npm i -g firebase-tools`
+- A Firebase project ([create one here](https://console.firebase.google.com/))
 
-```bash
-npm install
-```
+### Setup
 
-#### Run Next.js development:
+1. Clone the repo and install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+2. Update `.firebaserc` with your Firebase project ID.
+
+3. Create `src/app/.env.local` with your Firebase and Cloudinary config.
+
+4. Log in to Firebase:
+
+   ```bash
+   firebase login
+   ```
+
+### Development
 
 ```bash
 npm run dev
 ```
 
-#### Run Firebase locally for testing:
+### Local Firebase Testing
 
-```
+```bash
 npm run serve
 ```
 
-#### Deploy it to the cloud with Firebase:
+### Deploy
 
 ```bash
 npm run deploy
 ```
 
-#### Clean dist folder
+### Clean Build
 
 ```bash
 npm run clean
 ```
 
-</details>
+## Notes
 
-## Important
-
-- The empty `placeholder.html` file is so Firebase Hosting does not error on an empty `public/` folder and still hosts at the Firebase project URL.
-- `firebase.json` outlines the catchall rewrite rule for our Cloud Function.
-- Specifying [`"engines": {"node": "8"}`](package.json#L5-L7) in the `package.json` is required for firebase functions
-  to be deployed on Node 8 rather than Node 6
-  ([Firebase Blog Announcement](https://firebase.googleblog.com/2018/08/cloud-functions-for-firebase-config-node-8-timeout-memory-region.html))
-  . This is matched in [`src/functions/.babelrc`](src/functions/.babelrc) so that babel output somewhat compacter and moderner code.
-
-### Customization
-
-Next App and Next Server development are separated into two different folders:
-
-- app - `src/app/`
-- server - `src/functions/`
-
-If you wish to modify any configuration of the Next App, you should only modify the contents of `src/app`.
-
-For instance, the `.babelrc` in `src/functions` is used only to compile the Firebase Cloud Functions code, which is our the Next Server code. If you wish to customize the `.babelrc` for the Next App compilation, then you should create one at `src/app/.babelrc` and follow the [customization guide](https://github.com/zeit/next.js#customizing-babel-config).
-
-### \_app.js
-
-If using `_app.js` you may receive the following error on your deployed Cloud Function:
-
-```
-{ Error: Cannot find module '@babel/runtime/regenerator'...
-```
-
-Despite next.js having `@babel/runtime` as a dependency, you must install it as a dependency directly in this project.
+- The Next.js app is served via a Firebase Cloud Function, with Firebase Hosting rewrite rules directing all traffic to it.
+- On user signup, a Cloud Function trigger automatically creates a Firestore profile document. On deletion, it cleans up the profile.
+- Admin access is controlled via Firebase custom claims assigned to specific email addresses in the Cloud Functions.
